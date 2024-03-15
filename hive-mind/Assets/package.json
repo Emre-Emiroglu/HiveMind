@@ -1,0 +1,40 @@
+{
+  "name": "com.leogames.hivemind",
+  "version": "1.0.0",
+  "displayName": "Hive Mind",
+  "description": "Hive Mind is a core system for speed up the development process",
+  "unity": "2022.3",
+  "unityRelease": "0b5",
+  "dependencies":
+  {
+  },
+  "keywords": ["library", "data", "debug", "utility"],
+  "author": 
+  {
+    "name": "Leo Games",
+    "email": "emirogluemre08@gmail.com",
+    "url": "https://www.unity3d.com"
+  },
+  "samples": [
+        {
+            "displayName": "Data Sample",
+            "description": "Contains a sample class in sample scene for testing to data system",
+            "path": "Samples/DataSample"
+        },
+        {
+            "displayName": "Helpers Sample",
+            "description": "Contains simple but usefull helpers",
+            "path": "Samples/HelpersSample"
+        },
+        {
+            "displayName": "Pool Sample",
+            "description": "Contains a sample scene for testing to dynamic pool system",
+            "path": "Samples/PoolSample"
+        },
+        {
+            "displayName": "ProDebug Sample",
+            "description": "Contains how can you colorize your Debug.Log",
+            "path": "Samples/ProDebugSample"
+        }
+    ]
+}
