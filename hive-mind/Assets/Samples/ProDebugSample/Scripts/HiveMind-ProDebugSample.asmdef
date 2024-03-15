@@ -1,0 +1,16 @@
+{
+    "name": "HiveMind.ProDebugSample",
+    "rootNamespace": "HiveMind.ProDebugSample",
+    "references": [
+        "GUID:e96f5645abedef54ea816df70f0a110d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

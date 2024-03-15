@@ -1,0 +1,16 @@
+{
+    "name": "HiveMind.PoolSample",
+    "rootNamespace": "HiveMind.PoolSample",
+    "references": [
+        "GUID:fb031d1bf6794d34dae3c28714a9a39f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

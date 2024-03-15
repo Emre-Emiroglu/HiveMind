@@ -1,0 +1,17 @@
+{
+    "name": "HiveMind.HelpersSample",
+    "rootNamespace": "HiveMind.HelpersSample",
+    "references": [
+        "GUID:18525ca339ed7a64f802f7d86f52b4c9",
+        "GUID:d9240bda49675ec4face6cb71598b548"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
