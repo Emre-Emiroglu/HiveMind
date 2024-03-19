@@ -3,8 +3,7 @@ using Zenject;
 
 namespace HiveMind.MVC.Model
 {
-    public abstract class Model<TModelSettings>
-        where TModelSettings : ScriptableObject
+    public abstract class Model<TModelSettings> where TModelSettings : ScriptableObject
     {
         #region Fields
         protected readonly TModelSettings settings;
@@ -17,7 +16,7 @@ namespace HiveMind.MVC.Model
         #region Constructor
         public Model(string resourcePath)
         {
-            Resources.Load<TModelSettings>(resourcePath);
+            settings = Resources.Load<TModelSettings>(resourcePath);
         }
         #endregion
 
