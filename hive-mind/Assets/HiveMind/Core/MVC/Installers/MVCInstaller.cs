@@ -4,7 +4,7 @@ using Zenject;
 
 namespace HiveMind.MVC.Installers
 {
-    public abstract class MVCInstaller : Installer<MVCInstaller>
+    public class MVCInstaller : Installer<object, MVCInstaller>
     {
         #region Fields
         protected readonly BinderData binderData;

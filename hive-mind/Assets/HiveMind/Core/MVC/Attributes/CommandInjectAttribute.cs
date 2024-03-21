@@ -6,7 +6,7 @@ namespace HiveMind.MVC.Attributes
     public class CommandInjectAttribute : MVCAttribute
     {
         #region Constructor
-        public CommandInjectAttribute(object key = null) : base(key) { }
+        public CommandInjectAttribute(object key) : base(key) { }
         #endregion
     }
 }

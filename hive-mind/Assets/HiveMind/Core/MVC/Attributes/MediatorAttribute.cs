@@ -6,7 +6,7 @@ namespace HiveMind.MVC.Attributes
     public sealed class MediatorAttribute : MVCAttribute
     {
         #region Constructor
-        public MediatorAttribute(object key = null) : base(key) { }
+        public MediatorAttribute(object key) : base(key) { }
         #endregion
     }
 }

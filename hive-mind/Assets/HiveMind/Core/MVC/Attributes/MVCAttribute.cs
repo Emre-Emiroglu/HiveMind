@@ -13,7 +13,7 @@ namespace HiveMind.MVC.Attributes
         #endregion
 
         #region Constructor
-        public MVCAttribute(object key = null) => this.key = key;
+        public MVCAttribute(object key) => this.key = key;
         #endregion
     }
 }

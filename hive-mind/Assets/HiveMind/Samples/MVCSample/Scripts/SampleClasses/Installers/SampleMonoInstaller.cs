@@ -14,15 +14,14 @@ namespace HiveMind.MVCSample.SampleClasses.Installers
         {
             SignalBusInstaller.Install(Container);
             
-            signalBus = Container.Resolve<SignalBus>();
-            
-            SampleInstaller.Install(Container);
+            SampleInstaller.Install(Container, "MVCSample");
         }
         #endregion
 
         #region Cycle
         public override void Start()
         {
+            signalBus = Container.Resolve<SignalBus>();
             signalBus.Fire(new SampleSignal1());
             signalBus.Fire(new SampleSignal2() { InjectedValue = 99 });
         }

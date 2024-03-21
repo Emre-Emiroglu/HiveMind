@@ -6,7 +6,7 @@ namespace HiveMind.MVCSample.SampleClasses.Installers
     public class SampleInstaller : MVCInstaller
     {
         #region Constructor
-        public SampleInstaller() : base(key: "MVCSample") { }
+        public SampleInstaller(object key) : base(key) { }
         #endregion
 
         #region Bindings

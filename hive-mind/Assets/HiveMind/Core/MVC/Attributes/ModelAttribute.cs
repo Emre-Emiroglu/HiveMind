@@ -6,7 +6,7 @@ namespace HiveMind.MVC.Attributes
     public sealed class ModelAttribute : MVCAttribute
     {
         #region Constructor
-        public ModelAttribute(object key = null) : base(key) { }
+        public ModelAttribute(object key) : base(key) { }
         #endregion
     }
 }
