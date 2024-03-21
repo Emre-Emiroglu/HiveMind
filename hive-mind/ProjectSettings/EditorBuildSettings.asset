@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/HiveMind/Samples/ProDebugSample/Scenes/ProDebugSampleScene.unity
     guid: d5ce8195bf581af458713e4bc37630fc
+  - enabled: 1
+    path: Assets/HiveMind/Samples/MVCSample/Scenes/MVCSampleScene.unity
+    guid: 4037b1004a5542f46a8a681be707857b
   m_configObjects: {}
