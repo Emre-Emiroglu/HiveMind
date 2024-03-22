@@ -4,21 +4,21 @@ using Zenject;
 
 namespace HiveMind.MVC.Installers
 {
-    public class MVCInstaller : Installer<object, MVCInstaller>
+    public class MVCInstaller<TSubInstaller>: MVCInstallerBase<BinderData, MVCInstaller<TSubInstaller>, TSubInstaller>
     {
         #region Fields
         protected readonly BinderData binderData;
         protected readonly ModelBinder modelBinder;
-        protected readonly MediationBinder mediiationBinder;
+        protected readonly MediationBinder mediationBinder;
         protected readonly CommandBinder commandBinder;
         #endregion
 
         #region Constructor
-        public MVCInstaller(object key)
+        public MVCInstaller(BinderData binderData)
         {
-            binderData = new(Container, key);
+            this.binderData = binderData;
             modelBinder = new(binderData);
-            mediiationBinder = new(binderData);
+            mediationBinder = new(binderData);
             commandBinder = new(binderData);
         }
         #endregion
@@ -26,12 +26,14 @@ namespace HiveMind.MVC.Installers
         #region Bindings
         public override void InstallBindings()
         {
-            Container.BindInstance(modelBinder).AsSingle().NonLazy();
-            Container.BindInstance(mediiationBinder).AsSingle().NonLazy();
-            Container.BindInstance(commandBinder).AsSingle().NonLazy();
+            DiContainer container = binderData.Container;
+
+            container.BindInstance(modelBinder).AsSingle().NonLazy();
+            container.BindInstance(mediationBinder).AsSingle().NonLazy();
+            container.BindInstance(commandBinder).AsSingle().NonLazy();
 
             modelBinder.Bind();
-            mediiationBinder.Bind();
+            mediationBinder.Bind();
             commandBinder.Bind();
         }
         #endregion

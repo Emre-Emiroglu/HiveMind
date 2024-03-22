@@ -1,12 +1,13 @@
+using HiveMind.MVC.Datas;
 using HiveMind.MVC.Installers;
 using HiveMind.MVCSample.SampleClasses.Controllers;
 
 namespace HiveMind.MVCSample.SampleClasses.Installers
 {
-    public class SampleInstaller : MVCInstaller
+    public class SampleInstaller : MVCInstaller<SampleInstaller>
     {
         #region Constructor
-        public SampleInstaller(object key) : base(key) { }
+        public SampleInstaller(BinderData binderData) : base(binderData) { }
         #endregion
 
         #region Bindings
