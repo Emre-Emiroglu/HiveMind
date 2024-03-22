@@ -14,50 +14,26 @@ namespace HiveMind.MVC.Installers
         public static void Install(DiContainer container, TParam1 p1) => MVCInstallerBaseLogic<TDerived, TSubInstaller>.InstallLogic(container, p1);
     }
 
-    public abstract class MVCInstallerBase<TParam1, TParam2, TDerived, TSubInstaller> : InstallerBase
-        where TDerived : MVCInstaller<TSubInstaller>
-    {
-        public static void Install(DiContainer container, TParam1 p1, TParam2 p2) => MVCInstallerBaseLogic<TDerived, TSubInstaller>.InstallLogic(container, p1, p2);
-    }
-
-    public abstract class MVCInstallerBase<TParam1, TParam2, TParam3, TDerived, TSubInstaller> : InstallerBase
-        where TDerived : MVCInstaller<TSubInstaller>
-    {
-        public static void Install(DiContainer container, TParam1 p1, TParam2 p2, TParam3 p3) => MVCInstallerBaseLogic<TDerived, TSubInstaller>.InstallLogic(container, p1, p2, p3);
-    }
-
-    public abstract class MVCInstallerBase<TParam1, TParam2, TParam3, TParam4, TDerived, TSubInstaller> : InstallerBase
-        where TDerived : MVCInstaller<TSubInstaller>
-    {
-        public static void Install(DiContainer container, TParam1 p1, TParam2 p2, TParam3 p3, TParam4 p4) => MVCInstallerBaseLogic<TDerived, TSubInstaller>.InstallLogic(container, p1, p2, p3, p4);
-    }
-
-    public abstract class MVCInstallerBase<TParam1, TParam2, TParam3, TParam4, TParam5, TDerived, TSubInstaller> : InstallerBase
-        where TDerived : MVCInstaller<TSubInstaller>
-    {
-        public static void Install(DiContainer container, TParam1 p1, TParam2 p2, TParam3 p3, TParam4 p4, TParam5 p5) => MVCInstallerBaseLogic<TDerived, TSubInstaller>.InstallLogic(container, p1, p2, p3, p4, p5);
-    }
-
     internal static class MVCInstallerBaseLogic<TDerived, TSubInstaller>
         where TDerived : MVCInstaller<TSubInstaller>
     {
         #region Installs
-        internal static void InstallLogic(DiContainer container, params object[] parameters)
+        internal static void InstallLogic(DiContainer container, object parameter)
         {
-            if (parameters == null)
+            if (parameter == null)
                 InstallWithoutParameters(container);
             else
-                InstallWitParameters(container, parameters);
+                InstallWitParameters(container, parameter);
         }
         private static void InstallWithoutParameters(DiContainer container)
         {
-            var subClass = container.Instantiate<TSubInstaller>() as TDerived;
-            subClass.InstallBindings();
+            var subInstaller = container.Instantiate<TSubInstaller>() as TDerived;
+            subInstaller.InstallBindings();
         }
-        private static void InstallWitParameters(DiContainer container, params object[] parameters)
+        private static void InstallWitParameters(DiContainer container, object parameter)
         {
-            var subClass = container.InstantiateExplicit<TSubInstaller>(InjectUtil.CreateArgListExplicit(parameters)) as TDerived;
-            subClass.InstallBindings();
+            var subInstaller = container.InstantiateExplicit<TSubInstaller>(InjectUtil.CreateArgListExplicit(parameter)) as TDerived;
+            subInstaller.InstallBindings();
         }
         #endregion
     }
