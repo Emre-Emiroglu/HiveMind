@@ -1,9 +1,8 @@
 using HiveMind.MVC.Attributes;
 using HiveMind.MVC.Datas;
 using System;
+using System.Linq;
 using System.Reflection;
-using UnityEngine;
-using Zenject;
 
 namespace HiveMind.MVC.Binders
 {
@@ -11,6 +10,7 @@ namespace HiveMind.MVC.Binders
     {
         #region Fields
         protected readonly BinderData binderData;
+        protected Assembly targetAssembly;
         #endregion
 
         #region Constructor
@@ -20,22 +20,12 @@ namespace HiveMind.MVC.Binders
         #region Bindings
         public virtual void Bind()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Type[] types = assembly.GetTypes();
+            string assemblyName = binderData.AssemblyName;
 
-            DiContainer container = binderData.Container;
-            object key = binderData.Key;
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            Assembly assembly = assemblies.First(x => x.FullName.StartsWith(assemblyName));
 
-            foreach (Type type in types)
-            {
-                TAttribute attribute = type.GetCustomAttribute<TAttribute>();
-
-                if (attribute != null && attribute.Key == key)
-                {
-                    container.Bind(type).AsSingle().NonLazy();
-                    Debug.Log($"{type.Name} is binded");
-                }
-            }
+            targetAssembly = assembly;
         }
         #endregion
     }

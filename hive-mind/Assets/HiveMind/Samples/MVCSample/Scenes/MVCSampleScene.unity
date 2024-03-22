@@ -520,6 +520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ae203418ac0d04cb710ee5d354c460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  key: MVCSample
+  assemblyPath: 
 --- !u!1 &1286591317
 GameObject:
   m_ObjectHideFlags: 0

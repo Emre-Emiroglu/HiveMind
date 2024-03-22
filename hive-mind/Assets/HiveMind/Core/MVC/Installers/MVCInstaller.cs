@@ -1,6 +1,5 @@
 using HiveMind.MVC.Binders;
 using HiveMind.MVC.Datas;
-using Zenject;
 
 namespace HiveMind.MVC.Installers
 {
@@ -26,11 +25,9 @@ namespace HiveMind.MVC.Installers
         #region Bindings
         public override void InstallBindings()
         {
-            DiContainer container = binderData.Container;
-
-            container.BindInstance(modelBinder).AsSingle().NonLazy();
-            container.BindInstance(mediationBinder).AsSingle().NonLazy();
-            container.BindInstance(commandBinder).AsSingle().NonLazy();
+            binderData.Container.BindInstance(modelBinder).AsSingle().NonLazy();
+            binderData.Container.BindInstance(mediationBinder).AsSingle().NonLazy();
+            binderData.Container.BindInstance(commandBinder).AsSingle().NonLazy();
 
             modelBinder.Bind();
             mediationBinder.Bind();

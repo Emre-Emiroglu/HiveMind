@@ -8,6 +8,7 @@ namespace HiveMind.MVCSample.SampleClasses.Installers
     {
         #region Fields
         [SerializeField] private string key = "MVCSample";
+        [SerializeField] private string assemblyName = "HiveMind.MVCSample";
         #endregion
 
         #region Bindings
@@ -15,7 +16,7 @@ namespace HiveMind.MVCSample.SampleClasses.Installers
         {
             SignalBusInstaller.Install(Container);
 
-            SampleInstaller.Install(Container, new(Container, key));
+            SampleInstaller.Install(Container, new(Container, key, assemblyName));
         }
         #endregion
 
