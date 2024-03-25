@@ -17,16 +17,16 @@ namespace HiveMind.CharacterSystem.Editor
 
         #region CharacterSettingsCreator
         [BoxGroup("Character Settings Creator", true, true, 99)]
-        [TitleGroup("Character Settings/Input Data")]
+        [TitleGroup("Character Settings Creator/Input Data")]
         [SerializeField] private InputData inputData;
-        [TitleGroup("Character Settings/Movement Data")]
+        [TitleGroup("Character Settings Creator/Movement Data")]
         [SerializeField] private MovementData movementData;
-        [TitleGroup("Character Settings/Rotation Data")]
+        [TitleGroup("Character Settings Creator/Rotation Data")]
         [SerializeField] private RotationData rotationData;
 
-        [TitleGroup("Character Settings/Create Buttons")]
-        [ButtonGroup("Character Settings/Create Buttons/Buttons")] public void CreateCharacterSettings() { }
-        [ButtonGroup("Character Settings/Create Buttons/Buttons")] public void SecondButton() { }
+        [TitleGroup("Character Settings Creator/Create Buttons")]
+        [ButtonGroup("Character Settings Creator/Create Buttons/Buttons")] public void CreateCharacterSettings() { }
+        [ButtonGroup("Character Settings Creator/Create Buttons/Buttons")] public void SecondButton() { }
         #endregion
 
         #region Core
