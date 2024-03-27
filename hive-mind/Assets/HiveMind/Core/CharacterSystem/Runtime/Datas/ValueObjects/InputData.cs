@@ -1,22 +1,26 @@
-using HiveMind.CharacterSystem.Runtime.Enums;
+using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace HiveMind.CharacterSystem.Runtime.Datas.ValueObjects
 {
     [Serializable]
     public struct InputData
     {
-        #region Constants
-        #endregion
-
         #region Fields
         [Header("Input Data Fields")]
-        [SerializeField] private InputStyles inputStyle;
+        [AssetSelector][SerializeField] private InputActionAsset inputActionAsset;
+        [SerializeField] private string controlSchemeName;
+        [SerializeField] private string actionMapName;
+        [SerializeField] private string movementActionName;
         #endregion
 
         #region Getters
-        public readonly InputStyles InputStyle => inputStyle;
+        public readonly InputActionAsset InputActionAsset => inputActionAsset;
+        public readonly string ControlSchemeName => controlSchemeName;
+        public readonly string ActionMapName => actionMapName;
+        public readonly string MovementActionName => movementActionName;
         #endregion
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace HiveMind.CharacterSystem.Runtime.Datas.ScriptableObjects
 {
+    [CreateAssetMenu(fileName ="CharacterSettings", menuName = "HiveMind/CharacterSystem/CharacterSettings")]
     public sealed class CharacterSettings : ScriptableObject
     {
         #region Fields

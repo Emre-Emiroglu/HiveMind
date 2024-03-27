@@ -11,24 +11,22 @@ namespace HiveMind.CharacterSystem.Runtime.Datas.ValueObjects
         #region Constants
         private const float minWalkSpeed = 0f;
         private const float maxWalkSpeed = 10f;
-        private const float minRunSpeed = 0f;
-        private const float maxRunSpeed = 10f;
         #endregion
 
         #region Fields
         [Header("Movement Data Fields")]
         [Range(minWalkSpeed, maxWalkSpeed)][SerializeField] private float walkSpeed;
-        [Range(minRunSpeed, maxRunSpeed)][SerializeField] private float runSpeed;
         [SerializeField] private MovementStyles movementStyle;
-        [SerializeField] private Space movementSpace;
+        [ShowIf("movementStyle", MovementStyles.Transform)][SerializeField] private Space movementSpace;
+        [ShowIf("movementStyle", MovementStyles.Rigidbody)][SerializeField] private RigidbodyMovementStyles rigidbodyMovementStyle;
         [ShowIf("movementStyle", MovementStyles.Rigidbody)][SerializeField] private ForceMode forceMode;
         #endregion
 
         #region Getters
         public readonly float WalkSpeed => walkSpeed;
-        public readonly float RunSpeed => runSpeed;
         public readonly MovementStyles MovementStyle => movementStyle;
         public readonly Space MovementSpace => movementSpace;
+        public readonly RigidbodyMovementStyles RigidbodyMovementStyle => rigidbodyMovementStyle;
         public readonly ForceMode ForceMode => forceMode;
         #endregion
     }

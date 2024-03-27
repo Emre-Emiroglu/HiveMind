@@ -17,12 +17,14 @@ namespace HiveMind.CharacterSystem.Runtime.Datas.ValueObjects
         [Range(minRotationSpeed, maxRotationSpeed)][SerializeField] private float rotationSpeed;
         [SerializeField] private RotationStyles rotationStyle;
         [SerializeField] private Space rotationSpace;
+        [SerializeField] private bool isSlerp;
         #endregion
 
         #region Getters
         public readonly float RotationSpeed => rotationSpeed;
         public readonly RotationStyles RotationStyle => rotationStyle;
         public readonly Space RotationSpace => rotationSpace;
+        public readonly bool IsSlerp => isSlerp;
         #endregion
     }
 }
