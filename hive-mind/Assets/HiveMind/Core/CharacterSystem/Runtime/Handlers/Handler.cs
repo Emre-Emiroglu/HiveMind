@@ -1,6 +1,6 @@
 using System;
 
-namespace HiveMind.CharacterSystem.Runtime.Handlers
+namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 {
     public abstract class Handler: IDisposable
     {
@@ -9,8 +9,8 @@ namespace HiveMind.CharacterSystem.Runtime.Handlers
         #endregion
 
         #region Constructor
-        public Handler() => SetEnableStatus(false);
-        public virtual void Dispose() => SetEnableStatus(false);
+        public Handler() => isEnable = false;
+        public virtual void Dispose() => isEnable = false;
         #endregion
 
         #region Executes

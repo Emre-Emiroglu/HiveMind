@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace HiveMind.CharacterSystemSample.InputActions
+namespace HiveMind.Samples.CharacterSystemSample.InputActions
 {
     public partial class @CharacterSystemSampleInputActions: IInputActionCollection2, IDisposable
     {
@@ -26,13 +26,22 @@ namespace HiveMind.CharacterSystemSample.InputActions
     ""name"": ""InputAction"",
     ""maps"": [
         {
-            ""name"": ""CharacterSystem"",
+            ""name"": ""CharacterSystemSample"",
             ""id"": ""585c1855-106a-400f-aede-957f3f139f85"",
             ""actions"": [
                 {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""0adc6f4e-71f5-493c-af43-5aaf4bb69d69"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Rotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""7e9de6a9-a427-4748-9f98-8c741e1d3759"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -57,7 +66,7 @@ namespace HiveMind.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -68,7 +77,7 @@ namespace HiveMind.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -79,7 +88,7 @@ namespace HiveMind.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -90,7 +99,7 @@ namespace HiveMind.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -112,7 +121,7 @@ namespace HiveMind.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -123,7 +132,7 @@ namespace HiveMind.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -134,7 +143,7 @@ namespace HiveMind.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -145,65 +154,21 @@ namespace HiveMind.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Left Analogue"",
-                    ""id"": ""8f20fbe6-9669-4799-960c-7c72dbe0eec1"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""5a35ba97-0ed2-4843-bd76-6bfd14b415fe"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
+                    ""groups"": ""PC"",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""be1eeedd-1df4-4b41-9feb-3952601dee38"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""5eb1d29a-b6de-47f5-be6e-476026dacde3"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""340e9741-2529-4cf2-9c01-6d46bd56828d"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""7733fdbf-cdb6-48e4-9993-0eacfcf978a9"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -227,9 +192,10 @@ namespace HiveMind.CharacterSystemSample.InputActions
         }
     ]
 }");
-            // CharacterSystem
-            m_CharacterSystem = asset.FindActionMap("CharacterSystem", throwIfNotFound: true);
-            m_CharacterSystem_Movement = m_CharacterSystem.FindAction("Movement", throwIfNotFound: true);
+            // CharacterSystemSample
+            m_CharacterSystemSample = asset.FindActionMap("CharacterSystemSample", throwIfNotFound: true);
+            m_CharacterSystemSample_Movement = m_CharacterSystemSample.FindAction("Movement", throwIfNotFound: true);
+            m_CharacterSystemSample_Rotation = m_CharacterSystemSample.FindAction("Rotation", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -288,51 +254,59 @@ namespace HiveMind.CharacterSystemSample.InputActions
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // CharacterSystem
-        private readonly InputActionMap m_CharacterSystem;
-        private List<ICharacterSystemActions> m_CharacterSystemActionsCallbackInterfaces = new List<ICharacterSystemActions>();
-        private readonly InputAction m_CharacterSystem_Movement;
-        public struct CharacterSystemActions
+        // CharacterSystemSample
+        private readonly InputActionMap m_CharacterSystemSample;
+        private List<ICharacterSystemSampleActions> m_CharacterSystemSampleActionsCallbackInterfaces = new List<ICharacterSystemSampleActions>();
+        private readonly InputAction m_CharacterSystemSample_Movement;
+        private readonly InputAction m_CharacterSystemSample_Rotation;
+        public struct CharacterSystemSampleActions
         {
             private @CharacterSystemSampleInputActions m_Wrapper;
-            public CharacterSystemActions(@CharacterSystemSampleInputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Movement => m_Wrapper.m_CharacterSystem_Movement;
-            public InputActionMap Get() { return m_Wrapper.m_CharacterSystem; }
+            public CharacterSystemSampleActions(@CharacterSystemSampleInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Movement => m_Wrapper.m_CharacterSystemSample_Movement;
+            public InputAction @Rotation => m_Wrapper.m_CharacterSystemSample_Rotation;
+            public InputActionMap Get() { return m_Wrapper.m_CharacterSystemSample; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(CharacterSystemActions set) { return set.Get(); }
-            public void AddCallbacks(ICharacterSystemActions instance)
+            public static implicit operator InputActionMap(CharacterSystemSampleActions set) { return set.Get(); }
+            public void AddCallbacks(ICharacterSystemSampleActions instance)
             {
-                if (instance == null || m_Wrapper.m_CharacterSystemActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_CharacterSystemActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces.Add(instance);
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Rotation.started += instance.OnRotation;
+                @Rotation.performed += instance.OnRotation;
+                @Rotation.canceled += instance.OnRotation;
             }
 
-            private void UnregisterCallbacks(ICharacterSystemActions instance)
+            private void UnregisterCallbacks(ICharacterSystemSampleActions instance)
             {
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
+                @Rotation.started -= instance.OnRotation;
+                @Rotation.performed -= instance.OnRotation;
+                @Rotation.canceled -= instance.OnRotation;
             }
 
-            public void RemoveCallbacks(ICharacterSystemActions instance)
+            public void RemoveCallbacks(ICharacterSystemSampleActions instance)
             {
-                if (m_Wrapper.m_CharacterSystemActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(ICharacterSystemActions instance)
+            public void SetCallbacks(ICharacterSystemSampleActions instance)
             {
-                foreach (var item in m_Wrapper.m_CharacterSystemActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_CharacterSystemActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public CharacterSystemActions @CharacterSystem => new CharacterSystemActions(this);
+        public CharacterSystemSampleActions @CharacterSystemSample => new CharacterSystemSampleActions(this);
         private int m_PCSchemeIndex = -1;
         public InputControlScheme PCScheme
         {
@@ -342,9 +316,10 @@ namespace HiveMind.CharacterSystemSample.InputActions
                 return asset.controlSchemes[m_PCSchemeIndex];
             }
         }
-        public interface ICharacterSystemActions
+        public interface ICharacterSystemSampleActions
         {
             void OnMovement(InputAction.CallbackContext context);
+            void OnRotation(InputAction.CallbackContext context);
         }
     }
 }

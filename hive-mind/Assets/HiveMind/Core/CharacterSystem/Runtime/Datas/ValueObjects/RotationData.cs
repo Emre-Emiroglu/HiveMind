@@ -1,8 +1,8 @@
-using HiveMind.CharacterSystem.Runtime.Enums;
+using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using System;
 using UnityEngine;
 
-namespace HiveMind.CharacterSystem.Runtime.Datas.ValueObjects
+namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
 {
     [Serializable]
     public struct RotationData

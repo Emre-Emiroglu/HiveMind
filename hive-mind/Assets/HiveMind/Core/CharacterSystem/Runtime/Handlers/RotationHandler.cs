@@ -1,20 +1,22 @@
-using HiveMind.CharacterSystem.Runtime.Datas.ValueObjects;
-using HiveMind.CharacterSystem.Runtime.Enums;
+using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 
-namespace HiveMind.CharacterSystem.Runtime.Handlers
+namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 {
     public sealed class RotationHandler: Handler
     {
         #region ReadonlyFields
         private readonly Transform transform;
+        private readonly Camera camera;
         private readonly RotationData rotationData;
         #endregion
 
         #region Constructor
-        public RotationHandler(Transform transform, RotationData rotationData) : base()
+        public RotationHandler(Transform transform, Camera camera, RotationData rotationData) : base()
         {
             this.transform = transform;
+            this.camera = camera;
             this.rotationData = rotationData;
         }
         #endregion
@@ -48,7 +50,9 @@ namespace HiveMind.CharacterSystem.Runtime.Handlers
             Quaternion rot = rotationData.RotationSpace == Space.World ? transform.rotation : transform.localRotation;
             float speed = rotationData.RotationSpeed;
             float time = Time.deltaTime;
-            float angle = Mathf.Atan2(inputValue.y, inputValue.x);
+            Vector2 direction = camera.ScreenToWorldPoint(inputValue) - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
             Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.up);
             Quaternion lerp = rotationData.IsSlerp ? Quaternion.Slerp(rot, targetRot, speed * time) : Quaternion.Lerp(rot, targetRot, speed * time);
 
@@ -67,7 +71,9 @@ namespace HiveMind.CharacterSystem.Runtime.Handlers
             Vector3 rot = rotationData.RotationSpace == Space.World ? transform.eulerAngles : transform.localEulerAngles;
             float speed = rotationData.RotationSpeed;
             float time = Time.deltaTime;
-            float angle = Mathf.Atan2(inputValue.y, inputValue.x);
+            Vector2 direction = camera.ScreenToWorldPoint(inputValue) - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
             Vector3 targetRot = new(0f, angle, 0f);
             Vector3 lerp = rotationData.IsSlerp ? Vector3.Slerp(rot, targetRot, speed * time) : Vector3.Lerp(rot, targetRot, speed * time);
 

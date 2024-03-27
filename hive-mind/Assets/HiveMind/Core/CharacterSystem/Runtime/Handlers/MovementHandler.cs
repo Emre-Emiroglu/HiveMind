@@ -1,8 +1,8 @@
-using HiveMind.CharacterSystem.Runtime.Datas.ValueObjects;
-using HiveMind.CharacterSystem.Runtime.Enums;
+using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 
-namespace HiveMind.CharacterSystem.Runtime.Handlers
+namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 {
     public sealed class MovementHandler: Handler
     {

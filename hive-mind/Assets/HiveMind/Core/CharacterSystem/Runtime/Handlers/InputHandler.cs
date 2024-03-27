@@ -1,8 +1,8 @@
-using HiveMind.CharacterSystem.Runtime.Datas.ValueObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HiveMind.CharacterSystem.Runtime.Handlers
+namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 {
     public sealed class InputHandler: Handler
     {
@@ -12,6 +12,7 @@ namespace HiveMind.CharacterSystem.Runtime.Handlers
         private readonly InputControlScheme? controlScheme;
         private readonly InputActionMap actionMap;
         private readonly InputAction movementAction;
+        private readonly InputAction rotationAction;
         #endregion
 
         #region Fields
@@ -36,10 +37,15 @@ namespace HiveMind.CharacterSystem.Runtime.Handlers
 
             actionMap = inputActionAsset.FindActionMap(this.inputData.ActionMapName);
             movementAction = actionMap.FindAction(this.inputData.MovementActionName);
+            rotationAction = actionMap.FindAction(this.inputData.RotationActionName);
 
-            movementAction.canceled += OnMovementCanceled;
             movementAction.started += OnMovementStarted;
             movementAction.performed += OnMovementPreformed;
+            movementAction.canceled += OnMovementCanceled;
+
+            rotationAction.started += OnRotationStarted;
+            rotationAction.performed += OnRotationPreformed;
+            rotationAction.canceled += OnRotationCanceled;
         }
         #endregion
 
@@ -54,6 +60,10 @@ namespace HiveMind.CharacterSystem.Runtime.Handlers
             movementAction.started -= OnMovementStarted;
             movementAction.performed -= OnMovementPreformed;
             movementAction.canceled -= OnMovementCanceled;
+
+            rotationAction.started -= OnRotationStarted;
+            rotationAction.performed -= OnRotationPreformed;
+            rotationAction.canceled -= OnRotationCanceled;
         }
         #endregion
 
@@ -70,18 +80,12 @@ namespace HiveMind.CharacterSystem.Runtime.Handlers
         #endregion
 
         #region Receivers
-        private void OnMovementStarted(InputAction.CallbackContext context)
-        {
-            movementInputValue = Vector2.zero;
-        }
-        private void OnMovementPreformed(InputAction.CallbackContext context)
-        {
-            movementInputValue = context.ReadValue<Vector2>();
-        }
-        private void OnMovementCanceled(InputAction.CallbackContext context)
-        {
-            movementInputValue = Vector2.zero;
-        }
+        private void OnMovementStarted(InputAction.CallbackContext context) => movementInputValue = Vector2.zero;
+        private void OnMovementPreformed(InputAction.CallbackContext context) => movementInputValue = context.ReadValue<Vector2>();
+        private void OnMovementCanceled(InputAction.CallbackContext context) => movementInputValue = Vector2.zero;
+        private void OnRotationStarted(InputAction.CallbackContext context) => rotationInputValue = Vector2.zero;
+        private void OnRotationPreformed(InputAction.CallbackContext context) => rotationInputValue = context.ReadValue<Vector2>();
+        private void OnRotationCanceled(InputAction.CallbackContext context) => rotationInputValue = Vector2.zero;
         #endregion
     }
 }

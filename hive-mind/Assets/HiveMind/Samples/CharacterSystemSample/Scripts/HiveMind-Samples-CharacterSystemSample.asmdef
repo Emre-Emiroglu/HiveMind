@@ -1,7 +1,8 @@
 {
-    "name": "HiveMind.CharacterSystem",
-    "rootNamespace": "HiveMind.CharacterSystem",
+    "name": "HiveMind.Samples.CharacterSystemSample",
+    "rootNamespace": "HiveMind.Samples.CharacterSystemSample",
     "references": [
+        "GUID:27097338e8a69004abd06ad0e085274f",
         "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],

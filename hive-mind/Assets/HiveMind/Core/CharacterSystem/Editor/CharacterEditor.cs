@@ -1,49 +1,60 @@
-using HiveMind.CharacterSystem.Runtime.Datas.ScriptableObjects;
-using HiveMind.CharacterSystem.Runtime.Datas.ValueObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Datas.ScriptableObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace HiveMind.CharacterSystem.Editor
+namespace HiveMind.Core.CharacterSystem.Editor
 {
     public sealed class CharacterEditor : OdinEditorWindow
     {
         #region Constants
+        private const string characterSettingsCreatorTitlePreffix = "Character Settings Creator";
+        private const string datasSuffix = "/Datas";
+        private const string saveSettingsSuffix = "/Save Settings";
+        private const string buttonsSuffix = "/Buttons";
+
+        private const string menuItemName = "HiveMind/Editors/CharacterEditor";
         private const float minWidth = 512f;
         private const float minHeight = 512f;
         private const float maxWidth = 1024f;
         private const float maxHeight = 1024f;
+
+        private const string defaultCharacterSettingsName = "CharacterSettings";
+        private const string saveFolderPathError = "Save folder path can not be empty!";
+        private const string assetSuffix = ".asset";
+        private const string characterSettingsCreatedLog = "Character Settings created at: ";
         #endregion
 
         #region CharacterSettingsCreator
-        [BoxGroup("Character Settings Creator", true, true, 99)]
+        [TitleGroup(characterSettingsCreatorTitlePreffix, "", TitleAlignments.Centered, true, true, false)]
 
         #region Datas
-        [TitleGroup("Character Settings Creator/Input Data")]
+        [TitleGroup(characterSettingsCreatorTitlePreffix + datasSuffix, "", TitleAlignments.Left, false, true, true)]
         [SerializeField] private InputData inputData;
-        [TitleGroup("Character Settings Creator/Movement Data")]
+        [TitleGroup(characterSettingsCreatorTitlePreffix + datasSuffix, "", TitleAlignments.Left, false, true, true)]
         [SerializeField] private MovementData movementData;
-        [TitleGroup("Character Settings Creator/Rotation Data")]
+        [TitleGroup(characterSettingsCreatorTitlePreffix + datasSuffix, "", TitleAlignments.Left, false, true, true)]
         [SerializeField] private RotationData rotationData;
         #endregion
 
-        #region Essentials
-        [TitleGroup("Character Settings Creator/Essentials")]
-        [AssetSelector][SerializeField] private CharacterSettings tempCharacterSettings;
-        [TitleGroup("Character Settings Creator/Essentials")]
+        #region SaveSettings
+        [TitleGroup(characterSettingsCreatorTitlePreffix + saveSettingsSuffix, "", TitleAlignments.Left, false, true, true)]
+        [SerializeField] private string characterSettingsName;
+        [TitleGroup(characterSettingsCreatorTitlePreffix + saveSettingsSuffix, "", TitleAlignments.Left, false, true, true)]
         [FolderPath][SerializeField] private string saveFolderPath;
         #endregion
 
         #region Buttons
-        [TitleGroup("Character Settings Creator/Create Buttons")]
-        [ButtonGroup("Character Settings Creator/Create Buttons/Buttons")] public void CreateCharacterSettings() => CreateCharacterSettingsProcess();
+        [ButtonGroup(characterSettingsCreatorTitlePreffix + buttonsSuffix)]
+        public void CreateCharacterSettings() => CreateCharacterSettingsProcess();
         #endregion
 
         #endregion
 
         #region Core
-        [MenuItem("HiveMind/Editors/CharacterEditor")]
+        [MenuItem(menuItemName)]
         private static void OpenWindow()
         {
             CharacterEditor window = GetWindow<CharacterEditor>();
@@ -56,7 +67,27 @@ namespace HiveMind.CharacterSystem.Editor
         #region ButtonProcess
         private void CreateCharacterSettingsProcess()
         {
+            bool saveFolderPathIsNullOrEmpty = string.IsNullOrEmpty(saveFolderPath);
+            bool characterSettingsNameIsNullOrEmpty = string.IsNullOrEmpty(characterSettingsName);
+            string name = characterSettingsNameIsNullOrEmpty ? defaultCharacterSettingsName : characterSettingsName;
 
+            if (saveFolderPathIsNullOrEmpty)
+            {
+                Debug.LogError(saveFolderPathError);
+                return;
+            }
+
+            CharacterSettings characterSettings = CreateInstance<CharacterSettings>();
+            characterSettings.name = name;
+            characterSettings.InputData = inputData;
+            characterSettings.MovementData = movementData;
+            characterSettings.RotationData = rotationData;
+
+            string filePath = $"{saveFolderPath}/{name}{assetSuffix}";
+            AssetDatabase.CreateAsset(characterSettings, filePath);
+            AssetDatabase.SaveAssets();
+
+            Debug.Log(characterSettingsCreatedLog + $"{filePath}");
         }
         #endregion
     }

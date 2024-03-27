@@ -1,4 +1,4 @@
-namespace HiveMind.CharacterSystem.Runtime.Enums
+namespace HiveMind.Core.CharacterSystem.Runtime.Enums
 {
     public enum MovementStyles : int
     {

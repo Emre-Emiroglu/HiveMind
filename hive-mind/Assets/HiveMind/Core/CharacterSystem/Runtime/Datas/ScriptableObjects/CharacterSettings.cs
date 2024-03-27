@@ -1,7 +1,7 @@
-using HiveMind.CharacterSystem.Runtime.Datas.ValueObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
 using UnityEngine;
 
-namespace HiveMind.CharacterSystem.Runtime.Datas.ScriptableObjects
+namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ScriptableObjects
 {
     [CreateAssetMenu(fileName ="CharacterSettings", menuName = "HiveMind/CharacterSystem/CharacterSettings")]
     public sealed class CharacterSettings : ScriptableObject
