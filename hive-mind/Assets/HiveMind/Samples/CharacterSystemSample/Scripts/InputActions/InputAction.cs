@@ -30,24 +30,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
             ""id"": ""585c1855-106a-400f-aede-957f3f139f85"",
             ""actions"": [
                 {
-                    ""name"": ""Prone"",
-                    ""type"": ""Button"",
-                    ""id"": ""5f4a93f9-31e3-463e-aa4d-5c0b5e19dd55"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Crouch"",
-                    ""type"": ""Button"",
-                    ""id"": ""c52a943c-e794-4f32-b0a2-d2013ed060d6"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""0adc6f4e-71f5-493c-af43-5aaf4bb69d69"",
@@ -199,28 +181,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                 },
                 {
                     ""name"": """",
-                    ""id"": ""18496a56-1f9d-4412-ba4a-6b44ebd3cac2"",
-                    ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Prone"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""efa836bc-c6ed-4468-96bb-ff8331a4760a"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a66dc0c8-265f-4c3b-9c3a-f71de94c4296"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -237,8 +197,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
 }");
             // CharacterSystemSample
             m_CharacterSystemSample = asset.FindActionMap("CharacterSystemSample", throwIfNotFound: true);
-            m_CharacterSystemSample_Prone = m_CharacterSystemSample.FindAction("Prone", throwIfNotFound: true);
-            m_CharacterSystemSample_Crouch = m_CharacterSystemSample.FindAction("Crouch", throwIfNotFound: true);
             m_CharacterSystemSample_Movement = m_CharacterSystemSample.FindAction("Movement", throwIfNotFound: true);
             m_CharacterSystemSample_Run = m_CharacterSystemSample.FindAction("Run", throwIfNotFound: true);
             m_CharacterSystemSample_Jump = m_CharacterSystemSample.FindAction("Jump", throwIfNotFound: true);
@@ -303,8 +261,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
         // CharacterSystemSample
         private readonly InputActionMap m_CharacterSystemSample;
         private List<ICharacterSystemSampleActions> m_CharacterSystemSampleActionsCallbackInterfaces = new List<ICharacterSystemSampleActions>();
-        private readonly InputAction m_CharacterSystemSample_Prone;
-        private readonly InputAction m_CharacterSystemSample_Crouch;
         private readonly InputAction m_CharacterSystemSample_Movement;
         private readonly InputAction m_CharacterSystemSample_Run;
         private readonly InputAction m_CharacterSystemSample_Jump;
@@ -312,8 +268,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
         {
             private @CharacterSystemSampleInputActions m_Wrapper;
             public CharacterSystemSampleActions(@CharacterSystemSampleInputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Prone => m_Wrapper.m_CharacterSystemSample_Prone;
-            public InputAction @Crouch => m_Wrapper.m_CharacterSystemSample_Crouch;
             public InputAction @Movement => m_Wrapper.m_CharacterSystemSample_Movement;
             public InputAction @Run => m_Wrapper.m_CharacterSystemSample_Run;
             public InputAction @Jump => m_Wrapper.m_CharacterSystemSample_Jump;
@@ -326,12 +280,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
             {
                 if (instance == null || m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces.Add(instance);
-                @Prone.started += instance.OnProne;
-                @Prone.performed += instance.OnProne;
-                @Prone.canceled += instance.OnProne;
-                @Crouch.started += instance.OnCrouch;
-                @Crouch.performed += instance.OnCrouch;
-                @Crouch.canceled += instance.OnCrouch;
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
@@ -345,12 +293,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
 
             private void UnregisterCallbacks(ICharacterSystemSampleActions instance)
             {
-                @Prone.started -= instance.OnProne;
-                @Prone.performed -= instance.OnProne;
-                @Prone.canceled -= instance.OnProne;
-                @Crouch.started -= instance.OnCrouch;
-                @Crouch.performed -= instance.OnCrouch;
-                @Crouch.canceled -= instance.OnCrouch;
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
@@ -379,8 +321,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
         public CharacterSystemSampleActions @CharacterSystemSample => new CharacterSystemSampleActions(this);
         public interface ICharacterSystemSampleActions
         {
-            void OnProne(InputAction.CallbackContext context);
-            void OnCrouch(InputAction.CallbackContext context);
             void OnMovement(InputAction.CallbackContext context);
             void OnRun(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);

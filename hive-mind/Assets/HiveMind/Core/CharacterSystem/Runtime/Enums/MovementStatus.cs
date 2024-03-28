@@ -2,10 +2,8 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Enums
 {
     public enum MovementStatus : int
     {
-        Prone = 0,
-        Crouch = 1,
-        Walk = 2,
-        Run = 3,
-        Jump = 4
+        Walk = 0,
+        Run = 1,
+        Jump = 2
     }
 }
