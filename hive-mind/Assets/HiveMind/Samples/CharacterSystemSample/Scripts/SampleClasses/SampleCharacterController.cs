@@ -19,7 +19,6 @@ namespace HiveMind.Samples.CharacterSystemSample.SampleClasses
 
             EnableInput();
             EnableMovement();
-            EnableRotation();
         }
         #endregion
 
@@ -32,10 +31,6 @@ namespace HiveMind.Samples.CharacterSystemSample.SampleClasses
         public void EnableMovement() => characterComponent.ChangeMovementEnableStatus?.Invoke(true);
         [ContextMenu("DisableMovement")]
         public void DisableMovement() => characterComponent.ChangeMovementEnableStatus?.Invoke(false);
-        [ContextMenu("EnableRotation")]
-        public void EnableRotation() => characterComponent.ChangeRotationEnableStatus?.Invoke(true);
-        [ContextMenu("DisableRotation")]
-        public void DisableRotation() => characterComponent.ChangeRotationEnableStatus?.Invoke(false);
         #endregion
     }
 }

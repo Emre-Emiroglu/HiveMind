@@ -14,7 +14,6 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
         [SerializeField] private string controlSchemeName;
         [SerializeField] private string actionMapName;
         [SerializeField] private string movementActionName;
-        [SerializeField] private string rotationActionName;
         #endregion
 
         #region Getters
@@ -22,7 +21,6 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
         public readonly string ControlSchemeName => controlSchemeName;
         public readonly string ActionMapName => actionMapName;
         public readonly string MovementActionName => movementActionName;
-        public readonly string RotationActionName => rotationActionName;
         #endregion
     }
 }

@@ -35,8 +35,6 @@ namespace HiveMind.Core.CharacterSystem.Editor
         [SerializeField] private InputData inputData;
         [TitleGroup(characterSettingsCreatorTitlePreffix + datasSuffix, "", TitleAlignments.Left, false, true, true)]
         [SerializeField] private MovementData movementData;
-        [TitleGroup(characterSettingsCreatorTitlePreffix + datasSuffix, "", TitleAlignments.Left, false, true, true)]
-        [SerializeField] private RotationData rotationData;
         #endregion
 
         #region SaveSettings
@@ -81,7 +79,6 @@ namespace HiveMind.Core.CharacterSystem.Editor
             characterSettings.name = name;
             characterSettings.InputData = inputData;
             characterSettings.MovementData = movementData;
-            characterSettings.RotationData = rotationData;
 
             string filePath = $"{saveFolderPath}/{name}{assetSuffix}";
             AssetDatabase.CreateAsset(characterSettings, filePath);

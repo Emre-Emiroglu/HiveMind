@@ -37,15 +37,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Rotation"",
-                    ""type"": ""Value"",
-                    ""id"": ""7e9de6a9-a427-4748-9f98-8c741e1d3759"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -158,17 +149,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5a35ba97-0ed2-4843-bd76-6bfd14b415fe"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -195,7 +175,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
             // CharacterSystemSample
             m_CharacterSystemSample = asset.FindActionMap("CharacterSystemSample", throwIfNotFound: true);
             m_CharacterSystemSample_Movement = m_CharacterSystemSample.FindAction("Movement", throwIfNotFound: true);
-            m_CharacterSystemSample_Rotation = m_CharacterSystemSample.FindAction("Rotation", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -258,13 +237,11 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
         private readonly InputActionMap m_CharacterSystemSample;
         private List<ICharacterSystemSampleActions> m_CharacterSystemSampleActionsCallbackInterfaces = new List<ICharacterSystemSampleActions>();
         private readonly InputAction m_CharacterSystemSample_Movement;
-        private readonly InputAction m_CharacterSystemSample_Rotation;
         public struct CharacterSystemSampleActions
         {
             private @CharacterSystemSampleInputActions m_Wrapper;
             public CharacterSystemSampleActions(@CharacterSystemSampleInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_CharacterSystemSample_Movement;
-            public InputAction @Rotation => m_Wrapper.m_CharacterSystemSample_Rotation;
             public InputActionMap Get() { return m_Wrapper.m_CharacterSystemSample; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -277,9 +254,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @Rotation.started += instance.OnRotation;
-                @Rotation.performed += instance.OnRotation;
-                @Rotation.canceled += instance.OnRotation;
             }
 
             private void UnregisterCallbacks(ICharacterSystemSampleActions instance)
@@ -287,9 +261,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
-                @Rotation.started -= instance.OnRotation;
-                @Rotation.performed -= instance.OnRotation;
-                @Rotation.canceled -= instance.OnRotation;
             }
 
             public void RemoveCallbacks(ICharacterSystemSampleActions instance)
@@ -319,7 +290,6 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
         public interface ICharacterSystemSampleActions
         {
             void OnMovement(InputAction.CallbackContext context);
-            void OnRotation(InputAction.CallbackContext context);
         }
     }
 }

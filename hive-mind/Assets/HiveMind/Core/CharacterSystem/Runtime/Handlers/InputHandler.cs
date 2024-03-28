@@ -12,17 +12,14 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
         private readonly InputControlScheme? controlScheme;
         private readonly InputActionMap actionMap;
         private readonly InputAction movementAction;
-        private readonly InputAction rotationAction;
         #endregion
 
         #region Fields
         private Vector2 movementInputValue;
-        private Vector3 rotationInputValue;
         #endregion
 
         #region Getters
         public Vector2 MovementInputValue => movementInputValue;
-        public Vector2 RotationInputValue => rotationInputValue;
         #endregion
 
         #region Constructor
@@ -37,15 +34,10 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 
             actionMap = inputActionAsset.FindActionMap(this.inputData.ActionMapName);
             movementAction = actionMap.FindAction(this.inputData.MovementActionName);
-            rotationAction = actionMap.FindAction(this.inputData.RotationActionName);
 
             movementAction.started += OnMovementStarted;
             movementAction.performed += OnMovementPreformed;
             movementAction.canceled += OnMovementCanceled;
-
-            rotationAction.started += OnRotationStarted;
-            rotationAction.performed += OnRotationPreformed;
-            rotationAction.canceled += OnRotationCanceled;
         }
         #endregion
 
@@ -60,10 +52,6 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
             movementAction.started -= OnMovementStarted;
             movementAction.performed -= OnMovementPreformed;
             movementAction.canceled -= OnMovementCanceled;
-
-            rotationAction.started -= OnRotationStarted;
-            rotationAction.performed -= OnRotationPreformed;
-            rotationAction.canceled -= OnRotationCanceled;
         }
         #endregion
 
@@ -79,13 +67,15 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
         }
         #endregion
 
+        #region Executes
+        public override void Execute() => base.Execute();
+        protected override void ExecuteProcess() { }
+        #endregion
+
         #region Receivers
         private void OnMovementStarted(InputAction.CallbackContext context) => movementInputValue = Vector2.zero;
         private void OnMovementPreformed(InputAction.CallbackContext context) => movementInputValue = context.ReadValue<Vector2>();
         private void OnMovementCanceled(InputAction.CallbackContext context) => movementInputValue = Vector2.zero;
-        private void OnRotationStarted(InputAction.CallbackContext context) => rotationInputValue = Vector2.zero;
-        private void OnRotationPreformed(InputAction.CallbackContext context) => rotationInputValue = context.ReadValue<Vector2>();
-        private void OnRotationCanceled(InputAction.CallbackContext context) => rotationInputValue = Vector2.zero;
         #endregion
     }
 }
