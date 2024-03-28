@@ -4,7 +4,6 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Enums
     {
         ActionMapName = 0,
         MovementActionName = 1,
-        RunActionName = 2,
-        JumpActionName = 3
+        RunActionName = 2
     }
 }

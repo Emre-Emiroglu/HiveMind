@@ -15,19 +15,19 @@ MonoBehaviour:
   InputData:
     inputActionAsset: {fileID: -944628639613478452, guid: 693a0374af0e3ad499baba4f6b9f5772,
       type: 3}
-    actionMapName: CharacterSystemSample
-    actionNames:
-    - Movement
-    - Run
-    - Jump
+    inputActionNames:
+      keyData: 000000000100000002000000
+      valueData:
+      - CharacterSystemSample
+      - Movement
+      - Run
   MovementData:
     movementType: 0
     movementSpace: 0
     rigidbodyMovementType: 0
     forceMode: 0
     speeds:
-      keyData: 000000000100000002000000
+      keyData: 0000000001000000
       valueData:
       - 5
       - 10
-      - 0

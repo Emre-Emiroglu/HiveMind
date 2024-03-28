@@ -14,7 +14,6 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
         private readonly InputActionMap actionMap;
         private readonly InputAction movementAction;
         private readonly InputAction runAction;
-        private readonly InputAction jumpAction;
         #endregion
 
         #region Fields
@@ -37,11 +36,9 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 
             movementAction = actionMap.FindAction(this.inputData.InputActionNames[InputActionNameTypes.MovementActionName]);
             runAction = actionMap.FindAction(this.inputData.InputActionNames[InputActionNameTypes.RunActionName]);
-            jumpAction = actionMap.FindAction(this.inputData.InputActionNames[InputActionNameTypes.JumpActionName]);
 
             SetSubscriptionStatus(movementAction, OnMovementActionStarted, OnMovementActionPerformed, OnMovementActionCanceled, true);
             SetSubscriptionStatus(runAction, OnRunActionStarted, OnRunActionPerformed, OnRunActionCanceled, true);
-            SetSubscriptionStatus(jumpAction, OnJumpActionStarted, OnJumpActionPerformed, OnJumpActionCanceled, true);
         }
         #endregion
 
@@ -52,7 +49,6 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 
             SetSubscriptionStatus(movementAction, OnMovementActionStarted, OnMovementActionPerformed, OnMovementActionCanceled, false);
             SetSubscriptionStatus(runAction, OnRunActionStarted, OnRunActionPerformed, OnRunActionCanceled, false);
-            SetSubscriptionStatus(jumpAction, OnJumpActionStarted, OnJumpActionPerformed, OnJumpActionCanceled, false);
         }
         #endregion
 
@@ -108,21 +104,6 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
         private void OnRunActionCanceled(InputAction.CallbackContext context)
         {
             if (movementStatus == MovementStatus.Run)
-                movementStatus = MovementStatus.Walk;
-        }
-        private void OnJumpActionStarted(InputAction.CallbackContext context)
-        {
-            if (movementStatus == MovementStatus.Walk)
-                movementStatus = MovementStatus.Jump;
-        }
-        private void OnJumpActionPerformed(InputAction.CallbackContext context)
-        {
-            if (movementStatus == MovementStatus.Walk)
-                movementStatus = MovementStatus.Jump;
-        }
-        private void OnJumpActionCanceled(InputAction.CallbackContext context)
-        {
-            if (movementStatus == MovementStatus.Jump)
                 movementStatus = MovementStatus.Walk;
         }
         #endregion
