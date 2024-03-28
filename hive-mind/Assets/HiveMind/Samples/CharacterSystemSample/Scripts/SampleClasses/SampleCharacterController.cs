@@ -8,6 +8,19 @@ namespace HiveMind.Samples.CharacterSystemSample.SampleClasses
         #region Fields
         [Header("Sample Character Controller Fields")]
         [SerializeField] private CharacterComponent characterComponent;
+        [SerializeField] private bool enableAllHandlersOnStart = true;
+        #endregion
+
+        #region Core
+        private void Start()
+        {
+            if (!enableAllHandlersOnStart)
+                return;
+
+            EnableInput();
+            EnableMovement();
+            EnableRotation();
+        }
         #endregion
 
         #region Triggers

@@ -17,7 +17,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 
         #region Fields
         private Vector2 movementInputValue;
-        private Vector2 rotationInputValue;
+        private Vector3 rotationInputValue;
         #endregion
 
         #region Getters

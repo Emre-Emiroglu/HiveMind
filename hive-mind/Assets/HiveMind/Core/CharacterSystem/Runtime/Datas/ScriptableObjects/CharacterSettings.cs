@@ -7,9 +7,9 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ScriptableObjects
     public sealed class CharacterSettings : ScriptableObject
     {
         #region Fields
-        public InputData InputData { get; set; }
-        public MovementData MovementData { get; set; }
-        public RotationData RotationData { get; set; }
+        public InputData InputData;
+        public MovementData MovementData;
+        public RotationData RotationData;
         #endregion
     }
 }

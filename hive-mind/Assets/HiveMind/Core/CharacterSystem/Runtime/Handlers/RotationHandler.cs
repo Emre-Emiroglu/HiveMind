@@ -47,45 +47,52 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
         }
         private void QuaternionRotation(Vector2 inputValue)
         {
-            Quaternion rot = rotationData.RotationSpace == Space.World ? transform.rotation : transform.localRotation;
             float speed = rotationData.RotationSpeed;
             float time = Time.deltaTime;
-            Vector2 direction = camera.ScreenToWorldPoint(inputValue) - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.up);
-            Quaternion lerp = rotationData.IsSlerp ? Quaternion.Slerp(rot, targetRot, speed * time) : Quaternion.Lerp(rot, targetRot, speed * time);
+            Vector3 direction = GetDirection(inputValue);
+            float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.up);
+            Quaternion startRotation = rotationData.RotationSpace == Space.World ? transform.rotation : transform.localRotation;
+            Quaternion lerpRotation = rotationData.IsSlerp ? Quaternion.Slerp(startRotation, targetRotation, speed * time) : Quaternion.Lerp(startRotation, targetRotation, speed * time);
 
             switch (rotationData.RotationSpace)
             {
                 case Space.World:
-                    transform.rotation = lerp;
+                    transform.rotation = lerpRotation;
                     break;
                 case Space.Self:
-                    transform.localRotation = lerp;
+                    transform.localRotation = lerpRotation;
                     break;
             }
         }
         private void EulerRotation(Vector2 inputValue)
         {
-            Vector3 rot = rotationData.RotationSpace == Space.World ? transform.eulerAngles : transform.localEulerAngles;
             float speed = rotationData.RotationSpeed;
             float time = Time.deltaTime;
-            Vector2 direction = camera.ScreenToWorldPoint(inputValue) - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            Vector3 targetRot = new(0f, angle, 0f);
-            Vector3 lerp = rotationData.IsSlerp ? Vector3.Slerp(rot, targetRot, speed * time) : Vector3.Lerp(rot, targetRot, speed * time);
+            Vector3 direction = GetDirection(inputValue);
+            float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            Vector3 targetRotation = new(0f, angle, 0f);
+            Vector3 startRotation = rotationData.RotationSpace == Space.World ? transform.eulerAngles : transform.localEulerAngles;
+            Vector3 lerpRotation = rotationData.IsSlerp ? Vector3.Slerp(startRotation, targetRotation, speed * time) : Vector3.Lerp(startRotation, targetRotation, speed * time);
 
             switch (rotationData.RotationSpace)
             {
                 case Space.World:
-                    transform.eulerAngles = lerp;
+                    transform.eulerAngles = lerpRotation;
                     break;
                 case Space.Self:
-                    transform.localEulerAngles = lerp;
+                    transform.localEulerAngles = lerpRotation;
                     break;
             }
+        }
+        private Vector3 GetDirection(Vector2 inputValue)
+        {
+            Vector3 mousePosition = new(inputValue.x, inputValue.y, camera.nearClipPlane);
+            Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            Vector3 direction = targetPosition - transform.position;
+            direction.y = 0f;
+
+            return direction;
         }
         #endregion
     }

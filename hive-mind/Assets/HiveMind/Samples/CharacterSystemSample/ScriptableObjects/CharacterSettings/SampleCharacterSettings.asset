@@ -12,3 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944cadb19fc7fc140a152506522dba4e, type: 3}
   m_Name: SampleCharacterSettings
   m_EditorClassIdentifier: 
+  InputData:
+    inputActionAsset: {fileID: -944628639613478452, guid: 693a0374af0e3ad499baba4f6b9f5772,
+      type: 3}
+    controlSchemeName: PC
+    actionMapName: CharacterSystemSample
+    movementActionName: Movement
+    rotationActionName: Rotation
+  MovementData:
+    walkSpeed: 2
+    movementStyle: 0
+    movementSpace: 0
+    rigidbodyMovementStyle: 0
+    forceMode: 0
+  RotationData:
+    rotationSpeed: 180
+    rotationStyle: 0
+    rotationSpace: 0
+    isSlerp: 0

@@ -64,13 +64,14 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
         {
             if (characterSettings.MovementData.MovementStyle == Enums.MovementStyles.Transform)
                 movementHandler?.Movement(inputHandler.MovementInputValue);
+
+            rotationHandler?.Rotation(inputHandler.RotationInputValue);
         }
         private void FixedUpdate()
         {
             if (characterSettings.MovementData.MovementStyle == Enums.MovementStyles.Rigidbody)
                 movementHandler?.Movement(inputHandler.MovementInputValue);
         }
-        private void LateUpdate() => rotationHandler?.Rotation(inputHandler.RotationInputValue);
         #endregion
     }
 }
