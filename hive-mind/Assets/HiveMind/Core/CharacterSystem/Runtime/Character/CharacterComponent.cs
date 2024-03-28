@@ -29,12 +29,12 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
         private void Awake()
         {
             inputHandler = new(characterSettings.InputData);
-            switch (characterSettings.MovementData.MovementStyle)
+            switch (characterSettings.MovementData.MovementType)
             {
-                case MovementStyles.Transform:
+                case MovementTypes.Transform:
                     movementHandler = new TransformMovementHandler(transform, characterSettings.MovementData);
                     break;
-                case MovementStyles.Rigidbody:
+                case MovementTypes.Rigidbody:
                     movementHandler = new RigidbodyMovementHandler(rb, characterSettings.MovementData);
                     break;
             }
@@ -64,13 +64,13 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
         #region Cycle
         private void Update()
         {
-            if (characterSettings.MovementData.MovementStyle == MovementStyles.Transform)
-                movementHandler?.Execute(inputHandler.MovementInputValue);
+            if (characterSettings.MovementData.MovementType == MovementTypes.Transform)
+                movementHandler?.Execute(inputHandler.MovementInputValue, inputHandler.MovementStatus);
         }
         private void FixedUpdate()
         {
-            if (characterSettings.MovementData.MovementStyle == MovementStyles.Rigidbody)
-                movementHandler?.Execute(inputHandler.MovementInputValue);
+            if (characterSettings.MovementData.MovementType == MovementTypes.Rigidbody)
+                movementHandler?.Execute(inputHandler.MovementInputValue, inputHandler.MovementStatus);
         }
         #endregion
     }

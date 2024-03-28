@@ -30,6 +30,24 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
             ""id"": ""585c1855-106a-400f-aede-957f3f139f85"",
             ""actions"": [
                 {
+                    ""name"": ""Prone"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f4a93f9-31e3-463e-aa4d-5c0b5e19dd55"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""c52a943c-e794-4f32-b0a2-d2013ed060d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""0adc6f4e-71f5-493c-af43-5aaf4bb69d69"",
@@ -37,6 +55,24 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e88a315-0af9-43bf-87cf-dd412af2c2e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""b642bb98-8f93-42ab-92c3-c15f33e4be97"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -57,7 +93,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -68,7 +104,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -79,7 +115,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -90,7 +126,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -112,7 +148,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -123,7 +159,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -134,7 +170,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -145,36 +181,67 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""454edff9-48fb-4930-8cde-655b8de42803"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18496a56-1f9d-4412-ba4a-6b44ebd3cac2"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Prone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""efa836bc-c6ed-4468-96bb-ff8331a4760a"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a66dc0c8-265f-4c3b-9c3a-f71de94c4296"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": [
-        {
-            ""name"": ""PC"",
-            ""bindingGroup"": ""PC"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<Mouse>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        }
-    ]
+    ""controlSchemes"": []
 }");
             // CharacterSystemSample
             m_CharacterSystemSample = asset.FindActionMap("CharacterSystemSample", throwIfNotFound: true);
+            m_CharacterSystemSample_Prone = m_CharacterSystemSample.FindAction("Prone", throwIfNotFound: true);
+            m_CharacterSystemSample_Crouch = m_CharacterSystemSample.FindAction("Crouch", throwIfNotFound: true);
             m_CharacterSystemSample_Movement = m_CharacterSystemSample.FindAction("Movement", throwIfNotFound: true);
+            m_CharacterSystemSample_Run = m_CharacterSystemSample.FindAction("Run", throwIfNotFound: true);
+            m_CharacterSystemSample_Jump = m_CharacterSystemSample.FindAction("Jump", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -236,12 +303,20 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
         // CharacterSystemSample
         private readonly InputActionMap m_CharacterSystemSample;
         private List<ICharacterSystemSampleActions> m_CharacterSystemSampleActionsCallbackInterfaces = new List<ICharacterSystemSampleActions>();
+        private readonly InputAction m_CharacterSystemSample_Prone;
+        private readonly InputAction m_CharacterSystemSample_Crouch;
         private readonly InputAction m_CharacterSystemSample_Movement;
+        private readonly InputAction m_CharacterSystemSample_Run;
+        private readonly InputAction m_CharacterSystemSample_Jump;
         public struct CharacterSystemSampleActions
         {
             private @CharacterSystemSampleInputActions m_Wrapper;
             public CharacterSystemSampleActions(@CharacterSystemSampleInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Prone => m_Wrapper.m_CharacterSystemSample_Prone;
+            public InputAction @Crouch => m_Wrapper.m_CharacterSystemSample_Crouch;
             public InputAction @Movement => m_Wrapper.m_CharacterSystemSample_Movement;
+            public InputAction @Run => m_Wrapper.m_CharacterSystemSample_Run;
+            public InputAction @Jump => m_Wrapper.m_CharacterSystemSample_Jump;
             public InputActionMap Get() { return m_Wrapper.m_CharacterSystemSample; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -251,16 +326,40 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
             {
                 if (instance == null || m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_CharacterSystemSampleActionsCallbackInterfaces.Add(instance);
+                @Prone.started += instance.OnProne;
+                @Prone.performed += instance.OnProne;
+                @Prone.canceled += instance.OnProne;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
 
             private void UnregisterCallbacks(ICharacterSystemSampleActions instance)
             {
+                @Prone.started -= instance.OnProne;
+                @Prone.performed -= instance.OnProne;
+                @Prone.canceled -= instance.OnProne;
+                @Crouch.started -= instance.OnCrouch;
+                @Crouch.performed -= instance.OnCrouch;
+                @Crouch.canceled -= instance.OnCrouch;
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
+                @Run.started -= instance.OnRun;
+                @Run.performed -= instance.OnRun;
+                @Run.canceled -= instance.OnRun;
+                @Jump.started -= instance.OnJump;
+                @Jump.performed -= instance.OnJump;
+                @Jump.canceled -= instance.OnJump;
             }
 
             public void RemoveCallbacks(ICharacterSystemSampleActions instance)
@@ -278,18 +377,13 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
             }
         }
         public CharacterSystemSampleActions @CharacterSystemSample => new CharacterSystemSampleActions(this);
-        private int m_PCSchemeIndex = -1;
-        public InputControlScheme PCScheme
-        {
-            get
-            {
-                if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
-                return asset.controlSchemes[m_PCSchemeIndex];
-            }
-        }
         public interface ICharacterSystemSampleActions
         {
+            void OnProne(InputAction.CallbackContext context);
+            void OnCrouch(InputAction.CallbackContext context);
             void OnMovement(InputAction.CallbackContext context);
+            void OnRun(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
         }
     }
 }

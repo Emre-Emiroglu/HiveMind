@@ -2,6 +2,7 @@
     "name": "HiveMind.Core.CharacterSystem",
     "rootNamespace": "HiveMind.Core.CharacterSystem",
     "references": [
+        "GUID:d9240bda49675ec4face6cb71598b548",
         "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],

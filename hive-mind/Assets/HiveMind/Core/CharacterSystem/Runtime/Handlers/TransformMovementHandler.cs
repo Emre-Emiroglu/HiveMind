@@ -1,4 +1,5 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
@@ -25,13 +26,13 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
         #endregion
 
         #region Executes
-        public override void Execute(Vector2 inputValue) => base.Execute(inputValue);
-        protected override void ExecuteProcess(Vector2 inputValue)
+        public override void Execute(Vector2 inputValue, MovementStatus movementStatus) => base.Execute(inputValue, movementStatus);
+        protected override void ExecuteProcess(Vector2 inputValue, MovementStatus movementStatus)
         {
-            base.ExecuteProcess(inputValue);
+            base.ExecuteProcess(inputValue, movementStatus);
 
             Vector3 pos = movementData.MovementSpace == Space.World ? transform.position : transform.localPosition;
-            float speed = movementData.WalkSpeed;
+            float speed = movementData.Speeds[movementStatus];
             float time = Time.deltaTime;
 
             pos += speed * time * new Vector3(inputValue.x, 0f, inputValue.y);

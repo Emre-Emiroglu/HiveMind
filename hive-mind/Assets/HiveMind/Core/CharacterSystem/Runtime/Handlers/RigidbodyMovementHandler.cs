@@ -26,35 +26,35 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
         #endregion
 
         #region Executes
-        public override void Execute(Vector2 inputValue) => base.Execute(inputValue);
-        protected override void ExecuteProcess(Vector2 inputValue)
+        public override void Execute(Vector2 inputValue, MovementStatus movementStatus) => base.Execute(inputValue, movementStatus);
+        protected override void ExecuteProcess(Vector2 inputValue, MovementStatus movementStatus)
         {
-            base.ExecuteProcess(inputValue);
+            base.ExecuteProcess(inputValue, movementStatus);
 
             Vector3 force = rigidbody.velocity;
-            float speed = movementData.WalkSpeed;
+            float speed = movementData.Speeds[movementStatus];
             float time = Time.fixedDeltaTime;
             ForceMode forceMode = movementData.ForceMode;
             force += speed * time * new Vector3(inputValue.x, 0f, inputValue.y);
 
-            switch (movementData.RigidbodyMovementStyle)
+            switch (movementData.RigidbodyMovementType)
             {
-                case RigidbodyMovementStyles.ExplosionForce:
+                case RigidbodyMovementTypes.ExplosionForce:
                     rigidbody.AddExplosionForce(force.magnitude, rigidbody.position, force.sqrMagnitude, 0f, forceMode);
                     break;
-                case RigidbodyMovementStyles.Force:
+                case RigidbodyMovementTypes.Force:
                     rigidbody.AddForce(force, forceMode);
                     break;
-                case RigidbodyMovementStyles.ForceAtPosition:
+                case RigidbodyMovementTypes.ForceAtPosition:
                     rigidbody.AddForceAtPosition(force, rigidbody.position, forceMode);
                     break;
-                case RigidbodyMovementStyles.RelativeForce:
+                case RigidbodyMovementTypes.RelativeForce:
                     rigidbody.AddRelativeForce(force, forceMode);
                     break;
-                case RigidbodyMovementStyles.RelativeTorque:
+                case RigidbodyMovementTypes.RelativeTorque:
                     rigidbody.AddRelativeTorque(force, forceMode);
                     break;
-                case RigidbodyMovementStyles.Torque:
+                case RigidbodyMovementTypes.Torque:
                     rigidbody.AddTorque(force, forceMode);
                     break;
             }

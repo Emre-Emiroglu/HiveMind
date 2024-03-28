@@ -1,3 +1,5 @@
+using HiveMind.Core.CharacterSystem.Runtime.Enums;
+using HiveMind.Utilities.SerializedDictionary;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -11,16 +13,15 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
         #region Fields
         [Header("Input Data Fields")]
         [AssetSelector][SerializeField] private InputActionAsset inputActionAsset;
-        [SerializeField] private string controlSchemeName;
-        [SerializeField] private string actionMapName;
-        [SerializeField] private string movementActionName;
+        [SerializeField] private NamesDictionary names;
         #endregion
 
         #region Getters
         public readonly InputActionAsset InputActionAsset => inputActionAsset;
-        public readonly string ControlSchemeName => controlSchemeName;
-        public readonly string ActionMapName => actionMapName;
-        public readonly string MovementActionName => movementActionName;
+        public readonly NamesDictionary Names => names;
         #endregion
     }
+
+    [Serializable]
+    public class NamesDictionary : SerializedDictionary<InputNameTypes, string> { }
 }

@@ -1,9 +1,10 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
 {
-    public abstract class MovementHandler: Handler<Vector2>
+    public abstract class MovementHandler: Handler<Vector2, MovementStatus>
     {
         #region ReadonlyFields
         protected readonly MovementData movementData;
@@ -25,8 +26,12 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
         #endregion
 
         #region Executes
-        public override void Execute(Vector2 inputValue) => base.Execute(inputValue);
-        protected override void ExecuteProcess(Vector2 inputValue) { }
+        public override void Execute(Vector2 inputValue, MovementStatus movementStatus) => base.Execute(inputValue, movementStatus);
+        protected override void ExecuteProcess(Vector2 inputValue, MovementStatus movementStatus)
+        {
+            Debug.Log($"Current Input Value: {inputValue}");
+            Debug.Log($"Current Movement Status: {movementStatus}");
+        }
         #endregion
     }
 }

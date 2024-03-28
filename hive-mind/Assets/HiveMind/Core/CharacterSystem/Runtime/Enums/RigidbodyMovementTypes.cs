@@ -1,6 +1,6 @@
 namespace HiveMind.Core.CharacterSystem.Runtime.Enums
 {
-    public enum RigidbodyMovementStyles : int
+    public enum RigidbodyMovementTypes : int
     {
         ExplosionForce = 0,
         Force = 1,
