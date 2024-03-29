@@ -15,7 +15,8 @@
     "email": "emirogluemre08@gmail.com",
     "url": "https://www.unity3d.com"
   },
-  "samples": [
+  "samples":
+  [
         {
             "displayName": "Character System Sample",
             "path": "Samples/CharacterSystemSample"
@@ -40,5 +41,5 @@
             "displayName": "ProDebug Sample",
             "path": "Samples/ProDebugSample"
         }
-    ]
+  ]
 }
