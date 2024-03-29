@@ -8,7 +8,7 @@
   "dependencies":
   {
   },
-  "keywords": ["library", "data", "debug", "utility"],
+  "keywords": ["framework", "core system", "chracter system", "data", "helpers", "mvc", "pool", "debug", "utilities"],
   "author": 
   {
     "name": "Leo Games",
@@ -17,23 +17,27 @@
   },
   "samples": [
         {
+            "displayName": "Character System Sample",
+            "path": "Samples/CharacterSystemSample"
+        },
+        {
             "displayName": "Data Sample",
-            "description": "Contains a sample class in sample scene for testing to data system",
             "path": "Samples/DataSample"
         },
         {
             "displayName": "Helpers Sample",
-            "description": "Contains simple but usefull helpers",
             "path": "Samples/HelpersSample"
         },
         {
+            "displayName": "MVC Sample",
+            "path": "Samples/MVCSample"
+        },
+        {
             "displayName": "Pool Sample",
-            "description": "Contains a sample scene for testing to dynamic pool system",
             "path": "Samples/PoolSample"
         },
         {
             "displayName": "ProDebug Sample",
-            "description": "Contains how can you colorize your Debug.Log",
             "path": "Samples/ProDebugSample"
         }
     ]
