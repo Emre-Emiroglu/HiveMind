@@ -1,13 +1,21 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
 using HiveMind.Core.CharacterSystem.Runtime.Enums;
+using HiveMind.Utilities.Extensions;
 using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
 {
     public sealed class MovementDirectionRotationHandler : RotationHandler
     {
+        #region ReadonlyFields
+        private readonly Camera camera;
+        #endregion
+
         #region Constructor
-        public MovementDirectionRotationHandler(Transform transform, RotationData rotationData) : base(transform, rotationData) { }
+        public MovementDirectionRotationHandler(Camera camera, Transform transform, RotationData rotationData) : base(transform, rotationData)
+        {
+            this.camera = camera;
+        }
         #endregion
 
         #region Dispose
@@ -27,7 +35,10 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
             if (inputValue == Vector2.zero)
                 return;
 
+            Matrix4x4 matrix = Utilities.Utilities.IsoMatrix(Quaternion.Euler(0f, camera.transform.eulerAngles.y, 0f));
+
             Vector3 input = new(inputValue.x, 0f, inputValue.y);
+            input = input.InputToIso(matrix);
             Vector3 direction = (transform.position + input) - transform.position;
             float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float speed = rotationData.RotationSpeed;

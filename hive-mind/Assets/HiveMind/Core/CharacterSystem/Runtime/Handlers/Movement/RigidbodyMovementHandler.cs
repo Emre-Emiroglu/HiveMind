@@ -35,26 +35,28 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
             float speed = movementData.Speeds[movementStatus];
             float time = Time.fixedDeltaTime;
             ForceMode forceMode = movementData.ForceMode;
-            force += speed * time * new Vector3(inputValue.x, 0f, inputValue.y);
 
-            switch (movementData.RigidbodyMovementType)
+            Vector3 input = new(inputValue.x, 0f, inputValue.y);
+            force += speed * time * input;
+
+            switch (movementData.RigidbodyMovementStyle)
             {
-                case RigidbodyMovementTypes.ExplosionForce:
+                case RigidbodyMovementStyles.ExplosionForce:
                     rigidbody.AddExplosionForce(force.magnitude, rigidbody.position, force.sqrMagnitude, 0f, forceMode);
                     break;
-                case RigidbodyMovementTypes.Force:
+                case RigidbodyMovementStyles.Force:
                     rigidbody.AddForce(force, forceMode);
                     break;
-                case RigidbodyMovementTypes.ForceAtPosition:
+                case RigidbodyMovementStyles.ForceAtPosition:
                     rigidbody.AddForceAtPosition(force, rigidbody.position, forceMode);
                     break;
-                case RigidbodyMovementTypes.RelativeForce:
+                case RigidbodyMovementStyles.RelativeForce:
                     rigidbody.AddRelativeForce(force, forceMode);
                     break;
-                case RigidbodyMovementTypes.RelativeTorque:
+                case RigidbodyMovementStyles.RelativeTorque:
                     rigidbody.AddRelativeTorque(force, forceMode);
                     break;
-                case RigidbodyMovementTypes.Torque:
+                case RigidbodyMovementStyles.Torque:
                     rigidbody.AddTorque(force, forceMode);
                     break;
             }

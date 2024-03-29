@@ -13,7 +13,8 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
         [Header("Movement Data Fields")]
         [SerializeField] private MovementTypes movementType;
         [ShowIf("movementType", MovementTypes.Transform)][SerializeField] private Space movementSpace;
-        [ShowIf("movementType", MovementTypes.Rigidbody)][SerializeField] private RigidbodyMovementTypes rigidbodyMovementType;
+        [ShowIf("movementType", MovementTypes.Transform)][SerializeField] private TransformMovementStyles transformMovementStyle;
+        [ShowIf("movementType", MovementTypes.Rigidbody)][SerializeField] private RigidbodyMovementStyles rigidbodyMovementStyle;
         [ShowIf("movementType", MovementTypes.Rigidbody)][SerializeField] private ForceMode forceMode;
         [SerializeField] private SpeedDictionary speeds;
         #endregion
@@ -21,7 +22,8 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
         #region Getters
         public readonly MovementTypes MovementType => movementType;
         public readonly Space MovementSpace => movementSpace;
-        public readonly RigidbodyMovementTypes RigidbodyMovementType => rigidbodyMovementType;
+        public readonly TransformMovementStyles TransformMovementStyle => transformMovementStyle;
+        public readonly RigidbodyMovementStyles RigidbodyMovementStyle => rigidbodyMovementStyle;
         public readonly ForceMode ForceMode => forceMode;
         public readonly SpeedDictionary Speeds => speeds;
         #endregion

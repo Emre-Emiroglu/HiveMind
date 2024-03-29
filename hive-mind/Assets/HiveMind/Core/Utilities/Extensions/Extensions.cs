@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.Utilities.Extemsions
+namespace HiveMind.Utilities.Extensions
 {
     public static class Extensions
     {
@@ -48,5 +48,7 @@ namespace HiveMind.Utilities.Extemsions
             }
             return null;
         }
+
+        public static Vector3 InputToIso(this Vector3 input, Matrix4x4 matrix4X4) => matrix4X4.MultiplyPoint3x4(input); 
     }
 }

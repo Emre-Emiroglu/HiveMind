@@ -26,7 +26,8 @@ MonoBehaviour:
   MovementData:
     movementType: 0
     movementSpace: 0
-    rigidbodyMovementType: 0
+    transformMovementStyle: 0
+    rigidbodyMovementStyle: 0
     forceMode: 0
     speeds:
       keyData: 0000000001000000
@@ -34,8 +35,8 @@ MonoBehaviour:
       - 5
       - 10
   RotationData:
-    rotationType: 1
+    rotationType: 0
     rotationStyle: 0
     rotationSpace: 0
-    rotationSpeed: 180
+    rotationSpeed: 10
     isSlerp: 1

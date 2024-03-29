@@ -31,11 +31,16 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
         {
             base.ExecuteProcess(inputValue, movementStatus);
 
+            if (inputValue == Vector2.zero)
+                return;
+
             Vector3 pos = movementData.MovementSpace == Space.World ? transform.position : transform.localPosition;
             float speed = movementData.Speeds[movementStatus];
             float time = Time.deltaTime;
 
-            pos += speed * time * new Vector3(inputValue.x, 0f, inputValue.y);
+            Vector3 input = new(inputValue.x, 0f, inputValue.y);
+            Vector3 direction = movementData.TransformMovementStyle == TransformMovementStyles.InputBased ? input : transform.forward;
+            pos += speed * time * direction;
 
             switch (movementData.MovementSpace)
             {

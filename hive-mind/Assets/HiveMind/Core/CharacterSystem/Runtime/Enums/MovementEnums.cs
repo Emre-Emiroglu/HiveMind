@@ -5,14 +5,19 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Enums
         Transform = 0,
         Rigidbody = 1
     }
-    public enum RigidbodyMovementTypes : int
+    public enum TransformMovementStyles : int
+    {
+        InputBased = 0,
+        ForwardBased = 1
+    }
+    public enum RigidbodyMovementStyles : int
     {
         ExplosionForce = 0,
         Force = 1,
         ForceAtPosition = 2,
         RelativeForce = 3,
         RelativeTorque = 4,
-        Torque = 5,
+        Torque = 5
     }
     public enum MovementStatus : int
     {

@@ -62,10 +62,10 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
             switch (rotationType)
             {
                 case RotationTypes.MovementDirection:
-                    rotationHandler = new MovementDirectionRotationHandler(transform, characterSettings.RotationData);
+                    rotationHandler = new MovementDirectionRotationHandler(Camera.main, transform, characterSettings.RotationData);
                     break;
-                case RotationTypes.IsometricTopDown:
-                    rotationHandler = new IsometricTopDownRotationHandler(Camera.main, transform, characterSettings.RotationData);
+                case RotationTypes.TopDown:
+                    rotationHandler = new TopDownRotationHandler(Camera.main, transform, characterSettings.RotationData);
                     break;
             }
         }

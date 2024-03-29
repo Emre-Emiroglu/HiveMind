@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
 {
-    public sealed class IsometricTopDownRotationHandler : RotationHandler
+    public sealed class TopDownRotationHandler : RotationHandler
     {
         #region ReadonlyFields
         private readonly Camera camera;
         #endregion
 
         #region Constructor
-        public IsometricTopDownRotationHandler(Camera camera, Transform transform, RotationData rotationData) : base(transform, rotationData)
+        public TopDownRotationHandler(Camera camera, Transform transform, RotationData rotationData) : base(transform, rotationData)
         {
             this.camera = camera;
         }

@@ -33,7 +33,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Input
                 case RotationTypes.MovementDirection:
                     rotationInputValue = movementInputValue;
                     break;
-                case RotationTypes.IsometricTopDown:
+                case RotationTypes.TopDown:
                     rotationInputValue = mousePosInputValue;
                     break;
             }

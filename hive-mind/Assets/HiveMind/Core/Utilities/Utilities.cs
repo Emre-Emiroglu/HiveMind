@@ -99,5 +99,7 @@ namespace HiveMind.Utilities
             }
             return newList;
         }
+
+        public static Matrix4x4 IsoMatrix(Quaternion rotate) => Matrix4x4.Rotate(rotate);
     }
 }
