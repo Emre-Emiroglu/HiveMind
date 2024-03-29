@@ -1,6 +1,6 @@
 {
-    "name": "HiveMind.Pool",
-    "rootNamespace": "HiveMind.Pool",
+    "name": "HiveMind.Core.Pool",
+    "rootNamespace": "HiveMind.Core.Pool",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

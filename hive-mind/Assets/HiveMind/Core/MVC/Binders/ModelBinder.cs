@@ -1,10 +1,10 @@
-using HiveMind.MVC.Attributes;
-using HiveMind.MVC.Datas;
+using HiveMind.Core.MVC.Attributes;
+using HiveMind.Core.MVC.Datas;
 using System;
 using System.Reflection;
 using UnityEngine;
 
-namespace HiveMind.MVC.Binders
+namespace HiveMind.Core.MVC.Binders
 {
     public sealed class ModelBinder : Binder<ModelAttribute>
     {

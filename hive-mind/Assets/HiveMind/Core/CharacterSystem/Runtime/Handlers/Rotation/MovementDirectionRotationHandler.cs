@@ -1,6 +1,6 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
 using HiveMind.Core.CharacterSystem.Runtime.Enums;
-using HiveMind.Utilities.Extensions;
+using HiveMind.Core.Utilities.Extensions;
 using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation

@@ -1,8 +1,8 @@
-using HiveMind.MVCSample.SampleClasses.Controllers;
+using HiveMind.Samples.MVCSample.SampleClasses.Controllers;
 using UnityEngine;
 using Zenject;
 
-namespace HiveMind.MVCSample.SampleClasses.Installers
+namespace HiveMind.Samples.MVCSample.SampleClasses.Installers
 {
     public class SampleMonoInstaller : MonoInstaller<SampleMonoInstaller>
     {

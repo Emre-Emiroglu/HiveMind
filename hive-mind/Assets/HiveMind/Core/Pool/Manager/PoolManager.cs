@@ -1,8 +1,8 @@
-using HiveMind.Pool.Interfaces;
-using HiveMind.Pool.Settings;
+using HiveMind.Core.Pool.Interfaces;
+using HiveMind.Core.Pool.Settings;
 using UnityEngine;
 
-namespace HiveMind.Pool.Manager
+namespace HiveMind.Core.Pool.Manager
 {
     internal sealed class PoolManager : MonoBehaviour
     {

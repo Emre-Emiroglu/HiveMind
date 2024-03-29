@@ -1,8 +1,8 @@
-using HiveMind.Helpers.Enums;
+using HiveMind.Core.Helpers.Enums;
 using System;
 using UnityEngine;
 
-namespace HiveMind.Helpers
+namespace HiveMind.Core.Helpers
 {
     [Serializable]
     public sealed class Follower

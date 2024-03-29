@@ -1,4 +1,4 @@
-namespace HiveMind.Utilities.Enums
+namespace HiveMind.Core.Utilities.Enums
 {
     public enum DateTypes
     {

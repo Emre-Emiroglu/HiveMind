@@ -1,6 +1,6 @@
 using System;
 
-namespace HiveMind.Helpers.Enums
+namespace HiveMind.Core.Helpers.Enums
 {
     [Flags]
     public enum FollowTypes

@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace HiveMind.MVC.Installers
+namespace HiveMind.Core.MVC.Installers
 {
     public abstract class MVCInstallerBase<TDerived, TSubInstaller> : InstallerBase
         where TDerived : MVCInstaller<TSubInstaller>

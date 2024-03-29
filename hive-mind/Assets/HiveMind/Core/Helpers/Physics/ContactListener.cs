@@ -1,10 +1,10 @@
-using HiveMind.Helpers.Enums;
+using HiveMind.Core.Helpers.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace HiveMind.Helpers.Physics
+namespace HiveMind.Core.Helpers.Physics
 {
-    public class Contactlistener: MonoBehaviour
+    public abstract class Contactlistener: MonoBehaviour
     {
         #region Fields
         [Header("Contact Listener Settings")]

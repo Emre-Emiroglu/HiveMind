@@ -1,6 +1,6 @@
-using HiveMind.MVC.Interfaces;
+using HiveMind.Core.MVC.Interfaces;
 
-namespace HiveMind.MVC.Controllers
+namespace HiveMind.Core.MVC.Controllers
 {
     public abstract class Command : ICommand
     {

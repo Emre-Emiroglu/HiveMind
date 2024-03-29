@@ -1,6 +1,6 @@
-namespace HiveMind.ProDebug.TextFormat
+namespace HiveMind.Core.ProDebug.TextFormat
 {
-    public class TextFormat
+    public sealed class TextFormat
     {
         #region Fields
         public static TextFormat Bold = new TextFormat("b");

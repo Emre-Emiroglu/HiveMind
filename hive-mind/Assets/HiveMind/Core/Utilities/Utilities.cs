@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace HiveMind.Utilities
+namespace HiveMind.Core.Utilities
 {
     public static class Utilities
     {

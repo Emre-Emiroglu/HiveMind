@@ -1,6 +1,6 @@
 using System;
 
-namespace HiveMind.MVC.Attributes
+namespace HiveMind.Core.MVC.Attributes
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class CommandInjectAttribute : MVCAttribute

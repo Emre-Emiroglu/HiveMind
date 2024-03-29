@@ -1,11 +1,11 @@
-using HiveMind.Utilities.Enums;
+using HiveMind.Core.Utilities.Enums;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace HiveMind.Utilities.TimeCalculator
+namespace HiveMind.Core.Utilities.TimeCalculator
 {
     public static class TimeCalculator
     {

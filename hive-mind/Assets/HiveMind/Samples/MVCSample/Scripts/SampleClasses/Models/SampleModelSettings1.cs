@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.MVCSample.SampleClasses.Models
+namespace HiveMind.Samples.MVCSample.SampleClasses.Models
 {
     public class SampleModelSettings1 : ScriptableObject
     {

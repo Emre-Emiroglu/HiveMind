@@ -1,7 +1,7 @@
-using HiveMind.Helpers.Exploder;
+using HiveMind.Core.Helpers.Exploder;
 using UnityEngine;
 
-namespace HiveMind.HelpersSample.SampleClasses
+namespace HiveMind.Samples.HelpersSample.SampleClasses
 {
     public class ExploderSample : MonoBehaviour
     {

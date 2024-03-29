@@ -1,8 +1,8 @@
-using HiveMind.Pool.Interfaces;
-using HiveMind.Pool.Manager;
+using HiveMind.Core.Pool.Interfaces;
+using HiveMind.Core.Pool.Manager;
 using UnityEngine;
 
-namespace HiveMind.Pool.Engine
+namespace HiveMind.Core.Pool.Engine
 {
     public static class PoolEngine
     {

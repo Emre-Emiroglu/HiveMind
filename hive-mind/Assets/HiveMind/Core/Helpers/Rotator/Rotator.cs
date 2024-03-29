@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.Helpers.Rotator
+namespace HiveMind.Core.Helpers.Rotator
 {
     public sealed class Rotator : MonoBehaviour
     {

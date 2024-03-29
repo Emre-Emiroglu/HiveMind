@@ -1,8 +1,8 @@
-using HiveMind.ProDebug.Colorize;
-using HiveMind.ProDebug.TextFormat;
+using HiveMind.Core.ProDebug.Colorize;
+using HiveMind.Core.ProDebug.TextFormat;
 using UnityEngine;
 
-namespace HiveMind.ProDebugSample.SampleClasses
+namespace HiveMind.Samples.ProDebugSample.SampleClasses
 {
     public class SampleClass1 : MonoBehaviour
     {

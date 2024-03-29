@@ -1,6 +1,6 @@
 using System;
 
-namespace HiveMind.MVC.Attributes
+namespace HiveMind.Core.MVC.Attributes
 {
     public abstract class MVCAttribute : Attribute
     {

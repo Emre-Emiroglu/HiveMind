@@ -1,9 +1,9 @@
-using HiveMind.Utilities.Enums;
-using HiveMind.Helpers.Countdown;
+using HiveMind.Core.Utilities.Enums;
+using HiveMind.Core.Helpers.Countdown;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HiveMind.HelpersSample.SampleClasses
+namespace HiveMind.Samples.HelpersSample.SampleClasses
 {
     public class CountdownSample : MonoBehaviour
     {

@@ -1,10 +1,7 @@
 {
-    "name": "HiveMind.MVCSample",
-    "rootNamespace": "HiveMind.MVCSample",
-    "references": [
-        "GUID:fe880a7a77048f74e8bcf91723060978",
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
-    ],
+    "name": "HiveMind.Core.Data",
+    "rootNamespace": "HiveMind.Core.Data",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

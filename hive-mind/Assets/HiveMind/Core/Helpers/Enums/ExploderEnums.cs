@@ -1,4 +1,4 @@
-namespace HiveMind.Helpers.Enums
+namespace HiveMind.Core.Helpers.Enums
 {
     public enum PiecesFindingTypes
     {

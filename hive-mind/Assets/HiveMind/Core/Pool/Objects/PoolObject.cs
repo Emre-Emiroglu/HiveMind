@@ -1,7 +1,7 @@
-using HiveMind.Pool.Interfaces;
+using HiveMind.Core.Pool.Interfaces;
 using UnityEngine;
 
-namespace HiveMind.Pool.Objects
+namespace HiveMind.Core.Pool.Objects
 {
     public class PoolObject : MonoBehaviour, IPoolable
     {

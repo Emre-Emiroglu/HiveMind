@@ -1,8 +1,8 @@
-using HiveMind.Pool.Interfaces;
+using HiveMind.Core.Pool.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HiveMind.Pool.Manager
+namespace HiveMind.Core.Pool.Manager
 {
     internal sealed class ObjectPool
     {

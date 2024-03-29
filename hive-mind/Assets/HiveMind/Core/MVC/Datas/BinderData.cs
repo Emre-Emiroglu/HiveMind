@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace HiveMind.MVC.Datas
+namespace HiveMind.Core.MVC.Datas
 {
     public readonly struct BinderData
     {

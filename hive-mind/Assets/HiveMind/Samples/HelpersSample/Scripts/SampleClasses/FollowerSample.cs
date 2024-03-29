@@ -1,7 +1,7 @@
-using HiveMind.Helpers;
+using HiveMind.Core.Helpers;
 using UnityEngine;
 
-namespace HiveMind.HelpersSample.SampleClasses
+namespace HiveMind.Samples.HelpersSample.SampleClasses
 {
     public class FollowerSample : MonoBehaviour
     {

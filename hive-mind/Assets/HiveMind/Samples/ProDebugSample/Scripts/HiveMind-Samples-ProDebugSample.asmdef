@@ -1,8 +1,8 @@
 {
-    "name": "HiveMind.MVC",
-    "rootNamespace": "HiveMind.MVC",
+    "name": "HiveMind.Samples.ProDebugSample",
+    "rootNamespace": "HiveMind.Samples.ProDebugSample",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
+        "GUID:e96f5645abedef54ea816df70f0a110d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-namespace HiveMind.MVC.Controllers
+namespace HiveMind.Core.MVC.Controllers
 {
     public sealed class CommandSignalCallbackWrapper : IDisposable
     {

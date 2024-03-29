@@ -1,7 +1,7 @@
-using HiveMind.Utilities.Enums;
+using HiveMind.Core.Utilities.Enums;
 using System;
 
-namespace HiveMind.Utilities.TextFormatter
+namespace HiveMind.Core.Utilities.TextFormatter
 {
     public static class TextFormatter
     {

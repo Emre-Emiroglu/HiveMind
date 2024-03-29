@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace HiveMind.Data.Editors
+namespace HiveMind.Core.Data.Editors
 {
     public class DataEditor : EditorWindow, IHasCustomMenu
     {
@@ -18,7 +18,7 @@ namespace HiveMind.Data.Editors
         #endregion
 
         #region Core
-        [MenuItem("HiveMind/Data/DataEditor")]
+        [MenuItem("HiveMind/Editors/DataEditor")]
         public static void ShowDataEditor()
         {
             DataEditor dataEditor = GetWindow<DataEditor>();

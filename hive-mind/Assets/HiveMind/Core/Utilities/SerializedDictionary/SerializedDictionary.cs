@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HiveMind.Utilities.SerializedDictionary
+namespace HiveMind.Core.Utilities.SerializedDictionary
 {
     public abstract class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
     {

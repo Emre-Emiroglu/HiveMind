@@ -1,10 +1,10 @@
-using HiveMind.MVC.Attributes;
-using HiveMind.MVC.Datas;
+using HiveMind.Core.MVC.Attributes;
+using HiveMind.Core.MVC.Datas;
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace HiveMind.MVC.Binders
+namespace HiveMind.Core.MVC.Binders
 {
     public abstract class Binder<TAttribute> where TAttribute : MVCAttribute
     {

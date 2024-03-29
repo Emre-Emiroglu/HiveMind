@@ -1,7 +1,7 @@
-using HiveMind.Helpers.Enums;
+using HiveMind.Core.Helpers.Enums;
 using UnityEngine;
 
-namespace HiveMind.Helpers.Physics
+namespace HiveMind.Core.Helpers.Physics
 {
     [RequireComponent(typeof(Rigidbody))]
     public sealed class ContactListener3D : Contactlistener

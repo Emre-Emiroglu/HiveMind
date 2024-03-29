@@ -1,8 +1,8 @@
-using HiveMind.MVC.Datas;
-using HiveMind.MVC.Installers;
-using HiveMind.MVCSample.SampleClasses.Controllers;
+using HiveMind.Core.MVC.Datas;
+using HiveMind.Core.MVC.Installers;
+using HiveMind.Samples.MVCSample.SampleClasses.Controllers;
 
-namespace HiveMind.MVCSample.SampleClasses.Installers
+namespace HiveMind.Samples.MVCSample.SampleClasses.Installers
 {
     public class SampleInstaller : MVCInstaller<SampleInstaller>
     {

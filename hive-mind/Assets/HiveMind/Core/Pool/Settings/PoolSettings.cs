@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.Pool.Settings
+namespace HiveMind.Core.Pool.Settings
 {
     [CreateAssetMenu(fileName ="PoolSettings", menuName ="HiveMind/Pool/PoolSettings")]
     public sealed class PoolSettings : ScriptableObject

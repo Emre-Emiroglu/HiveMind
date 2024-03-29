@@ -1,8 +1,8 @@
-using HiveMind.MVC.Attributes;
-using HiveMind.MVC.Views;
+using HiveMind.Core.MVC.Attributes;
+using HiveMind.Core.MVC.Views;
 using UnityEngine;
 
-namespace HiveMind.MVCSample.SampleClasses.Views
+namespace HiveMind.Samples.MVCSample.SampleClasses.Views
 {
     [Mediator(key: "MVCSample")]
     public class SampleMediator2 : Mediator<SampleView2>

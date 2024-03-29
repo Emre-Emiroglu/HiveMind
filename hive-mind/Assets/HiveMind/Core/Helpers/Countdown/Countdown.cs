@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
-using HiveMind.Utilities.Enums;
-using HiveMind.Utilities.TextFormatter;
+using HiveMind.Core.Utilities.Enums;
+using HiveMind.Core.Utilities.TextFormatter;
 
-namespace HiveMind.Helpers.Countdown
+namespace HiveMind.Core.Helpers.Countdown
 {
     public sealed class Countdown
     {

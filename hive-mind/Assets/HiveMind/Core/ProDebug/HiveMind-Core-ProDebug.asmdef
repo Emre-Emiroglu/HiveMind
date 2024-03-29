@@ -1,6 +1,6 @@
 {
-    "name": "HiveMind.Utilities",
-    "rootNamespace": "HiveMind.Utilities",
+    "name": "HiveMind.Core.ProDebug",
+    "rootNamespace": "HiveMind.Core.ProDebug",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

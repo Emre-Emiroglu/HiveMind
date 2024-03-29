@@ -1,5 +1,5 @@
-using HiveMind.MVC.Attributes;
-using HiveMind.MVC.Interfaces;
+using HiveMind.Core.MVC.Attributes;
+using HiveMind.Core.MVC.Interfaces;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Zenject;
 
-namespace HiveMind.MVC.Controllers
+namespace HiveMind.Core.MVC.Controllers
 {
     public sealed class CommandPool
     {

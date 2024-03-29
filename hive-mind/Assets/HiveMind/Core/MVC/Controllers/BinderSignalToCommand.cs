@@ -3,7 +3,7 @@ using System;
 using System.Reflection;
 using Zenject;
 
-namespace HiveMind.MVC.Controllers
+namespace HiveMind.Core.MVC.Controllers
 {
     public sealed class BinderSignalToCommand<TSignal> : BindSignalToBinder<TSignal>
     {

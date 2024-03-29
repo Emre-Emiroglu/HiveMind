@@ -1,11 +1,11 @@
-using HiveMind.MVC.Attributes;
-using HiveMind.MVC.Datas;
-using HiveMind.MVC.Views;
+using HiveMind.Core.MVC.Attributes;
+using HiveMind.Core.MVC.Datas;
+using HiveMind.Core.MVC.Views;
 using System;
 using System.Reflection;
 using UnityEngine;
 
-namespace HiveMind.MVC.Binders
+namespace HiveMind.Core.MVC.Binders
 {
     public sealed class MediationBinder : Binder<MediatorAttribute>
     {

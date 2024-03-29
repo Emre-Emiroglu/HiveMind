@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace HiveMind.MVC.Models
+namespace HiveMind.Core.MVC.Models
 {
     public abstract class Model<TModelSettings> where TModelSettings : ScriptableObject
     {

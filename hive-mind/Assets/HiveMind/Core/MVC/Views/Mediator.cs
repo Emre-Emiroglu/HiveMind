@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace HiveMind.MVC.Views
+namespace HiveMind.Core.MVC.Views
 {
     public abstract class Mediator<TView> where TView : View
     {

@@ -1,7 +1,7 @@
-using HiveMind.MVC.Controllers;
+using HiveMind.Core.MVC.Controllers;
 using UnityEngine;
 
-namespace HiveMind.MVCSample.SampleClasses.Controllers
+namespace HiveMind.Samples.MVCSample.SampleClasses.Controllers
 {
     public class SampleCommand1 : Command
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace HiveMind.ProDebug.Colorize
+namespace HiveMind.Core.ProDebug.Colorize
 {
-    public class Colorize
+    public sealed class Colorize
     {
         #region Colors
         public static Colorize Red = new Colorize(Color.red);

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.Pool.Objects
+namespace HiveMind.Core.Pool.Objects
 {
     public class PoolParticle : PoolObject
     {

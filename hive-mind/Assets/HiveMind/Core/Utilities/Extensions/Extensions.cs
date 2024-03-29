@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.Utilities.Extensions
+namespace HiveMind.Core.Utilities.Extensions
 {
     public static class Extensions
     {

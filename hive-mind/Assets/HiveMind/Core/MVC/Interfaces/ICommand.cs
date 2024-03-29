@@ -1,4 +1,4 @@
-namespace HiveMind.MVC.Interfaces
+namespace HiveMind.Core.MVC.Interfaces
 {
     public interface ICommand
     {

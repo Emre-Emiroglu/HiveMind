@@ -1,6 +1,6 @@
 {
-    "name": "HiveMind.DataSample",
-    "rootNamespace": "HiveMind.DataSample",
+    "name": "HiveMind.Samples.DataSample",
+    "rootNamespace": "HiveMind.Samples.DataSample",
     "references": [
         "GUID:dc4b27d49faaf2946b3fefd603cfdea8"
     ],

@@ -1,9 +1,9 @@
-using HiveMind.Helpers.Enums;
+using HiveMind.Core.Helpers.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HiveMind.Helpers.Exploder
+namespace HiveMind.Core.Helpers.Exploder
 {
     public sealed class Exploder : MonoBehaviour
     {

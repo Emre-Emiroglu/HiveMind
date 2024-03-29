@@ -1,8 +1,8 @@
-using HiveMind.MVC.Attributes;
-using HiveMind.MVC.Models;
+using HiveMind.Core.MVC.Attributes;
+using HiveMind.Core.MVC.Models;
 using UnityEngine;
 
-namespace HiveMind.MVCSample.SampleClasses.Models
+namespace HiveMind.Samples.MVCSample.SampleClasses.Models
 {
     [Model(key: "MVCSample")]
     public class SampleModel2 : Model<SampleModelSettings2>

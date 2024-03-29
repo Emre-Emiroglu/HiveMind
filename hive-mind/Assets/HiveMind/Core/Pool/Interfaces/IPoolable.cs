@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.Pool.Interfaces
+namespace HiveMind.Core.Pool.Interfaces
 {
     public interface IPoolable
     {

@@ -1,8 +1,8 @@
-using HiveMind.Data.Services;
+using HiveMind.Core.Data.Services;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HiveMind.DataSamples.SampleClasses
+namespace HiveMind.Samples.DataSample.SampleClasses
 {
     public class SampleDataManager : MonoBehaviour
     {

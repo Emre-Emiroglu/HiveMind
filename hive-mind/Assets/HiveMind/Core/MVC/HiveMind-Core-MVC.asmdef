@@ -1,7 +1,9 @@
 {
-    "name": "HiveMind.Data",
-    "rootNamespace": "HiveMind.Data",
-    "references": [],
+    "name": "HiveMind.Core.MVC",
+    "rootNamespace": "HiveMind.Core.MVC",
+    "references": [
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

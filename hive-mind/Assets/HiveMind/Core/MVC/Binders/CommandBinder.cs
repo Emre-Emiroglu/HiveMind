@@ -1,9 +1,9 @@
-using HiveMind.MVC.Attributes;
-using HiveMind.MVC.Controllers;
-using HiveMind.MVC.Datas;
+using HiveMind.Core.MVC.Attributes;
+using HiveMind.Core.MVC.Controllers;
+using HiveMind.Core.MVC.Datas;
 using Zenject;
 
-namespace HiveMind.MVC.Binders
+namespace HiveMind.Core.MVC.Binders
 {
     public sealed class CommandBinder : Binder<CommandInjectAttribute>
     {

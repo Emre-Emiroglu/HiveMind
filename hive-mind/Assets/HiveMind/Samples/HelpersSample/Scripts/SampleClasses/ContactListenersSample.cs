@@ -1,7 +1,7 @@
-using HiveMind.Helpers.Physics;
+using HiveMind.Core.Helpers.Physics;
 using UnityEngine;
 
-namespace HiveMind.HelpersSample.SampleClasses
+namespace HiveMind.Samples.HelpersSample.SampleClasses
 {
     public class ContactListenersSample : MonoBehaviour
     {

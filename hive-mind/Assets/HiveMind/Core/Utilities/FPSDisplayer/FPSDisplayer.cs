@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.Utilities.FPSDisplayer
+namespace HiveMind.Core.Utilities.FPSDisplayer
 {
     public class FPSDisplayer: MonoBehaviour
     {

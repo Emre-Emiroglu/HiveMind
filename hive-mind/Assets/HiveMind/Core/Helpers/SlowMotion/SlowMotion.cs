@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HiveMind.Helpers.SlowMotion
+namespace HiveMind.Core.Helpers.SlowMotion
 {
     public sealed class SlowMotion : MonoBehaviour
     {

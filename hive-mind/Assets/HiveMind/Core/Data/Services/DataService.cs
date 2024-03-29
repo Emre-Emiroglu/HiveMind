@@ -5,7 +5,7 @@ using System.Text;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 
-namespace HiveMind.Data.Services
+namespace HiveMind.Core.Data.Services
 {
     public static class DataService
     {

@@ -1,7 +1,7 @@
-using HiveMind.MVC.Binders;
-using HiveMind.MVC.Datas;
+using HiveMind.Core.MVC.Binders;
+using HiveMind.Core.MVC.Datas;
 
-namespace HiveMind.MVC.Installers
+namespace HiveMind.Core.MVC.Installers
 {
     public class MVCInstaller<TSubInstaller>: MVCInstallerBase<BinderData, MVCInstaller<TSubInstaller>, TSubInstaller>
     {

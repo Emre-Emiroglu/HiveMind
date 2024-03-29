@@ -1,7 +1,7 @@
-using HiveMind.Helpers.SlowMotion;
+using HiveMind.Core.Helpers.SlowMotion;
 using UnityEngine;
 
-namespace HiveMind.HelpersSample.SampleClasses
+namespace HiveMind.Samples.HelpersSample.SampleClasses
 {
     public class SlowMotionSample : MonoBehaviour
     {
