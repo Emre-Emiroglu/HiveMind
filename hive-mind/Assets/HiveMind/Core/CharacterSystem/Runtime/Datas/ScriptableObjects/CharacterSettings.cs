@@ -1,5 +1,4 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
-using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ScriptableObjects
@@ -10,6 +9,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ScriptableObjects
         #region Fields
         public InputData InputData;
         public MovementData MovementData;
+        public RotationData RotationData;
         #endregion
     }
 }

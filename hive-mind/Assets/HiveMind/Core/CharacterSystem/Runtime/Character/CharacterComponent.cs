@@ -1,6 +1,7 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ScriptableObjects;
 using HiveMind.Core.CharacterSystem.Runtime.Handlers.Input;
 using HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement;
+using HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation;
 using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
         #region Events
         public UnityAction<bool> ChangeInputEnableStatus;
         public UnityAction<bool> ChangeMovementEnableStatus;
+        public UnityAction<bool> ChangeRotationEnableStatus;
         #endregion
 
         #region SerializeFields
@@ -24,12 +26,20 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
         #region Fields
         private InputHandler inputHandler;
         private MovementHandler movementHandler;
+        private RotationHandler rotationHandler;
+        private InputTypes inputType;
+        private MovementTypes movementType;
+        private RotationTypes rotationType;
         #endregion
 
         #region Core
         private void Awake()
         {
-            switch (characterSettings.InputData.InputType)
+            inputType = characterSettings.InputData.InputType;
+            movementType = characterSettings.MovementData.MovementType;
+            rotationType = characterSettings.RotationData.RotationType;
+
+            switch (inputType)
             {
                 case InputTypes.PC:
                     inputHandler = new PCInputHandler(characterSettings.InputData);
@@ -39,7 +49,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
                     break;
             }
 
-            switch (characterSettings.MovementData.MovementType)
+            switch (movementType)
             {
                 case MovementTypes.Transform:
                     movementHandler = new TransformMovementHandler(transform, characterSettings.MovementData);
@@ -48,38 +58,54 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
                     movementHandler = new RigidbodyMovementHandler(rb, characterSettings.MovementData);
                     break;
             }
+
+            switch (rotationType)
+            {
+                case RotationTypes.MovementDirection:
+                    rotationHandler = new MovementDirectionRotationHandler(transform, characterSettings.RotationData);
+                    break;
+                case RotationTypes.IsometricTopDown:
+                    rotationHandler = new IsometricTopDownRotationHandler(Camera.main, transform, characterSettings.RotationData);
+                    break;
+            }
         }
         private void OnEnable()
         {
             ChangeInputEnableStatus += OnInputEnableStatusChanged;
             ChangeMovementEnableStatus += OnMovementEnableStatusChanged;
+            ChangeRotationEnableStatus += OnRotationEnableStatusChanged;
         }
         private void OnDisable()
         {
             ChangeInputEnableStatus -= OnInputEnableStatusChanged;
             ChangeMovementEnableStatus -= OnMovementEnableStatusChanged;
+            ChangeRotationEnableStatus -= OnRotationEnableStatusChanged;
         }
         private void OnDestroy()
         {
             inputHandler?.Dispose();
             movementHandler?.Dispose();
+            rotationHandler?.Dispose();
         }
         #endregion
 
         #region Receivers
         private void OnInputEnableStatusChanged(bool isEnable) => inputHandler?.SetEnableStatus(isEnable);
         private void OnMovementEnableStatusChanged(bool isEnable) => movementHandler?.SetEnableStatus(isEnable);
+        private void OnRotationEnableStatusChanged(bool isEnable) => rotationHandler?.SetEnableStatus(isEnable);
         #endregion
 
         #region Cycle
         private void Update()
         {
-            if (characterSettings.MovementData.MovementType == MovementTypes.Transform)
+            if (movementType == MovementTypes.Transform)
                 movementHandler?.Execute(inputHandler.MovementInputValue, inputHandler.MovementStatus);
+
+            rotationHandler?.Execute(inputHandler.RotationInputValue(rotationType));
         }
         private void FixedUpdate()
         {
-            if (characterSettings.MovementData.MovementType == MovementTypes.Rigidbody)
+            if (movementType == MovementTypes.Rigidbody)
                 movementHandler?.Execute(inputHandler.MovementInputValue, inputHandler.MovementStatus);
         }
         #endregion

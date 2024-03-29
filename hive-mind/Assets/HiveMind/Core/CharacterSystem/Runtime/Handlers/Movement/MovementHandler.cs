@@ -27,11 +27,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
 
         #region Executes
         public override void Execute(Vector2 inputValue, MovementStatus movementStatus) => base.Execute(inputValue, movementStatus);
-        protected override void ExecuteProcess(Vector2 inputValue, MovementStatus movementStatus)
-        {
-            Debug.Log($"Current Input Value: {inputValue}");
-            Debug.Log($"Current Movement Status: {movementStatus}");
-        }
+        protected override void ExecuteProcess(Vector2 inputValue, MovementStatus movementStatus) { }
         #endregion
     }
 }

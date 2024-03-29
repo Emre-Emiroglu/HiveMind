@@ -14,15 +14,31 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Input
         protected readonly InputActionMap actionMap;
         protected readonly InputAction movementAction;
         protected readonly InputAction runAction;
+        protected readonly InputAction mousePosAction;
         #endregion
 
         #region Fields
         protected Vector2 movementInputValue;
+        protected Vector2 mousePosInputValue;
         protected MovementStatus movementStatus;
         #endregion
 
         #region Getters
         public Vector2 MovementInputValue => movementInputValue;
+        public Vector2 RotationInputValue(RotationTypes rotationType)
+        {
+            Vector2 rotationInputValue = Vector2.zero;
+            switch (rotationType)
+            {
+                case RotationTypes.MovementDirection:
+                    rotationInputValue = movementInputValue;
+                    break;
+                case RotationTypes.IsometricTopDown:
+                    rotationInputValue = mousePosInputValue;
+                    break;
+            }
+            return rotationInputValue;
+        }
         public MovementStatus MovementStatus => movementStatus;
         #endregion
 
@@ -36,9 +52,11 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Input
 
             movementAction = actionMap.FindAction(this.inputData.InputActionNames[InputActionNameTypes.MovementActionName]);
             runAction = actionMap.FindAction(this.inputData.InputActionNames[InputActionNameTypes.RunActionName]);
+            mousePosAction = actionMap.FindAction(this.inputData.InputActionNames[InputActionNameTypes.MousePosActionName]);
 
             SetSubscriptionStatus(movementAction, OnMovementActionStarted, OnMovementActionPerformed, OnMovementActionCanceled, true);
             SetSubscriptionStatus(runAction, OnRunActionStarted, OnRunActionPerformed, OnRunActionCanceled, true);
+            SetSubscriptionStatus(mousePosAction, OnMousePosActionStarted, OnMousePosActionPerformed, OnMousePosActionCanceled, true);
         }
         #endregion
 
@@ -49,6 +67,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Input
 
             SetSubscriptionStatus(movementAction, OnMovementActionStarted, OnMovementActionPerformed, OnMovementActionCanceled, false);
             SetSubscriptionStatus(runAction, OnRunActionStarted, OnRunActionPerformed, OnRunActionCanceled, false);
+            SetSubscriptionStatus(mousePosAction, OnMousePosActionStarted, OnMousePosActionPerformed, OnMousePosActionCanceled, false);
         }
         #endregion
 
@@ -63,6 +82,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Input
                 inputActionAsset.Disable();
 
             movementInputValue = Vector2.zero;
+            mousePosInputValue = Vector2.zero;
             movementStatus = MovementStatus.Walk;
         }
         protected void SetSubscriptionStatus(InputAction action, Action<InputAction.CallbackContext> onStarted, Action<InputAction.CallbackContext> onPerformed, Action<InputAction.CallbackContext> onCanceled, bool isSub)
@@ -106,6 +126,9 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Input
             if (movementStatus == MovementStatus.Run)
                 movementStatus = MovementStatus.Walk;
         }
+        private void OnMousePosActionStarted(InputAction.CallbackContext context) => mousePosInputValue = Vector2.zero;
+        private void OnMousePosActionPerformed(InputAction.CallbackContext context) => mousePosInputValue = context.ReadValue<Vector2>();
+        private void OnMousePosActionCanceled(InputAction.CallbackContext context) => mousePosInputValue = Vector2.zero;
         #endregion
     }
 }

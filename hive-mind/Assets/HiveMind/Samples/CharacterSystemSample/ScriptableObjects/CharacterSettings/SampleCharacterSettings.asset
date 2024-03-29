@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: SampleCharacterSettings
   m_EditorClassIdentifier: 
   InputData:
+    inputType: 0
     inputActionAsset: {fileID: -944628639613478452, guid: 693a0374af0e3ad499baba4f6b9f5772,
       type: 3}
     inputActionNames:
-      keyData: 000000000100000002000000
+      keyData: 00000000010000000200000003000000
       valueData:
       - CharacterSystemSample
       - Movement
       - Run
+      - MousePos
   MovementData:
     movementType: 0
     movementSpace: 0
@@ -31,3 +33,9 @@ MonoBehaviour:
       valueData:
       - 5
       - 10
+  RotationData:
+    rotationType: 1
+    rotationStyle: 0
+    rotationSpace: 0
+    rotationSpeed: 180
+    isSlerp: 1

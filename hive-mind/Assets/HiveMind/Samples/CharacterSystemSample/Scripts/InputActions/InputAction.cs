@@ -46,6 +46,15 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePos"",
+                    ""type"": ""Value"",
+                    ""id"": ""4a4ecd05-504b-477a-a573-5d7cd3659ddd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -169,6 +178,17 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48f4913b-1510-4808-ae79-2d37893e0943"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -179,6 +199,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
             m_CharacterSystemSample = asset.FindActionMap("CharacterSystemSample", throwIfNotFound: true);
             m_CharacterSystemSample_Movement = m_CharacterSystemSample.FindAction("Movement", throwIfNotFound: true);
             m_CharacterSystemSample_Run = m_CharacterSystemSample.FindAction("Run", throwIfNotFound: true);
+            m_CharacterSystemSample_MousePos = m_CharacterSystemSample.FindAction("MousePos", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -242,12 +263,14 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
         private List<ICharacterSystemSampleActions> m_CharacterSystemSampleActionsCallbackInterfaces = new List<ICharacterSystemSampleActions>();
         private readonly InputAction m_CharacterSystemSample_Movement;
         private readonly InputAction m_CharacterSystemSample_Run;
+        private readonly InputAction m_CharacterSystemSample_MousePos;
         public struct CharacterSystemSampleActions
         {
             private @CharacterSystemSampleInputActions m_Wrapper;
             public CharacterSystemSampleActions(@CharacterSystemSampleInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_CharacterSystemSample_Movement;
             public InputAction @Run => m_Wrapper.m_CharacterSystemSample_Run;
+            public InputAction @MousePos => m_Wrapper.m_CharacterSystemSample_MousePos;
             public InputActionMap Get() { return m_Wrapper.m_CharacterSystemSample; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -263,6 +286,9 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @MousePos.started += instance.OnMousePos;
+                @MousePos.performed += instance.OnMousePos;
+                @MousePos.canceled += instance.OnMousePos;
             }
 
             private void UnregisterCallbacks(ICharacterSystemSampleActions instance)
@@ -273,6 +299,9 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
                 @Run.started -= instance.OnRun;
                 @Run.performed -= instance.OnRun;
                 @Run.canceled -= instance.OnRun;
+                @MousePos.started -= instance.OnMousePos;
+                @MousePos.performed -= instance.OnMousePos;
+                @MousePos.canceled -= instance.OnMousePos;
             }
 
             public void RemoveCallbacks(ICharacterSystemSampleActions instance)
@@ -294,6 +323,7 @@ namespace HiveMind.Samples.CharacterSystemSample.InputActions
         {
             void OnMovement(InputAction.CallbackContext context);
             void OnRun(InputAction.CallbackContext context);
+            void OnMousePos(InputAction.CallbackContext context);
         }
     }
 }
