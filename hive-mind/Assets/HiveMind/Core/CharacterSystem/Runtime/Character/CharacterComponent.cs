@@ -1,5 +1,6 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ScriptableObjects;
-using HiveMind.Core.CharacterSystem.Runtime.Handlers;
+using HiveMind.Core.CharacterSystem.Runtime.Handlers.Input;
+using HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement;
 using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 using UnityEngine.Events;
@@ -28,7 +29,16 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Character
         #region Core
         private void Awake()
         {
-            inputHandler = new(characterSettings.InputData);
+            switch (characterSettings.InputData.InputType)
+            {
+                case InputTypes.PC:
+                    inputHandler = new PCInputHandler(characterSettings.InputData);
+                    break;
+                case InputTypes.Gamepad:
+                    inputHandler = new GamepadInputHandler(characterSettings.InputData);
+                    break;
+            }
+
             switch (characterSettings.MovementData.MovementType)
             {
                 case MovementTypes.Transform:

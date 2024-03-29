@@ -4,21 +4,21 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
+namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Input
 {
-    public sealed class InputHandler: Handler
+    public abstract class InputHandler: Handler
     {
         #region ReadonlyFields
-        private readonly InputData inputData;
-        private readonly InputActionAsset inputActionAsset;
-        private readonly InputActionMap actionMap;
-        private readonly InputAction movementAction;
-        private readonly InputAction runAction;
+        protected readonly InputData inputData;
+        protected readonly InputActionAsset inputActionAsset;
+        protected readonly InputActionMap actionMap;
+        protected readonly InputAction movementAction;
+        protected readonly InputAction runAction;
         #endregion
 
         #region Fields
-        private Vector2 movementInputValue;
-        private MovementStatus movementStatus;
+        protected Vector2 movementInputValue;
+        protected MovementStatus movementStatus;
         #endregion
 
         #region Getters
@@ -65,7 +65,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
             movementInputValue = Vector2.zero;
             movementStatus = MovementStatus.Walk;
         }
-        private void SetSubscriptionStatus(InputAction action, Action<InputAction.CallbackContext> onStarted, Action<InputAction.CallbackContext> onPerformed, Action<InputAction.CallbackContext> onCanceled, bool isSub)
+        protected void SetSubscriptionStatus(InputAction action, Action<InputAction.CallbackContext> onStarted, Action<InputAction.CallbackContext> onPerformed, Action<InputAction.CallbackContext> onCanceled, bool isSub)
         {
             if (isSub)
             {

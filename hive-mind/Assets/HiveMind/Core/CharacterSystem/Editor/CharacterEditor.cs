@@ -11,8 +11,8 @@ namespace HiveMind.Core.CharacterSystem.Editor
     {
         #region Constants
         private const string characterSettingsCreatorTitlePreffix = "Character Settings Creator";
+        private const string generalsSuffix = "/Generals";
         private const string datasSuffix = "/Datas";
-        private const string saveSettingsSuffix = "/Save Settings";
         private const string buttonsSuffix = "/Buttons";
 
         private const string menuItemName = "HiveMind/Editors/CharacterEditor";
@@ -30,18 +30,18 @@ namespace HiveMind.Core.CharacterSystem.Editor
         #region CharacterSettingsCreator
         [TitleGroup(characterSettingsCreatorTitlePreffix, "", TitleAlignments.Centered, true, true, false)]
 
+        #region Generals
+        [TitleGroup(characterSettingsCreatorTitlePreffix + generalsSuffix, "", TitleAlignments.Left, false, true, true)]
+        [SerializeField] private string characterSettingsName;
+        [TitleGroup(characterSettingsCreatorTitlePreffix + generalsSuffix, "", TitleAlignments.Left, false, true, true)]
+        [FolderPath][SerializeField] private string saveFolderPath;
+        #endregion
+
         #region Datas
         [TitleGroup(characterSettingsCreatorTitlePreffix + datasSuffix, "", TitleAlignments.Left, false, true, true)]
         [SerializeField] private InputData inputData;
         [TitleGroup(characterSettingsCreatorTitlePreffix + datasSuffix, "", TitleAlignments.Left, false, true, true)]
         [SerializeField] private MovementData movementData;
-        #endregion
-
-        #region SaveSettings
-        [TitleGroup(characterSettingsCreatorTitlePreffix + saveSettingsSuffix, "", TitleAlignments.Left, false, true, true)]
-        [SerializeField] private string characterSettingsName;
-        [TitleGroup(characterSettingsCreatorTitlePreffix + saveSettingsSuffix, "", TitleAlignments.Left, false, true, true)]
-        [FolderPath][SerializeField] private string saveFolderPath;
         #endregion
 
         #region Buttons

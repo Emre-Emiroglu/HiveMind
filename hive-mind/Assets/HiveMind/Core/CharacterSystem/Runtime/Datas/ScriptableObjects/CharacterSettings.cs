@@ -1,4 +1,5 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
+using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ScriptableObjects

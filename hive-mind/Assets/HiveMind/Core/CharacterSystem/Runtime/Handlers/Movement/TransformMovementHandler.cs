@@ -2,7 +2,7 @@ using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
 using HiveMind.Core.CharacterSystem.Runtime.Enums;
 using UnityEngine;
 
-namespace HiveMind.Core.CharacterSystem.Runtime.Handlers
+namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
 {
     public sealed class TransformMovementHandler : MovementHandler
     {

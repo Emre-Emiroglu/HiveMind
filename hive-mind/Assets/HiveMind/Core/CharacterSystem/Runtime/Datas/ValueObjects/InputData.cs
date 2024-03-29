@@ -12,11 +12,13 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
     {
         #region Fields
         [Header("Input Data Fields")]
+        [SerializeField] private InputTypes inputType;
         [AssetSelector][SerializeField] private InputActionAsset inputActionAsset;
         [SerializeField] private InputActionNamesDictionary inputActionNames;
         #endregion
 
         #region Getters
+        public readonly InputTypes InputType => inputType;
         public readonly InputActionAsset InputActionAsset => inputActionAsset;
         public readonly InputActionNamesDictionary InputActionNames => inputActionNames;
         #endregion
