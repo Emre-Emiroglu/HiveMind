@@ -25,10 +25,10 @@ namespace HiveMind.Core.MVC.Controllers
         #region SignalReceiver
         public void OnSignalFired<TSignal>(TSignal signal)
         {
-            Type type = typeof(TSignal);
-            if (commandDeclarationMap.ContainsKey(type))
+            Type t = signal.GetType();
+            if (commandDeclarationMap.ContainsKey(t))
             {
-                Type commandType = commandDeclarationMap[type].CommandType;
+                Type commandType = commandDeclarationMap[t].CommandType;
                 ICommand command = commandPool.GetCommand(commandType, signal);
 
                 command.Execute();

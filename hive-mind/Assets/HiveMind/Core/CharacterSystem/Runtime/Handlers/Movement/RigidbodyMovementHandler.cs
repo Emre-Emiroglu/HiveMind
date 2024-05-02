@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
 {
-    public sealed class RigidbodyMovementHandler : MovementHandler
+    public class RigidbodyMovementHandler : MovementHandler
     {
         #region ReadonlyFields
         private readonly Rigidbody rigidbody;
@@ -38,6 +38,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
 
             Vector3 input = new(inputValue.x, 0f, inputValue.y);
             force += speed * time * input;
+            force = Vector3.ClampMagnitude(force, movementData.MagnitudeClamp);
 
             switch (movementData.RigidbodyMovementStyle)
             {

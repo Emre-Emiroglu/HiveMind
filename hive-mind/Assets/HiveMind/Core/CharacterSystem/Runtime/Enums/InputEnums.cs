@@ -10,6 +10,8 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Enums
         ActionMapName = 0,
         MovementActionName = 1,
         RunActionName = 2,
-        MousePosActionName = 3
+        MousePosActionName = 3,
+        AttackKey = 4,
+        DashKey = 5,
     }
 }

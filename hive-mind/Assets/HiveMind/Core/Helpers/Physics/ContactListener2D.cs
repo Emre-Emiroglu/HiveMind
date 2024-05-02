@@ -7,38 +7,38 @@ namespace HiveMind.Core.Helpers.Physics
     public sealed class ContactListener2D : Contactlistener
     {
         #region Triggers
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collider2D)
         {
             if (contactType == ContactTypes.Trigger)
-                ContactStatus(ContactStatusTypes.Enter, collision.gameObject.tag);
+                ContactStatus(ContactStatusTypes.Enter, collider2D.gameObject.tag, null, null, null, collider2D);
         }
-        private void OnTriggerStay2D(Collider2D collision)
+        private void OnTriggerStay2D(Collider2D collider2D)
         {
             if (contactType == ContactTypes.Trigger)
-                ContactStatus(ContactStatusTypes.Stay, collision.gameObject.tag);
+                ContactStatus(ContactStatusTypes.Stay, collider2D.gameObject.tag, null, null, null, collider2D);
         }
-        private void OnTriggerExit2D(Collider2D collision)
+        private void OnTriggerExit2D(Collider2D collider2D)
         {
             if (contactType == ContactTypes.Trigger)
-                ContactStatus(ContactStatusTypes.Exit, collision.gameObject.tag);
+                ContactStatus(ContactStatusTypes.Exit, collider2D.gameObject.tag, null, null, null, collider2D);
         }
         #endregion
 
         #region Collisions
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision2D)
         {
             if (contactType == ContactTypes.Collision)
-                ContactStatus(ContactStatusTypes.Enter, collision.gameObject.tag);
+                ContactStatus(ContactStatusTypes.Enter, collision2D.gameObject.tag, null, collision2D);
         }
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision2D)
         {
             if (contactType == ContactTypes.Collision)
-                ContactStatus(ContactStatusTypes.Stay, collision.gameObject.tag);
+                ContactStatus(ContactStatusTypes.Stay, collision2D.gameObject.tag, null, collision2D);
         }
-        private void OnCollisionExit2D(Collision2D collision)
+        private void OnCollisionExit2D(Collision2D collision2D)
         {
             if (contactType == ContactTypes.Collision)
-                ContactStatus(ContactStatusTypes.Exit, collision.gameObject.tag);
+                ContactStatus(ContactStatusTypes.Exit, collision2D.gameObject.tag, null, collision2D);
         }
         #endregion
     }

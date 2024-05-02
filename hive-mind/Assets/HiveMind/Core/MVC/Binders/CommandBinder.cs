@@ -16,8 +16,8 @@ namespace HiveMind.Core.MVC.Binders
         {
             base.Bind();
 
-            binderData.Container.Bind<CommandInvoker>().AsSingle().CopyIntoAllSubContainers();
-            binderData.Container.Bind<CommandPool>().AsSingle().CopyIntoAllSubContainers();
+            binderData.Container.Bind<CommandInvoker>().AsSingle();
+            binderData.Container.Bind<CommandPool>().AsSingle();
         }
         public BinderSignalToCommand<TSignal> BindSignal<TSignal>()
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
 {
-    public sealed class TransformMovementHandler : MovementHandler
+    public class TransformMovementHandler : MovementHandler
     {
         #region ReadonlyFields
         private readonly Transform transform;
@@ -38,9 +38,12 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
             float speed = movementData.Speeds[movementStatus];
             float time = Time.deltaTime;
 
-            Vector3 input = new(inputValue.x, 0f, inputValue.y);
+            Vector3 input = new(inputValue.x, inputValue.y, 0f);
             Vector3 direction = movementData.TransformMovementStyle == TransformMovementStyles.InputBased ? input : transform.forward;
             pos += speed * time * direction;
+            pos.x = Mathf.Clamp(pos.x, movementData.MinimumPositionClamp.x, movementData.MaximumPositionClamp.x);
+            pos.y = Mathf.Clamp(pos.y, movementData.MinimumPositionClamp.y, movementData.MaximumPositionClamp.y);
+            pos.z = Mathf.Clamp(pos.z, movementData.MinimumPositionClamp.z, movementData.MaximumPositionClamp.z);
 
             switch (movementData.MovementSpace)
             {

@@ -25,7 +25,7 @@ namespace HiveMind.Core.MVC.Binders
                 if (attribute == null || !attribute.Key.Equals(binderData.Key))
                     continue;
 
-                binderData.Container.Bind(type).AsSingle().NonLazy();
+                binderData.Container.BindInterfacesAndSelfTo(type).AsSingle().NonLazy();
 
                 Debug.Log($"Model: {type.Name} is binded!");
             }

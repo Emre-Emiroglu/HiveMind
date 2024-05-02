@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
 {
-    public sealed class TopDownRotationHandler : RotationHandler
+    public class TopDownRotationHandler : RotationHandler
     {
         #region ReadonlyFields
         private readonly Camera camera;
@@ -34,9 +34,9 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
             Vector3 mousePosition = new(inputValue.x, inputValue.y, camera.nearClipPlane);
             Vector3 targetPosition = camera.ScreenToWorldPoint(mousePosition);
             Vector3 direction = targetPosition - transform.position;
-            direction.y = 0f;
+            direction.z = 0f;
 
-            float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg;
             float speed = rotationData.RotationSpeed;
             float time = Time.deltaTime;
 
@@ -53,7 +53,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
         private void QuaternionRotate(float angle, float speed, float time)
         {
             Quaternion startRotation = rotationData.RotationSpace == Space.World ? transform.rotation : transform.localRotation;
-            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.up);
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
             Quaternion lerpRotation = rotationData.IsSlerp ? Quaternion.Slerp(startRotation, targetRotation, speed * time) : Quaternion.Lerp(startRotation, targetRotation, speed * time);
 
             switch (rotationData.RotationSpace)
@@ -69,7 +69,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
         private void EulerRotate(float angle, float speed, float time)
         {
             Vector3 startRotation = rotationData.RotationSpace == Space.World ? transform.eulerAngles : transform.localEulerAngles;
-            Vector3 targetRotation = new(0f, angle, 0f);
+            Vector3 targetRotation = new(0f, 0f, angle);
             Vector3 lerpRotation = rotationData.IsSlerp ? Vector3.Slerp(startRotation, targetRotation, speed * time) : Vector3.Lerp(startRotation, targetRotation, speed * time);
 
             switch (rotationData.RotationSpace)

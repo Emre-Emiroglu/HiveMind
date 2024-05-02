@@ -11,9 +11,9 @@ namespace HiveMind.Core.Helpers.Physics
         [SerializeField] protected ContactTypes contactType;
         [SerializeField] protected string[] contactableTags;
         [Header("Receivers")]
-        [SerializeField] protected UnityEvent EnterCallBack;
-        [SerializeField] protected UnityEvent StayCallBack;
-        [SerializeField] protected UnityEvent ExitCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> EnterCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> StayCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> ExitCallBack;
         #endregion
 
         #region Checks
@@ -42,7 +42,7 @@ namespace HiveMind.Core.Helpers.Physics
         #endregion
 
         #region Logics
-        protected void ContactStatus(ContactStatusTypes contactStatusType, string tag)
+        protected void ContactStatus(ContactStatusTypes contactStatusType, string tag, Collision collision = null, Collision2D collision2D = null, Collider collider = null, Collider2D collider2D = null)
         {
             bool isContain = CompareCheck(tag);
             if (isContain)
@@ -50,13 +50,13 @@ namespace HiveMind.Core.Helpers.Physics
                 switch (contactStatusType)
                 {
                     case ContactStatusTypes.Enter:
-                        EnterCallBack?.Invoke();
+                        EnterCallBack?.Invoke(collision, collision2D, collider, collider2D);
                         break;
                     case ContactStatusTypes.Stay:
-                        StayCallBack?.Invoke();
+                        StayCallBack?.Invoke(collision, collision2D, collider, collider2D);
                         break;
                     case ContactStatusTypes.Exit:
-                        ExitCallBack?.Invoke();
+                        ExitCallBack?.Invoke(collision, collision2D, collider, collider2D);
                         break;
                 }
             }

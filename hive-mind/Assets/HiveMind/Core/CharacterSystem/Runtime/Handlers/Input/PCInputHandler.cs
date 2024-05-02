@@ -2,7 +2,7 @@ using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Input
 {
-    public sealed class PCInputHandler : InputHandler
+    public class PCInputHandler : InputHandler
     {
         #region Constructor
         public PCInputHandler(InputData inputData) : base(inputData) { }

@@ -25,10 +25,6 @@ namespace HiveMind.Core.MVC.Installers
         #region Bindings
         public override void InstallBindings()
         {
-            binderData.Container.BindInstance(modelBinder).AsSingle().NonLazy();
-            binderData.Container.BindInstance(mediationBinder).AsSingle().NonLazy();
-            binderData.Container.BindInstance(commandBinder).AsSingle().NonLazy();
-
             modelBinder.Bind();
             mediationBinder.Bind();
             commandBinder.Bind();

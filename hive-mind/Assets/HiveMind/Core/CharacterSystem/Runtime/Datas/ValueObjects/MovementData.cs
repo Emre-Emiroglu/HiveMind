@@ -16,6 +16,9 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
         [ShowIf("movementType", MovementTypes.Transform)][SerializeField] private TransformMovementStyles transformMovementStyle;
         [ShowIf("movementType", MovementTypes.Rigidbody)][SerializeField] private RigidbodyMovementStyles rigidbodyMovementStyle;
         [ShowIf("movementType", MovementTypes.Rigidbody)][SerializeField] private ForceMode forceMode;
+        [ShowIf("movementType", MovementTypes.Transform)][SerializeField] private Vector3 minimumPositionClamp;
+        [ShowIf("movementType", MovementTypes.Transform)][SerializeField] private Vector3 maximumPositionClamp;
+        [ShowIf("movementType", MovementTypes.Rigidbody)][SerializeField] private float magnitudeClamp;
         [SerializeField] private SpeedDictionary speeds;
         #endregion
 
@@ -25,6 +28,9 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects
         public readonly TransformMovementStyles TransformMovementStyle => transformMovementStyle;
         public readonly RigidbodyMovementStyles RigidbodyMovementStyle => rigidbodyMovementStyle;
         public readonly ForceMode ForceMode => forceMode;
+        public readonly Vector3 MinimumPositionClamp => minimumPositionClamp;
+        public readonly Vector3 MaximumPositionClamp => maximumPositionClamp;
+        public readonly float MagnitudeClamp => magnitudeClamp;
         public readonly SpeedDictionary Speeds => speeds;
         #endregion
     }
