@@ -1,4 +1,4 @@
-using HiveMind.Core.Helpers;
+using HiveMind.Core.Helpers.Runtime.Follower;
 using UnityEngine;
 
 namespace HiveMind.Samples.HelpersSample.SampleClasses

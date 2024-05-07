@@ -8,7 +8,7 @@
   "dependencies":
   {
   },
-  "keywords": ["framework", "core system", "chracter system", "data", "helpers", "mvc", "pool", "debug", "utilities"],
+  "keywords": ["framework", "core system", "chracter system", "helpers", "mvc", "pool", "debug", "utilities"],
   "author": 
   {
     "name": "Leo Games",
@@ -20,10 +20,6 @@
         {
             "displayName": "Character System Sample",
             "path": "Samples/CharacterSystemSample"
-        },
-        {
-            "displayName": "Data Sample",
-            "path": "Samples/DataSample"
         },
         {
             "displayName": "Helpers Sample",

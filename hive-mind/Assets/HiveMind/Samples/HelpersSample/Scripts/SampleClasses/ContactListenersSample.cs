@@ -1,4 +1,4 @@
-using HiveMind.Core.Helpers.Physics;
+using HiveMind.Core.Helpers.Runtime.Physics;
 using UnityEngine;
 
 namespace HiveMind.Samples.HelpersSample.SampleClasses

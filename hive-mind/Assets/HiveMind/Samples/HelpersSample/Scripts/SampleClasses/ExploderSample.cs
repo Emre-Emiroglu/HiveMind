@@ -1,4 +1,4 @@
-using HiveMind.Core.Helpers.Exploder;
+using HiveMind.Core.Helpers.Runtime.Exploder;
 using UnityEngine;
 
 namespace HiveMind.Samples.HelpersSample.SampleClasses

@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/HiveMind/Samples/DataSample/Scenes/DataSampleScene.unity
-    guid: 5048045c17e0e554aaee9dcd17642ce2
-  - enabled: 1
     path: Assets/HiveMind/Samples/HelpersSample/Scenes/HelpersSampleScene.unity
     guid: 2d21995f1374aed42a660bb6e4f8ccdd
   - enabled: 1

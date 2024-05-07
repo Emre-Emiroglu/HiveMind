@@ -38,7 +38,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Movement
             float speed = movementData.Speeds[movementStatus];
             float time = Time.deltaTime;
 
-            Vector3 input = new(inputValue.x, inputValue.y, 0f);
+            Vector3 input = new(inputValue.x, 0f, inputValue.y);
             Vector3 direction = movementData.TransformMovementStyle == TransformMovementStyles.InputBased ? input : transform.forward;
             pos += speed * time * direction;
             pos.x = Mathf.Clamp(pos.x, movementData.MinimumPositionClamp.x, movementData.MaximumPositionClamp.x);

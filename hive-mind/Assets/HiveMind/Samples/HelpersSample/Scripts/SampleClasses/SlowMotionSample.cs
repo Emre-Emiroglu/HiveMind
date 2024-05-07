@@ -1,4 +1,4 @@
-using HiveMind.Core.Helpers.SlowMotion;
+using HiveMind.Core.Helpers.Runtime.SlowMotion;
 using UnityEngine;
 
 namespace HiveMind.Samples.HelpersSample.SampleClasses

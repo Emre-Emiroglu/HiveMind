@@ -1,5 +1,5 @@
-using HiveMind.Core.MVC.Attributes;
-using HiveMind.Core.MVC.Views;
+using HiveMind.Core.MVC.Runtime.Attributes;
+using HiveMind.Core.MVC.Runtime.Views;
 using UnityEngine;
 
 namespace HiveMind.Samples.MVCSample.SampleClasses.Views

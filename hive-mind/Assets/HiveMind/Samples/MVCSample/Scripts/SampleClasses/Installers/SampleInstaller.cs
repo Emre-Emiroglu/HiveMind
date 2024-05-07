@@ -1,5 +1,5 @@
-using HiveMind.Core.MVC.Datas;
-using HiveMind.Core.MVC.Installers;
+using HiveMind.Core.MVC.Runtime.Datas;
+using HiveMind.Core.MVC.Runtime.Installers;
 using HiveMind.Samples.MVCSample.SampleClasses.Controllers;
 
 namespace HiveMind.Samples.MVCSample.SampleClasses.Installers

@@ -1,5 +1,5 @@
-using HiveMind.Core.Utilities.Enums;
-using HiveMind.Core.Helpers.Countdown;
+using HiveMind.Core.Utilities.Runtime.Enums;
+using HiveMind.Core.Helpers.Runtime.Countdown;
 using UnityEngine;
 using UnityEngine.UI;
 

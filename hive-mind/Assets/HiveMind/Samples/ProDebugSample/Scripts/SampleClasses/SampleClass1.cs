@@ -1,5 +1,5 @@
-using HiveMind.Core.ProDebug.Colorize;
-using HiveMind.Core.ProDebug.TextFormat;
+using HiveMind.Core.ProDebug.Runtime.Colorize;
+using HiveMind.Core.ProDebug.Runtime.TextFormat;
 using UnityEngine;
 
 namespace HiveMind.Samples.ProDebugSample.SampleClasses

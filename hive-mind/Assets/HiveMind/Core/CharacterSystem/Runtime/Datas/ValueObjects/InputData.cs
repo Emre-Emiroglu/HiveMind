@@ -1,5 +1,5 @@
 using HiveMind.Core.CharacterSystem.Runtime.Enums;
-using HiveMind.Core.Utilities.SerializedDictionary;
+using HiveMind.Core.Utilities.Runtime.SerializedDictionary;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;

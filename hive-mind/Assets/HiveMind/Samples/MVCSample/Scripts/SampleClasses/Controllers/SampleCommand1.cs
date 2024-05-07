@@ -1,4 +1,4 @@
-using HiveMind.Core.MVC.Controllers;
+using HiveMind.Core.MVC.Runtime.Controllers;
 using UnityEngine;
 
 namespace HiveMind.Samples.MVCSample.SampleClasses.Controllers

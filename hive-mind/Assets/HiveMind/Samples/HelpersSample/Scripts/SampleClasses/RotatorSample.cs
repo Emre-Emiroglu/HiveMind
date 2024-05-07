@@ -1,4 +1,4 @@
-using HiveMind.Core.Helpers.Rotator;
+using HiveMind.Core.Helpers.Runtime.Rotator;
 using UnityEngine;
 
 namespace HiveMind.Samples.HelpersSample.SampleClasses

@@ -1,6 +1,6 @@
 using HiveMind.Core.CharacterSystem.Runtime.Datas.ValueObjects;
 using HiveMind.Core.CharacterSystem.Runtime.Enums;
-using HiveMind.Core.Utilities.Extensions;
+using HiveMind.Core.Utilities.Runtime.Extensions;
 using UnityEngine;
 
 namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
@@ -35,7 +35,7 @@ namespace HiveMind.Core.CharacterSystem.Runtime.Handlers.Rotation
             if (inputValue == Vector2.zero)
                 return;
 
-            Matrix4x4 matrix = Utilities.Utilities.IsoMatrix(Quaternion.Euler(0f, camera.transform.eulerAngles.y, 0f));
+            Matrix4x4 matrix = Utilities.Runtime.Utilities.IsoMatrix(Quaternion.Euler(0f, camera.transform.eulerAngles.y, 0f));
 
             Vector3 input = new(inputValue.x, 0f, inputValue.y);
             input = input.InputToIso(matrix);

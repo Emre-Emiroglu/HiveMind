@@ -29,6 +29,9 @@ MonoBehaviour:
     transformMovementStyle: 0
     rigidbodyMovementStyle: 0
     forceMode: 0
+    minimumPositionClamp: {x: -100, y: 0, z: -100}
+    maximumPositionClamp: {x: 100, y: 0, z: 100}
+    magnitudeClamp: 0
     speeds:
       keyData: 0000000001000000
       valueData:
