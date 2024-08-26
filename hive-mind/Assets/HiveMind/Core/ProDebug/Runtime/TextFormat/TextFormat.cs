@@ -3,24 +3,24 @@ namespace HiveMind.Core.ProDebug.Runtime.TextFormat
     public sealed class TextFormat
     {
         #region Fields
-        public static TextFormat Bold = new TextFormat("b");
-        public static TextFormat Italic = new TextFormat("i");
-        private string prefix;
-        private string suffix;
+        public static TextFormat Bold = new("b");
+        public static TextFormat Italic = new("i");
+        private readonly string _prefix;
+        private readonly string _suffix;
         #endregion
 
         #region Constructor
         private TextFormat(string format)
         {
-            prefix = $"<{format}>";
-            suffix = $"</{format}>";
+            _prefix = $"<{format}>";
+            _suffix = $"</{format}>";
         }
         #endregion
 
         #region Operators
         public static string operator %(string text, TextFormat textFormat)
         {
-            return textFormat.prefix + text + textFormat.suffix;
+            return textFormat._prefix + text + textFormat._suffix;
         }
         #endregion
     }

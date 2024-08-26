@@ -18,15 +18,15 @@ namespace HiveMind.Core.Utilities.Runtime.TimeCalculator
         #endregion
 
         #region Fields
-        private static float time;
-        private static DateTime cachedDateTime;
+        private static float _time;
+        private static DateTime _cachedDateTime;
         #endregion
 
         #region Core
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static async void Initialize()
         {
-            cachedDateTime = default;
+            _cachedDateTime = default;
             await RefreshDateTimeAsync();
         }
         #endregion
@@ -156,11 +156,11 @@ namespace HiveMind.Core.Utilities.Runtime.TimeCalculator
         #region Timer
         public static void StartTimer()
         {
-            time = Time.realtimeSinceStartup;
+            _time = Time.realtimeSinceStartup;
         }
         public static float StopTimer(string title = "")
         {
-            float diff = Time.realtimeSinceStartup - time;
+            float diff = Time.realtimeSinceStartup - _time;
             diff = diff < 0 ? 0 : diff;
             Debug.Log(title + "TIME::" + diff);
             return diff;
@@ -172,7 +172,7 @@ namespace HiveMind.Core.Utilities.Runtime.TimeCalculator
         {
             var localDate = await FetchCurrentLocalDate();
             Debug.Log($"Current local date: {localDate}");
-            cachedDateTime = localDate;
+            _cachedDateTime = localDate;
             await Task.Yield();
         }
         private static async Task<DateTime> FetchCurrentLocalDate()
@@ -224,10 +224,10 @@ namespace HiveMind.Core.Utilities.Runtime.TimeCalculator
         }
         public static async Task<DateTime> GetCachedDateTime()
         {
-            if (cachedDateTime == default)
-                await Task.Run(() => cachedDateTime != default);
+            if (_cachedDateTime == default)
+                await Task.Run(() => _cachedDateTime != default);
 
-            return cachedDateTime;
+            return _cachedDateTime;
         }
         #endregion
     }

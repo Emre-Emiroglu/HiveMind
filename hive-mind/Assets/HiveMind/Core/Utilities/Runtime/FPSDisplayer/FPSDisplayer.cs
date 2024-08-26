@@ -2,27 +2,27 @@ using UnityEngine;
 
 namespace HiveMind.Core.Utilities.Runtime.FPSDisplayer
 {
-    public class FPSDisplayer: MonoBehaviour
+    public sealed class FPSDisplayer: MonoBehaviour
     {
         #region Fields
         [Header("FPS Displayer Settings")]
-        [SerializeField] private bool show = true;
-        [SerializeField] private Rect rect = new Rect(960, 540, 128, 64);
-        [Range(0f, 1f)][SerializeField] private float updateInterval = .5f;
-        float accum;
-        private int frames;
-        private float timeLeft;
-        private float fps;
-        private GUIStyle textStyle = new GUIStyle();
+        [SerializeField] private bool _show = true;
+        [SerializeField] private Rect _rect = new(960, 540, 128, 64);
+        [Range(0f, 1f)][SerializeField] private float _updateInterval = .5f;
+        private float _accum;
+        private int _frames;
+        private float _timeLeft;
+        private float _fps;
+        private readonly GUIStyle _textStyle = new();
         #endregion
 
         #region Core
         private void Initialize()
         {
-            timeLeft = updateInterval;
+            _timeLeft = _updateInterval;
 
-            textStyle.fontStyle = FontStyle.Bold;
-            textStyle.normal.textColor = Color.white;
+            _textStyle.fontStyle = FontStyle.Bold;
+            _textStyle.normal.textColor = Color.white;
         }
         private void Start() => Initialize();
         #endregion
@@ -30,16 +30,16 @@ namespace HiveMind.Core.Utilities.Runtime.FPSDisplayer
         #region Calculate
         private void CalculateFPS()
         {
-            timeLeft -= Time.deltaTime;
-            accum += Time.timeScale / Time.deltaTime;
-            frames++;
+            _timeLeft -= Time.deltaTime;
+            _accum += Time.timeScale / Time.deltaTime;
+            _frames++;
 
-            if (timeLeft <= 0)
+            if (_timeLeft <= 0)
             {
-                fps = accum / frames;
-                timeLeft = updateInterval;
-                accum = 0f;
-                frames = 0;
+                _fps = _accum / _frames;
+                _timeLeft = _updateInterval;
+                _accum = 0f;
+                _frames = 0;
             }
         }
         #endregion
@@ -51,10 +51,10 @@ namespace HiveMind.Core.Utilities.Runtime.FPSDisplayer
         #region OnGUI
         private void OnGUI()
         {
-            if (!show)
+            if (!_show)
                 return;
 
-            GUI.Label(rect, fps.ToString("F2") + "FPS", textStyle);
+            GUI.Label(_rect, _fps.ToString("F2") + "FPS", _textStyle);
         }
         #endregion
     }
