@@ -1,41 +1,15 @@
 {
   "name": "com.leogames.hivemind",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "displayName": "Hive Mind",
   "description": "Hive Mind is a core system for speed up the development process",
   "unity": "2022.3",
   "unityRelease": "0b5",
-  "dependencies":
-  {
-  },
-  "keywords": ["framework", "core system", "chracter system", "helpers", "mvc", "pool", "debug", "utilities"],
+  "keywords": ["framework", "core system", "helpers", "mvc", "debug", "utilities"],
   "author": 
   {
     "name": "Leo Games",
     "email": "emirogluemre08@gmail.com",
     "url": "https://www.unity3d.com"
   },
-  "samples":
-  [
-        {
-            "displayName": "Character System Sample",
-            "path": "Samples/CharacterSystemSample"
-        },
-        {
-            "displayName": "Helpers Sample",
-            "path": "Samples/HelpersSample"
-        },
-        {
-            "displayName": "MVC Sample",
-            "path": "Samples/MVCSample"
-        },
-        {
-            "displayName": "Pool Sample",
-            "path": "Samples/PoolSample"
-        },
-        {
-            "displayName": "ProDebug Sample",
-            "path": "Samples/ProDebugSample"
-        }
-  ]
 }

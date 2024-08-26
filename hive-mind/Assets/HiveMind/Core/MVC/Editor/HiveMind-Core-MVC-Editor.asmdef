@@ -1,0 +1,18 @@
+{
+    "name": "HiveMind.Core.MVC.Editor",
+    "rootNamespace": "HiveMind.Core.MVC.Editor",
+    "references": [
+        "GUID:fe880a7a77048f74e8bcf91723060978"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

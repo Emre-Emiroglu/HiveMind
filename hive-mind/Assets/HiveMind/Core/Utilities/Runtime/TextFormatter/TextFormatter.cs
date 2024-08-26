@@ -57,6 +57,7 @@ namespace HiveMind.Core.Utilities.Runtime.TextFormatter
             string ms = withMiliSeconds ? MILI_SECONDS : null;
 
             string result = string.Format(d + h + m + s + ms, days, hours, minutes, seconds, milliSeconds);
+            result = result.TrimEnd(':');
             return result;
         }
         #endregion
