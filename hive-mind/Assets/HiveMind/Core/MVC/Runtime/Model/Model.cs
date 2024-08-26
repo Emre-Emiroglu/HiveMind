@@ -1,16 +1,16 @@
 using UnityEngine;
 using Zenject;
 
-namespace HiveMind.Core.MVC.Runtime.Models
+namespace HiveMind.Core.MVC.Runtime.Model
 {
     public abstract class Model<TModelSettings> where TModelSettings : ScriptableObject
     {
         #region Fields
-        protected readonly TModelSettings settings;
+        protected readonly TModelSettings _settings;
         #endregion
 
         #region Getters
-        public TModelSettings Settings => settings;
+        public TModelSettings Settings => _settings;
         #endregion
 
         #region Constructor
@@ -21,7 +21,7 @@ namespace HiveMind.Core.MVC.Runtime.Models
                 Debug.Log("Resource path can not be null for getting model settings!");
                 return;
             }
-            settings = Resources.Load<TModelSettings>(resourcePath);
+            _settings = Resources.Load<TModelSettings>(resourcePath);
         }
         #endregion
 

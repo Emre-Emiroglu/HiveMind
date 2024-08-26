@@ -11,14 +11,14 @@ namespace HiveMind.Core.Helpers.Runtime.SlowMotion
 
         #region Fields
         [Header("Slow Motion Settings")]
-        [Range(0f, TIME_SCALE)][SerializeField] private float factor = .25f;
+        [Range(0f, TIME_SCALE)][SerializeField] private float _factor = .25f;
         #endregion
 
         #region SetActivation
         public void Activate()
         {
-            Time.timeScale = factor;
-            Time.fixedDeltaTime = factor * TIME_STEP;
+            Time.timeScale = _factor;
+            Time.fixedDeltaTime = _factor * TIME_STEP;
         }
         public void DeActivate()
         {

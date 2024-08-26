@@ -8,19 +8,19 @@ namespace HiveMind.Core.Helpers.Runtime.Physics
     {
         #region Fields
         [Header("Contact Listener Settings")]
-        [SerializeField] protected ContactTypes contactType;
-        [SerializeField] protected string[] contactableTags;
+        [SerializeField] protected ContactTypes _contactType;
+        [SerializeField] protected string[] _contactableTags;
         [Header("Receivers")]
-        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> EnterCallBack;
-        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> StayCallBack;
-        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> ExitCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> _enterCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> _stayCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> _exitCallBack;
         #endregion
 
         #region Checks
         protected bool CompareCheck(string tag)
         {
             bool result;
-            int tagsCount = contactableTags.Length;
+            int tagsCount = _contactableTags.Length;
             if (tagsCount == 0)
             {
                 Debug.LogError("Contacable Tags Cannot Be 0!");
@@ -30,7 +30,7 @@ namespace HiveMind.Core.Helpers.Runtime.Physics
             {
                 for (int i = 0; i < tagsCount; i++)
                 {
-                    bool isEqual = contactableTags[i] == tag;
+                    bool isEqual = _contactableTags[i] == tag;
                     if (isEqual)
                         break;
                 }
@@ -50,13 +50,13 @@ namespace HiveMind.Core.Helpers.Runtime.Physics
                 switch (contactStatusType)
                 {
                     case ContactStatusTypes.Enter:
-                        EnterCallBack?.Invoke(collision, collision2D, collider, collider2D);
+                        _enterCallBack?.Invoke(collision, collision2D, collider, collider2D);
                         break;
                     case ContactStatusTypes.Stay:
-                        StayCallBack?.Invoke(collision, collision2D, collider, collider2D);
+                        _stayCallBack?.Invoke(collision, collision2D, collider, collider2D);
                         break;
                     case ContactStatusTypes.Exit:
-                        ExitCallBack?.Invoke(collision, collision2D, collider, collider2D);
+                        _exitCallBack?.Invoke(collision, collision2D, collider, collider2D);
                         break;
                 }
             }

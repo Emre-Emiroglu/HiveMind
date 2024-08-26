@@ -9,45 +9,45 @@ namespace HiveMind.Core.Helpers.Runtime.Follower
     {
         #region Fields
         [Header("Follower Settings")]
-        [SerializeField] private FollowTypes followType;
-        [SerializeField] private Space positionSpaceType;
-        [SerializeField] private Space rotationSpaceType;
-        [SerializeField] private LerpTypes positionLerpType;
-        [SerializeField] private LerpTypes rotationLerpType;
+        [SerializeField] private FollowTypes _followType;
+        [SerializeField] private Space _positionSpaceType;
+        [SerializeField] private Space _rotationSpaceType;
+        [SerializeField] private LerpTypes _positionLerpType;
+        [SerializeField] private LerpTypes _rotationLerpType;
         [Header("Target Settings")]
-        [SerializeField] private Space targetPositionSpaceType;
-        [SerializeField] private Space targetRotationSpaceType;
+        [SerializeField] private Space _targetPositionSpaceType;
+        [SerializeField] private Space _targetRotationSpaceType;
         [Header("Speed Settings")]
-        [Range(0f, 100)][SerializeField] private float positionLerpSpeed = .25f;
-        [Range(0f, 100)][SerializeField] private float rotationLerpSpeed = .25f;
-        private Transform follower;
-        private Transform target;
-        private bool canFollow;
+        [Range(0f, 100)][SerializeField] private float _positionLerpSpeed = .25f;
+        [Range(0f, 100)][SerializeField] private float _rotationLerpSpeed = .25f;
+        private Transform _follower;
+        private Transform _target;
+        private bool _canFollow;
         #endregion
 
         #region Getters
         private (Vector3, Quaternion) GetTarget()
         {
-            Vector3 pos = new Vector3();
+            Vector3 pos = new();
             Quaternion rot = Quaternion.identity;
 
-            switch (targetPositionSpaceType)
+            switch (_targetPositionSpaceType)
             {
                 case Space.World:
-                    pos = target.position;
+                    pos = _target.position;
                     break;
                 case Space.Self:
-                    pos = target.localPosition;
+                    pos = _target.localPosition;
                     break;
             }
 
-            switch (targetRotationSpaceType)
+            switch (_targetRotationSpaceType)
             {
                 case Space.World:
-                    rot = target.rotation;
+                    rot = _target.rotation;
                     break;
                 case Space.Self:
-                    rot = target.localRotation;
+                    rot = _target.localRotation;
                     break;
             }
 
@@ -58,41 +58,41 @@ namespace HiveMind.Core.Helpers.Runtime.Follower
         #region Core
         public void Initialize(Transform follower, Transform target, bool withSnap = false)
         {
-            this.follower = follower;
-            this.target = target;
+            _follower = follower;
+            _target = target;
 
             if (withSnap)
                 SetupSnap();
 
-            canFollow = false;
+            _canFollow = false;
         }
         #endregion
 
         #region Snapping
         private void SetupSnap()
         {
-            if (followType.HasFlag(FollowTypes.Position))
+            if (_followType.HasFlag(FollowTypes.Position))
             {
-                switch (positionSpaceType)
+                switch (_positionSpaceType)
                 {
                     case Space.World:
-                        follower.position = GetTarget().Item1;
+                        _follower.position = GetTarget().Item1;
                         break;
                     case Space.Self:
-                        follower.localPosition = GetTarget().Item1;
+                        _follower.localPosition = GetTarget().Item1;
                         break;
                 }
             }
 
-            if (followType.HasFlag(FollowTypes.Rotation))
+            if (_followType.HasFlag(FollowTypes.Rotation))
             {
-                switch (rotationSpaceType)
+                switch (_rotationSpaceType)
                 {
                     case Space.World:
-                        follower.rotation = GetTarget().Item2;
+                        _follower.rotation = GetTarget().Item2;
                         break;
                     case Space.Self:
-                        follower.localRotation = GetTarget().Item2;
+                        _follower.localRotation = GetTarget().Item2;
                         break;
                 }
             }
@@ -105,58 +105,58 @@ namespace HiveMind.Core.Helpers.Runtime.Follower
             Vector3 targetPos = GetTarget().Item1;
             Quaternion targetRot = GetTarget().Item2;
 
-            if (followType.HasFlag(FollowTypes.Position))
+            if (_followType.HasFlag(FollowTypes.Position))
             {
-                switch (positionSpaceType)
+                switch (_positionSpaceType)
                 {
                     case Space.World:
-                        switch (positionLerpType)
+                        switch (_positionLerpType)
                         {
                             case LerpTypes.Lerp:
-                                follower.position = Vector3.Lerp(follower.position, targetPos, Time.deltaTime * positionLerpSpeed);
+                                _follower.position = Vector3.Lerp(_follower.position, targetPos, Time.deltaTime * _positionLerpSpeed);
                                 break;
                             case LerpTypes.NonLerp:
-                                follower.position = targetPos;
+                                _follower.position = targetPos;
                                 break;
                         }
                         break;
                     case Space.Self:
-                        switch (positionLerpType)
+                        switch (_positionLerpType)
                         {
                             case LerpTypes.Lerp:
-                                follower.localPosition = Vector3.Lerp(follower.localPosition, targetPos, Time.deltaTime * positionLerpSpeed);
+                                _follower.localPosition = Vector3.Lerp(_follower.localPosition, targetPos, Time.deltaTime * _positionLerpSpeed);
                                 break;
                             case LerpTypes.NonLerp:
-                                follower.localPosition = targetPos;
+                                _follower.localPosition = targetPos;
                                 break;
                         }
                         break;
                 }
             }
 
-            if (followType.HasFlag(FollowTypes.Rotation))
+            if (_followType.HasFlag(FollowTypes.Rotation))
             {
-                switch (rotationSpaceType)
+                switch (_rotationSpaceType)
                 {
                     case Space.World:
-                        switch (rotationLerpType)
+                        switch (_rotationLerpType)
                         {
                             case LerpTypes.Lerp:
-                                follower.rotation = Quaternion.Lerp(follower.rotation, targetRot, Time.deltaTime * rotationLerpSpeed);
+                                _follower.rotation = Quaternion.Lerp(_follower.rotation, targetRot, Time.deltaTime * _rotationLerpSpeed);
                                 break;
                             case LerpTypes.NonLerp:
-                                follower.rotation = targetRot;
+                                _follower.rotation = targetRot;
                                 break;
                         }
                         break;
                     case Space.Self:
-                        switch (rotationLerpType)
+                        switch (_rotationLerpType)
                         {
                             case LerpTypes.Lerp:
-                                follower.localRotation = Quaternion.Lerp(follower.localRotation, targetRot, Time.deltaTime * rotationLerpSpeed);
+                                _follower.localRotation = Quaternion.Lerp(_follower.localRotation, targetRot, Time.deltaTime * _rotationLerpSpeed);
                                 break;
                             case LerpTypes.NonLerp:
-                                follower.localRotation = targetRot;
+                                _follower.localRotation = targetRot;
                                 break;
                         }
                         break;
@@ -166,13 +166,13 @@ namespace HiveMind.Core.Helpers.Runtime.Follower
         #endregion
 
         #region SetCanFollowStatus
-        public void SetCanFollow(bool canFollow) => this.canFollow = canFollow;
+        public void SetCanFollow(bool canFollow) => _canFollow = canFollow;
         #endregion
 
         #region Updates
         public void ExtrenalUpdate()
         {
-            if (!canFollow)
+            if (!_canFollow)
                 return;
 
             FollowLogic();
