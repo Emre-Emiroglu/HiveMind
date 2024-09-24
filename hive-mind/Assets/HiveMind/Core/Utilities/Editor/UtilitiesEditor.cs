@@ -1,5 +1,7 @@
+using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
+using UnityEngine;
 
 namespace HiveMind.Core.Utilities.Editor
 {
@@ -11,6 +13,12 @@ namespace HiveMind.Core.Utilities.Editor
         private const float MinHeight = 512f;
         private const float MaxWidth = 1024f;
         private const float MaxHeight = 1024f;
+        private const string CSharpGeneratorTitle = "C# Generator";
+        #endregion
+
+        #region CSharpGenerator
+        [TitleGroup(CSharpGeneratorTitle, null, TitleAlignments.Centered, true, true)]
+        [SerializeField] private string className;
         #endregion
 
         #region Core

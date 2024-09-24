@@ -2,6 +2,9 @@ using HiveMind.Core.Helpers.Runtime.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace HiveMind.Core.Helpers.Runtime.Exploder
 {
@@ -22,9 +25,11 @@ namespace HiveMind.Core.Helpers.Runtime.Exploder
         [Range(0f, 10f)][SerializeField] private float smoothDuration = 1f;
         private Vector3[] _poses;
         private Quaternion[] _rots;
+#if UNITY_EDITOR
         [Header("Gizmo Settings")]
         [SerializeField] private bool useGizmo;
         [SerializeField] private Color gizmoColor = Color.red;
+#endif
         #endregion
 
         #region Core
@@ -127,6 +132,7 @@ namespace HiveMind.Core.Helpers.Runtime.Exploder
         #endregion
 
         #region Gizmo
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             if (!useGizmo)
@@ -135,6 +141,7 @@ namespace HiveMind.Core.Helpers.Runtime.Exploder
             Gizmos.color = gizmoColor;
             Gizmos.DrawWireSphere(transform.position + explosionPosOffset, radius);
         }
+#endif
         #endregion
     }
 }
