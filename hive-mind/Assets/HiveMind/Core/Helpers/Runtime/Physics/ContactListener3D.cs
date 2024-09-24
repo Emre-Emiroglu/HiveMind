@@ -7,38 +7,38 @@ namespace HiveMind.Core.Helpers.Runtime.Physics
     public sealed class ContactListener3D : Contactlistener
     {
         #region Triggers
-        private void OnTriggerEnter(Collider collider)
+        private void OnTriggerEnter(Collider contactCollider)
         {
-            if (_contactType == ContactTypes.Trigger)
-                ContactStatus(ContactStatusTypes.Enter, collider.gameObject.tag, null, null, collider);
+            if (contactType == ContactTypes.Trigger)
+                ContactStatus(ContactStatusTypes.Enter, contactCollider.gameObject.tag, null, null, contactCollider);
         }
-        private void OnTriggerStay(Collider collider)
+        private void OnTriggerStay(Collider contactCollider)
         {
-            if (_contactType == ContactTypes.Trigger)
-                ContactStatus(ContactStatusTypes.Stay, collider.gameObject.tag, null, null, collider);
+            if (contactType == ContactTypes.Trigger)
+                ContactStatus(ContactStatusTypes.Stay, contactCollider.gameObject.tag, null, null, contactCollider);
         }
-        private void OnTriggerExit(Collider collider)
+        private void OnTriggerExit(Collider contactCollider)
         {
-            if (_contactType == ContactTypes.Trigger)
-                ContactStatus(ContactStatusTypes.Exit, collider.gameObject.tag, null, null, collider);
+            if (contactType == ContactTypes.Trigger)
+                ContactStatus(ContactStatusTypes.Exit, contactCollider.gameObject.tag, null, null, contactCollider);
         }
         #endregion
 
         #region Collisions
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision contactCollision)
         {
-            if (_contactType == ContactTypes.Collision)
-                ContactStatus(ContactStatusTypes.Enter, collision.gameObject.tag, collision);
+            if (contactType == ContactTypes.Collision)
+                ContactStatus(ContactStatusTypes.Enter, contactCollision.gameObject.tag, contactCollision);
         }
-        private void OnCollisionStay(Collision collision)
+        private void OnCollisionStay(Collision contactCollision)
         {
-            if (_contactType == ContactTypes.Collision)
-                ContactStatus(ContactStatusTypes.Stay, collision.gameObject.tag, collision);
+            if (contactType == ContactTypes.Collision)
+                ContactStatus(ContactStatusTypes.Stay, contactCollision.gameObject.tag, contactCollision);
         }
-        private void OnCollisionExit(Collision collision)
+        private void OnCollisionExit(Collision contactCollision)
         {
-            if (_contactType == ContactTypes.Collision)
-                ContactStatus(ContactStatusTypes.Exit, collision.gameObject.tag, collision);
+            if (contactType == ContactTypes.Collision)
+                ContactStatus(ContactStatusTypes.Exit, contactCollision.gameObject.tag, contactCollision);
         }
         #endregion
     }

@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace HiveMind.Core.Utilities.Runtime.FPSDisplayer
+namespace HiveMind.Core.Utilities.Runtime.FPSDisplay
 {
-    public sealed class FPSDisplayer: MonoBehaviour
+    public sealed class FPSDisplay: MonoBehaviour
     {
         #region Fields
-        [Header("FPS Displayer Settings")]
-        [SerializeField] private bool _show = true;
-        [SerializeField] private Rect _rect = new(960, 540, 128, 64);
-        [Range(0f, 1f)][SerializeField] private float _updateInterval = .5f;
+        [Header("FPS Display Settings")]
+        [SerializeField] private bool show = true;
+        [SerializeField] private Rect rect = new(960, 540, 128, 64);
+        [Range(0f, 1f)][SerializeField] private float updateInterval = .5f;
         private float _accum;
         private int _frames;
         private float _timeLeft;
@@ -19,7 +19,7 @@ namespace HiveMind.Core.Utilities.Runtime.FPSDisplayer
         #region Core
         private void Initialize()
         {
-            _timeLeft = _updateInterval;
+            _timeLeft = updateInterval;
 
             _textStyle.fontStyle = FontStyle.Bold;
             _textStyle.normal.textColor = Color.white;
@@ -37,7 +37,7 @@ namespace HiveMind.Core.Utilities.Runtime.FPSDisplayer
             if (_timeLeft <= 0)
             {
                 _fps = _accum / _frames;
-                _timeLeft = _updateInterval;
+                _timeLeft = updateInterval;
                 _accum = 0f;
                 _frames = 0;
             }
@@ -51,10 +51,10 @@ namespace HiveMind.Core.Utilities.Runtime.FPSDisplayer
         #region OnGUI
         private void OnGUI()
         {
-            if (!_show)
+            if (!show)
                 return;
 
-            GUI.Label(_rect, _fps.ToString("F2") + "FPS", _textStyle);
+            GUI.Label(rect, _fps.ToString("F2") + "FPS", _textStyle);
         }
         #endregion
     }

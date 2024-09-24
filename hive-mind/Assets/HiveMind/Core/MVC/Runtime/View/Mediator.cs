@@ -7,7 +7,7 @@ namespace HiveMind.Core.MVC.Runtime.View
         where TView : View
     {
         #region Fields
-        protected readonly TView _view;
+        private readonly TView _view;
         #endregion
 
         #region Getters

@@ -5,25 +5,25 @@ namespace HiveMind.Core.Helpers.Runtime.SlowMotion
     public sealed class SlowMotion : MonoBehaviour
     {
         #region Constants
-        private const float TIME_STEP = .02f;
-        private const float TIME_SCALE = 1f;
+        private const float TimeStep = .02f;
+        private const float TimeScale = 1f;
         #endregion
 
         #region Fields
         [Header("Slow Motion Settings")]
-        [Range(0f, TIME_SCALE)][SerializeField] private float _factor = .25f;
+        [Range(0f, TimeScale)][SerializeField] private float factor = .25f;
         #endregion
 
         #region SetActivation
         public void Activate()
         {
-            Time.timeScale = _factor;
-            Time.fixedDeltaTime = _factor * TIME_STEP;
+            Time.timeScale = factor;
+            Time.fixedDeltaTime = factor * TimeStep;
         }
         public void DeActivate()
         {
-            Time.timeScale = TIME_SCALE;
-            Time.fixedDeltaTime = TIME_STEP;
+            Time.timeScale = TimeScale;
+            Time.fixedDeltaTime = TimeStep;
         }
         #endregion
     }

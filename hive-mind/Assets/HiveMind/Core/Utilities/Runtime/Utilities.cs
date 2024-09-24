@@ -46,23 +46,18 @@ namespace HiveMind.Core.Utilities.Runtime
             }
         }
         
-        public static Vector3 WorldToScreenPointForUICamera(Vector3 worldPos, Camera GameCamera, Canvas ScreenCanvas)
+        public static Vector3 WorldToScreenPointForUICamera(Vector3 worldPos, Camera gameCamera, Canvas screenCanvas)
         {
-            Vector3 screenPos;
             Vector3 canvasPos;
-            Vector2 posRect2D;
+            Vector3 screenPos = gameCamera.WorldToScreenPoint(worldPos);
 
-            screenPos = GameCamera.WorldToScreenPoint(worldPos);
-
-            if (ScreenCanvas.renderMode == RenderMode.ScreenSpaceOverlay)
-            {
+            if (screenCanvas.renderMode == RenderMode.ScreenSpaceOverlay)
                 canvasPos = screenPos;
-            }
             else
             {
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                ScreenCanvas.transform as RectTransform, screenPos, ScreenCanvas.worldCamera, out posRect2D);
-                canvasPos = ScreenCanvas.transform.TransformPoint(posRect2D);
+                screenCanvas.transform as RectTransform, screenPos, screenCanvas.worldCamera, out var posRect2D);
+                canvasPos = screenCanvas.transform.TransformPoint(posRect2D);
             }
 
             return canvasPos;

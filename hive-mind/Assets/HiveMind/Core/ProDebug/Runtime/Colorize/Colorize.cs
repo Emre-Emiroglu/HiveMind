@@ -24,7 +24,7 @@ namespace HiveMind.Core.ProDebug.Runtime.Colorize
         #endregion
 
         #region Constants
-        private const string SUFFIX = "</color>";
+        private const string Suffix = "</color>";
         #endregion
         
         #region Fields
@@ -45,7 +45,7 @@ namespace HiveMind.Core.ProDebug.Runtime.Colorize
         #region Operators
         public static string operator %(string text, Colorize color)
         {
-            return color._prefix + text + SUFFIX;
+            return color._prefix + text + Suffix;
         }
         #endregion
     }

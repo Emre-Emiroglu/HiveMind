@@ -8,29 +8,29 @@ namespace HiveMind.Core.Helpers.Runtime.Physics
     {
         #region Fields
         [Header("Contact Listener Settings")]
-        [SerializeField] protected ContactTypes _contactType;
-        [SerializeField] protected string[] _contactableTags;
+        [SerializeField] protected ContactTypes contactType;
+        [SerializeField] protected string[] contactableTags;
         [Header("Receivers")]
-        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> _enterCallBack;
-        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> _stayCallBack;
-        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> _exitCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> enterCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> stayCallBack;
+        [SerializeField] protected UnityEvent<Collision, Collision2D, Collider, Collider2D> exitCallBack;
         #endregion
 
         #region Checks
-        protected bool CompareCheck(string tag)
+        private bool CompareCheck(string tagName)
         {
             bool result;
-            int tagsCount = _contactableTags.Length;
+            int tagsCount = contactableTags.Length;
             if (tagsCount == 0)
             {
-                Debug.LogError("Contacable Tags Cannot Be 0!");
+                Debug.LogError("Contactable Tags Cannot Be 0!");
                 result = false;
             }
             else
             {
                 for (int i = 0; i < tagsCount; i++)
                 {
-                    bool isEqual = _contactableTags[i] == tag;
+                    bool isEqual = contactableTags[i] == tagName;
                     if (isEqual)
                         break;
                 }
@@ -42,21 +42,21 @@ namespace HiveMind.Core.Helpers.Runtime.Physics
         #endregion
 
         #region Logics
-        protected void ContactStatus(ContactStatusTypes contactStatusType, string tag, Collision collision = null, Collision2D collision2D = null, Collider collider = null, Collider2D collider2D = null)
+        protected void ContactStatus(ContactStatusTypes contactStatusType, string tagName, Collision contactCollision = null, Collision2D contactCollision2D = null, Collider contactCollider = null, Collider2D contactCollider2D = null)
         {
-            bool isContain = CompareCheck(tag);
+            bool isContain = CompareCheck(tagName);
             if (isContain)
             {
                 switch (contactStatusType)
                 {
                     case ContactStatusTypes.Enter:
-                        _enterCallBack?.Invoke(collision, collision2D, collider, collider2D);
+                        enterCallBack?.Invoke(contactCollision, contactCollision2D, contactCollider, contactCollider2D);
                         break;
                     case ContactStatusTypes.Stay:
-                        _stayCallBack?.Invoke(collision, collision2D, collider, collider2D);
+                        stayCallBack?.Invoke(contactCollision, contactCollision2D, contactCollider, contactCollider2D);
                         break;
                     case ContactStatusTypes.Exit:
-                        _exitCallBack?.Invoke(collision, collision2D, collider, collider2D);
+                        exitCallBack?.Invoke(contactCollision, contactCollision2D, contactCollider, contactCollider2D);
                         break;
                 }
             }

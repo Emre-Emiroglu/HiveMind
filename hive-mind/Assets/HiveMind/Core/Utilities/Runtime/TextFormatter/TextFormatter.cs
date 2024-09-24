@@ -6,11 +6,11 @@ namespace HiveMind.Core.Utilities.Runtime.TextFormatter
     public static class TextFormatter
     {
         #region Constants
-        private const string DAYS = "{0:00}:";
-        private const string HOURS = "{1:00}:";
-        private const string MINUTES = "{2:00}:";
-        private const string SECONDS = "{3:00}:";
-        private const string MILI_SECONDS = "{4:00}";
+        private const string Days = "{0:00}:";
+        private const string Hours = "{1:00}:";
+        private const string Minutes = "{2:00}:";
+        private const string Seconds = "{3:00}:";
+        private const string Milliseconds = "{4:00}";
         #endregion
 
         #region Formats
@@ -35,7 +35,7 @@ namespace HiveMind.Core.Utilities.Runtime.TextFormatter
 
             return num.ToString("#,0");
         }
-        public static string FormatTime(double totalSecond, TimeFormattingTypes timeFormattingType = TimeFormattingTypes.DaysHoursMinutesSeconds, bool withMiliSeconds = true)
+        public static string FormatTime(double totalSecond, TimeFormattingTypes timeFormattingType = TimeFormattingTypes.DaysHoursMinutesSeconds, bool withMilliSeconds = true)
         {
             TimeSpan time = TimeSpan.FromSeconds(totalSecond);
             int days = time.Days;
@@ -48,13 +48,12 @@ namespace HiveMind.Core.Utilities.Runtime.TextFormatter
             bool withDays = timeFormattingType == TimeFormattingTypes.DaysHoursMinutesSeconds;
             bool withHours = timeFormattingType == TimeFormattingTypes.DaysHoursMinutesSeconds || timeFormattingType == TimeFormattingTypes.HoursMinutesSeconds;
             bool withMinutes = timeFormattingType == TimeFormattingTypes.DaysHoursMinutesSeconds || timeFormattingType == TimeFormattingTypes.HoursMinutesSeconds || timeFormattingType == TimeFormattingTypes.MinutesSeconds;
-            bool withSeconds = true;
 
-            string d = withDays ? DAYS : null;
-            string h = withHours ? HOURS : null;
-            string m = withMinutes ? MINUTES : null;
-            string s = withSeconds ? SECONDS : null;
-            string ms = withMiliSeconds ? MILI_SECONDS : null;
+            string d = withDays ? Days : null;
+            string h = withHours ? Hours : null;
+            string m = withMinutes ? Minutes : null;
+            string s = Seconds;
+            string ms = withMilliSeconds ? Milliseconds : null;
 
             string result = string.Format(d + h + m + s + ms, days, hours, minutes, seconds, milliSeconds);
             result = result.TrimEnd(':');

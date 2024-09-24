@@ -6,20 +6,20 @@ namespace HiveMind.Core.Helpers.Editor
     public sealed class HelpersEditor : OdinEditorWindow
     {
         #region Constants
-        private const string MENU_ITEM_NAME = "HiveMind/Editors/HelpersEditor";
-        private const float MIN_WIDTH = 512f;
-        private const float MIN_HEIGHT = 512f;
-        private const float MAX_WIDTH = 1024f;
-        private const float MAX_HEIGHT = 1024f;
+        private const string MenuItemName = "HiveMind/Editors/HelpersEditor";
+        private const float MinWidth = 512f;
+        private const float MinHeight = 512f;
+        private const float MaxWidth = 1024f;
+        private const float MaxHeight = 1024f;
         #endregion
 
         #region Core
-        [MenuItem(MENU_ITEM_NAME)]
+        [MenuItem(MenuItemName)]
         private static void OpenWindow()
         {
             HelpersEditor window = GetWindow<HelpersEditor>();
-            window.minSize = new(MIN_WIDTH, MIN_HEIGHT);
-            window.maxSize = new(MAX_WIDTH, MAX_HEIGHT);
+            window.minSize = new(MinWidth, MinHeight);
+            window.maxSize = new(MaxWidth, MaxHeight);
             window.Show();
         }
         #endregion

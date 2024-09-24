@@ -6,7 +6,7 @@ namespace HiveMind.Core.MVC.Runtime.Model
     public abstract class Model<TModelSettings> where TModelSettings : ScriptableObject
     {
         #region Fields
-        protected readonly TModelSettings _settings;
+        private readonly TModelSettings _settings;
         #endregion
 
         #region Getters

@@ -9,56 +9,56 @@ namespace HiveMind.Core.Helpers.Runtime.Exploder
     {
         #region Fields
         [Header("Explosion Settings")]
-        [SerializeField] private PiecesFindingTypes _findingType = PiecesFindingTypes.Physic;
-        [SerializeField] private LayerMask _pieceLayer;
-        [SerializeField] private List<Rigidbody> _pieces;
-        [SerializeField] private Vector3 _explosionPosOffset = Vector3.zero;
-        [Range(0f, 100f)][SerializeField] private float _radius = 1f;
-        [Range(0f, 100f)][SerializeField] private float _force = 2f;
-        [Range(0f, 100f)][SerializeField] private float _upwardModifier = .1f;
-        [SerializeField] private ForceMode _forceMode = ForceMode.Impulse;
+        [SerializeField] private PiecesFindingTypes findingType = PiecesFindingTypes.Physic;
+        [SerializeField] private LayerMask pieceLayer;
+        [SerializeField] private List<Rigidbody> pieces;
+        [SerializeField] private Vector3 explosionPosOffset = Vector3.zero;
+        [Range(0f, 100f)][SerializeField] private float radius = 1f;
+        [Range(0f, 100f)][SerializeField] private float force = 2f;
+        [Range(0f, 100f)][SerializeField] private float upwardModifier = .1f;
+        [SerializeField] private ForceMode forceMode = ForceMode.Impulse;
         [Header("Refresh Settings")]
-        [SerializeField] private RefreshTypes _refreshType = RefreshTypes.NonSmooth;
-        [Range(0f, 10f)][SerializeField] private float _smoothDuration = 1f;
+        [SerializeField] private RefreshTypes refreshType = RefreshTypes.NonSmooth;
+        [Range(0f, 10f)][SerializeField] private float smoothDuration = 1f;
         private Vector3[] _poses;
         private Quaternion[] _rots;
         [Header("Gizmo Settings")]
-        [SerializeField] private bool _useGizmo = false;
-        [SerializeField] private Color _gizmoColor = Color.red;
+        [SerializeField] private bool useGizmo;
+        [SerializeField] private Color gizmoColor = Color.red;
         #endregion
 
         #region Core
         public void Explode()
         {
-            Vector3 explosionPos = transform.position + _explosionPosOffset;
+            Vector3 explosionPos = transform.position + explosionPosOffset;
 
-            if (_findingType == PiecesFindingTypes.Physic)
+            if (findingType == PiecesFindingTypes.Physic)
                 FindPiecesByPhysic();
 
             SetPosesAndRotations();
 
             SetPiecesPhysicActivation(true);
 
-            _pieces.ForEach(x => x.AddExplosionForce(_force, explosionPos, _radius, _upwardModifier, _forceMode));
+            pieces.ForEach(x => x.AddExplosionForce(force, explosionPos, radius, upwardModifier, forceMode));
         }
         public void Refresh()
         {
             SetPiecesPhysicActivation(false);
 
-            for (int i = 0; i < _pieces.Count; i++)
+            for (int i = 0; i < pieces.Count; i++)
             {
                 Vector3 targetPos = _poses[i];
                 Quaternion targetRot = _rots[i];
 
-                Transform piece = _pieces[i].transform;
+                Transform piece = pieces[i].transform;
 
-                switch (_refreshType)
+                switch (refreshType)
                 {
                     case RefreshTypes.NonSmooth:
                         piece.SetLocalPositionAndRotation(targetPos, targetRot);
                         break;
                     case RefreshTypes.Smooth:
-                        StartCoroutine(SmoothRefresh(_smoothDuration, piece, targetPos, targetRot));
+                        StartCoroutine(SmoothRefresh(smoothDuration, piece, targetPos, targetRot));
                         break;
                 }
             }
@@ -68,9 +68,10 @@ namespace HiveMind.Core.Helpers.Runtime.Exploder
         #region Finding
         private void FindPiecesByPhysic()
         {
-            _pieces = new List<Rigidbody>();
+            pieces = new List<Rigidbody>();
 
-            Collider[] colliders = UnityEngine.Physics.OverlapSphere(transform.position, _radius, _pieceLayer);
+            // ReSharper disable once Unity.PreferNonAllocApi
+            Collider[] colliders = UnityEngine.Physics.OverlapSphere(transform.position, radius, pieceLayer);
 
             _poses = new Vector3[colliders.Length];
             _rots = new Quaternion[colliders.Length];
@@ -78,29 +79,29 @@ namespace HiveMind.Core.Helpers.Runtime.Exploder
             if (colliders.Length == 0)
                 Debug.Log("Pieces not found. Check LayerMask or radius");
             else
-                for (int i = 0; i < colliders.Length; i++)
-                    _pieces.Add(colliders[i].attachedRigidbody.gameObject.GetComponent<Rigidbody>());
+                foreach (Collider t in colliders)
+                    pieces.Add(t.attachedRigidbody.gameObject.GetComponent<Rigidbody>());
         }
         #endregion
 
         #region Sets
         private void SetPosesAndRotations()
         {
-            _poses = new Vector3[_pieces.Count];
-            _rots = new Quaternion[_pieces.Count];
+            _poses = new Vector3[pieces.Count];
+            _rots = new Quaternion[pieces.Count];
 
-            for (int i = 0; i < _pieces.Count; i++)
+            for (int i = 0; i < pieces.Count; i++)
             {
-                _poses[i] = _pieces[i].transform.localPosition;
-                _rots[i] = _pieces[i].transform.localRotation;
+                _poses[i] = pieces[i].transform.localPosition;
+                _rots[i] = pieces[i].transform.localRotation;
             }
         }
         private void SetPiecesPhysicActivation(bool isActive)
         {
-            for (int i = 0; i < _pieces.Count; i++)
+            foreach (Rigidbody t in pieces)
             {
-                _pieces[i].isKinematic = !isActive;
-                _pieces[i].useGravity = isActive;
+                t.isKinematic = !isActive;
+                t.useGravity = isActive;
             }
         }
         #endregion
@@ -128,11 +129,11 @@ namespace HiveMind.Core.Helpers.Runtime.Exploder
         #region Gizmo
         private void OnDrawGizmosSelected()
         {
-            if (!_useGizmo)
+            if (!useGizmo)
                 return;
 
-            Gizmos.color = _gizmoColor;
-            Gizmos.DrawWireSphere(transform.position + _explosionPosOffset, _radius);
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawWireSphere(transform.position + explosionPosOffset, radius);
         }
         #endregion
     }
