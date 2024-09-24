@@ -13,12 +13,17 @@ namespace HiveMind.Core.Utilities.Editor
         private const float MinHeight = 512f;
         private const float MaxWidth = 1024f;
         private const float MaxHeight = 1024f;
-        private const string CSharpGeneratorTitle = "C# Generator";
+        private const string CSharpGeneratorFoldoutGroup = "CSharp Generator";
+        private const string CSharpGeneratorTitle = "Generate CSharp Class";
         #endregion
 
         #region CSharpGenerator
-        [TitleGroup(CSharpGeneratorTitle, null, TitleAlignments.Centered, true, true)]
-        [SerializeField] private string className;
+        [FoldoutGroup(CSharpGeneratorFoldoutGroup, false)]
+        [Title(CSharpGeneratorTitle, null, TitleAlignments.Centered)]
+        [FoldoutGroup(CSharpGeneratorFoldoutGroup, false)]
+        [HideLabel] [SerializeField] private CSharpGenerator cSharpGenerator;
+        [FoldoutGroup(CSharpGeneratorFoldoutGroup, false)]
+        [Button(ButtonSizes.Medium, ButtonStyle.CompactBox)] private void GenerateScript() =>  cSharpGenerator.GenerateScript();
         #endregion
 
         #region Core
