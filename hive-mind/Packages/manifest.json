@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.unity.collab-proxy": "2.3.1",
+    "com.unity.collab-proxy": "2.4.3",
     "com.unity.ide.rider": "3.0.31",
     "com.unity.test-framework": "1.1.33",
     "com.unity.modules.ai": "1.0.0",
