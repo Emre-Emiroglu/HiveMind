@@ -7,9 +7,9 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Helpers.Physics
     public abstract class Contactlistener: MonoBehaviour
     {
         #region Actions
-        protected Action<Collision, Collision2D, Collider, Collider2D> EnterCallBack;
-        protected Action<Collision, Collision2D, Collider, Collider2D> StayCallBack;
-        protected Action<Collision, Collision2D, Collider, Collider2D> ExitCallBack;
+        public Action<Collision, Collision2D, Collider, Collider2D> EnterCallBack;
+        public Action<Collision, Collision2D, Collider, Collider2D> StayCallBack;
+        public Action<Collision, Collision2D, Collider, Collider2D> ExitCallBack;
         #endregion
         
         #region Fields
@@ -21,25 +21,21 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Helpers.Physics
         #region Checks
         private bool CompareCheck(string tagName)
         {
-            bool result;
             int tagsCount = contactableTags.Length;
+            
             if (tagsCount == 0)
-            {
                 Debug.LogError("Contactable Tags Cannot Be 0!");
-                result = false;
-            }
             else
             {
                 for (int i = 0; i < tagsCount; i++)
                 {
                     bool isEqual = contactableTags[i] == tagName;
                     if (isEqual)
-                        break;
+                        return true;
                 }
-                result = true;
             }
 
-            return result;
+            return false;
         }
         #endregion
 
