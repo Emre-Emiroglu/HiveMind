@@ -2,7 +2,7 @@
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Follower
 {
-    public class FollowerSample : MonoBehaviour
+    public sealed class FollowerSample : MonoBehaviour
     {
         #region Fields
         [Header("Follower Sample Fields")]

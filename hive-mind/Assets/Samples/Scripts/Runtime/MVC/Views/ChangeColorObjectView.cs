@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Views
 {
-    public class ChangeColorObjectView : View
+    public sealed class ChangeColorObjectView : View
     {
         #region Fields
         [Header("Change Color Object View Fields")]

@@ -3,7 +3,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.MVC.Data.ScriptableObjects;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Model
 {
-    public class MvcSampleModel : Model<MvcSampleSettings>
+    public sealed class MvcSampleModel : Model<MvcSampleSettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/MVC/MvcSampleSettings";

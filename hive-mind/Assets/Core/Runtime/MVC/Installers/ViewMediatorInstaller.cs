@@ -31,7 +31,7 @@ namespace CodeCatGames.HiveMind.Core.Runtime.MVC.Installers
         #endregion
     }
 
-    public class ViewMediatorInitializer<TView, TMediator> : IInitializable, IDisposable
+    public sealed class ViewMediatorInitializer<TView, TMediator> : IInitializable, IDisposable
         where TView : View.View
         where TMediator : Mediator<TView>
     {

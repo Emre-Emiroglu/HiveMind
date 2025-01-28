@@ -2,7 +2,7 @@
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Exploder
 {
-    public class ExploderSample : MonoBehaviour
+    public sealed class ExploderSample : MonoBehaviour
     {
         #region Fields
         [Header("Exploder Sample Fields")]

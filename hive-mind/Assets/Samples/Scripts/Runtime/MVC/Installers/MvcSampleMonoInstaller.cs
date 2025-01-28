@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Installers
 {
-    public class MvcSampleMonoInstaller : MonoInstaller
+    public sealed class MvcSampleMonoInstaller : MonoInstaller
     {
         #region Bindings
         public override void InstallBindings()

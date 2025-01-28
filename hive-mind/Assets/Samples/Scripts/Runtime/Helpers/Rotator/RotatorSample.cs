@@ -2,7 +2,7 @@
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Rotator
 {
-    public class RotatorSample : MonoBehaviour
+    public sealed class RotatorSample : MonoBehaviour
     {
         #region Fields
         [Header("Rotator Sample Fields")]

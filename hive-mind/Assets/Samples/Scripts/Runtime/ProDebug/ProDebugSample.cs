@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.ProDebug
 {
-    public class ProDebugSample : MonoBehaviour
+    public sealed class ProDebugSample : MonoBehaviour
     {
         #region Fields
         [Header("Pro Debug Sample Fields")]

@@ -3,7 +3,7 @@
 namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Data.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "MvcSampleSettings", menuName = "CodeCatGames/HiveMind/Samples/MVC/MvcSampleSettings", order = 0)]
-    public class MvcSampleSettings : ScriptableObject
+    public sealed class MvcSampleSettings : ScriptableObject
     {
         #region Fields
         [Header("Mvc Sample Settings Fields")]

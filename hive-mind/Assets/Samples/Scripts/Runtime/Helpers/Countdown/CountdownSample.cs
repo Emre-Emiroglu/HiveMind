@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Countdown
 {
-    public class CountdownSample : MonoBehaviour
+    public sealed class CountdownSample : MonoBehaviour
     {
         #region Fields
         [Header("Countdown Sample Fields")]

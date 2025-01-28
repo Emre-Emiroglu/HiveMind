@@ -4,7 +4,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Views
 {
-    public class ChangeColorObjectMediator : Mediator<ChangeColorObjectView>
+    public sealed class ChangeColorObjectMediator : Mediator<ChangeColorObjectView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;

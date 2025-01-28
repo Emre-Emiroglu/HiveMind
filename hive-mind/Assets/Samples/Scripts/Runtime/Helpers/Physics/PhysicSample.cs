@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Physics
 {
-    public class PhysicSample : MonoBehaviour
+    public sealed class PhysicSample : MonoBehaviour
     {
         #region Fields
         [Header("Physic Sample Fields")]

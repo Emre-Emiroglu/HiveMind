@@ -1,5 +1,5 @@
 {
-  "name": "com.leogames.hivemind",
+  "name": "com.codecatgames.hivemind",
   "version": "1.0.0",
   "displayName": "Hive Mind",
   "description": "Hive Mind is a core system for speed up the development process",
@@ -8,7 +8,7 @@
   "keywords": ["framework", "core system, template"],
   "author": 
   {
-    "name": "Leo Games",
+    "name": "Code Cat Games",
     "email": "emirogluemre08@gmail.com",
     "url": "https://www.unity3d.com"
   }

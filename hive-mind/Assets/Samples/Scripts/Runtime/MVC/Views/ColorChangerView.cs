@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Views
 {
-    public class ColorChangerView : View
+    public sealed class ColorChangerView : View
     {
         #region Actions
         public event Action<int> ClickChangeColorButton; 

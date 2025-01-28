@@ -2,7 +2,7 @@
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.SlowMotion
 {
-    public class SlowMotionSample : MonoBehaviour
+    public sealed class SlowMotionSample : MonoBehaviour
     {
         #region Fields
         [Header("Slow Motion Sample Fields")]
