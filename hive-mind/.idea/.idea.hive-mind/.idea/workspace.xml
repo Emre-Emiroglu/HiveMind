@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.environmentSetup&quot;
+  <component name="ChangeListManager">
+    <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vsconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Core.Runtime.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Samples.HelpersSample.Runtime.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Samples.Runtime.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Tests.EditMode.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Tests.PlayMode.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiveMind.Core.Helpers.Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiveMind.Core.Helpers.Runtime.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiveMind.Core.MVC.Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiveMind.Core.MVC.Runtime.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiveMind.Core.ProDebug.Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiveMind.Core.ProDebug.Runtime.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiveMind.Core.Utilities.Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiveMind.Core.Utilities.Runtime.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zenject-Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zenject-IntegrationTests-Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zenject-IntegrationTests.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zenject-PoolMonitor-Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zenject-ReflectionBaking-Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zenject-TestFramework.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zenject-UnitTests-Editor.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zenject.csproj.DotSettings" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2sH0Qp7QzIIIyJGnmnNRw07pwpP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.environmentSetup",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.37f1\Editor\Unity.exe" />
@@ -48,5 +100,30 @@
       </option>
       <method v="2" />
     </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="" />
+      <created>1738097181786</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738097181786</updated>
+      <workItem from="1738097184232" duration="149000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
 </project>
