@@ -1,13 +1,12 @@
-﻿using CodeCatGames.HiveMind.Core.Runtime.Helpers.Follower;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.FollowerSample
+namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Follower
 {
     public class FollowerSample : MonoBehaviour
     {
         #region Fields
         [Header("Follower Sample Fields")]
-        [SerializeField] private Follower follower;
+        [SerializeField] private Core.Runtime.Helpers.Follower.Follower follower;
         [SerializeField] private Transform followerObject;
         [SerializeField] private Transform targetObject;
         [SerializeField] private bool withSnap;

@@ -1,13 +1,12 @@
-﻿using CodeCatGames.HiveMind.Core.Runtime.Helpers.Exploder;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.ExploderSample
+namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Exploder
 {
     public class ExploderSample : MonoBehaviour
     {
         #region Fields
         [Header("Exploder Sample Fields")]
-        [SerializeField] private Exploder exploder;
+        [SerializeField] private Core.Runtime.Helpers.Exploder.Exploder exploder;
         #endregion
 
         #region Executes

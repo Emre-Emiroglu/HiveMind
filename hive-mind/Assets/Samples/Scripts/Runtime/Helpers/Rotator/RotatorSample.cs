@@ -1,13 +1,12 @@
-﻿using CodeCatGames.HiveMind.Core.Runtime.Helpers.Rotator;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.RotatorSample
+namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Rotator
 {
     public class RotatorSample : MonoBehaviour
     {
         #region Fields
         [Header("Rotator Sample Fields")]
-        [SerializeField] private Rotator rotator;
+        [SerializeField] private Core.Runtime.Helpers.Rotator.Rotator rotator;
         #endregion
         
         #region Executes

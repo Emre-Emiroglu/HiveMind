@@ -1,9 +1,8 @@
-﻿using CodeCatGames.HiveMind.Core.Runtime.Helpers.Countdown;
-using CodeCatGames.HiveMind.Core.Runtime.Utilities.Enums;
+﻿using CodeCatGames.HiveMind.Core.Runtime.Utilities.Enums;
 using TMPro;
 using UnityEngine;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.CountdownSample
+namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Countdown
 {
     public class CountdownSample : MonoBehaviour
     {
@@ -11,13 +10,13 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.CountdownSample
         [Header("Countdown Sample Fields")]
         [SerializeField] private TextMeshProUGUI countdownSampleText;
         [SerializeField] private TMP_InputField addSecondsField;
-        private Countdown _countdown;
+        private Core.Runtime.Helpers.Countdown.Countdown _countdown;
         #endregion
 
         #region Core
         private void Awake()
         {
-            _countdown = new Countdown();
+            _countdown = new Core.Runtime.Helpers.Countdown.Countdown();
             
             _countdown.Setup(TimeFormattingTypes.DaysHoursMinutesSeconds, true, 3600);
         }

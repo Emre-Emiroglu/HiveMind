@@ -1,20 +1,19 @@
-﻿using CodeCatGames.HiveMind.Core.Runtime.Helpers.SlowMotion;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.SlowMotionSample
+namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.SlowMotion
 {
     public class SlowMotionSample : MonoBehaviour
     {
         #region Fields
         [Header("Slow Motion Sample Fields")]
         [SerializeField] private float slowMotionFactor;
-        private SlowMotion _slowMotion;
+        private Core.Runtime.Helpers.SlowMotion.SlowMotion _slowMotion;
         #endregion
 
         #region Core
         private void Awake()
         {
-            _slowMotion = new SlowMotion();
+            _slowMotion = new Core.Runtime.Helpers.SlowMotion.SlowMotion();
             
             _slowMotion?.Setup(slowMotionFactor);
         }

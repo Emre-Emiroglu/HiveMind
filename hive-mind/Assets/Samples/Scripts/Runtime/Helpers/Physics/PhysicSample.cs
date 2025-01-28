@@ -1,7 +1,7 @@
 ﻿using CodeCatGames.HiveMind.Core.Runtime.Helpers.Physics;
 using UnityEngine;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.PhysicsSample
+namespace CodeCatGames.HiveMind.Samples.Runtime.Helpers.Physics
 {
     public class PhysicSample : MonoBehaviour
     {
