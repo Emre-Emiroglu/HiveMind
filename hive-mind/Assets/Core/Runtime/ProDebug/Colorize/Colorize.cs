@@ -32,21 +32,12 @@ namespace CodeCatGames.HiveMind.Core.Runtime.ProDebug.Colorize
         #endregion
 
         #region Constructors
-        private Colorize(Color color)
-        {
-            _prefix = $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>";
-        }
-        private Colorize(string hexColor)
-        {
-            _prefix = $"<color={hexColor}>";
-        }
+        private Colorize(Color color) => _prefix = $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>";
+        private Colorize(string hexColor) => _prefix = $"<color={hexColor}>";
         #endregion
 
         #region Operators
-        public static string operator %(string text, Colorize color)
-        {
-            return color._prefix + text + Suffix;
-        }
+        public static string operator %(string text, Colorize color) => color._prefix + text + Suffix;
         #endregion
     }
 }

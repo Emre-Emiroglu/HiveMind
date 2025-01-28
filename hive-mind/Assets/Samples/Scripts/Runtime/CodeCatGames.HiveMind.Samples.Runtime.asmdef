@@ -1,0 +1,18 @@
+{
+    "name": "CodeCatGames.HiveMind.Samples.Runtime",
+    "rootNamespace": "CodeCatGames.HiveMind.Samples.Runtime",
+    "references": [
+        "GUID:2ecd908c01ef8fe498e8fd85151e2f67",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

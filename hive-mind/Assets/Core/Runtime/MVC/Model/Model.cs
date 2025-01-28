@@ -6,11 +6,11 @@ namespace CodeCatGames.HiveMind.Core.Runtime.MVC.Model
     public abstract class Model<TModelSettings> where TModelSettings : ScriptableObject
     {
         #region Fields
-        protected readonly TModelSettings Settings;
+        private readonly TModelSettings _settings;
         #endregion
 
         #region Getters
-        public TModelSettings GetSettings => Settings;
+        public TModelSettings GetSettings => _settings;
         #endregion
 
         #region Constructor
@@ -22,7 +22,7 @@ namespace CodeCatGames.HiveMind.Core.Runtime.MVC.Model
                 return;
             }
             
-            Settings = Resources.Load<TModelSettings>(resourcePath);
+            _settings = Resources.Load<TModelSettings>(resourcePath);
         }
         #endregion
 

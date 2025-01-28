@@ -18,10 +18,7 @@ namespace CodeCatGames.HiveMind.Core.Runtime.ProDebug.TextFormat
         #endregion
 
         #region Operators
-        public static string operator %(string text, TextFormat textFormat)
-        {
-            return textFormat._prefix + text + textFormat._suffix;
-        }
+        public static string operator %(string text, TextFormat textFormat) => textFormat._prefix + text + textFormat._suffix;
         #endregion
     }
 }

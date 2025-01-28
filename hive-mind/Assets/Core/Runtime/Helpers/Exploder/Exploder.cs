@@ -72,16 +72,16 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Helpers.Exploder
         {
             pieces = new List<Rigidbody>();
 
-            // ReSharper disable once Unity.PreferNonAllocApi
-            Collider[] colliders = UnityEngine.Physics.OverlapSphere(transform.position, radius, pieceLayer);
+            Collider[] results = new Collider[] { };
+            UnityEngine.Physics.OverlapSphereNonAlloc(transform.position, radius, results, pieceLayer);
 
-            _poses = new Vector3[colliders.Length];
-            _rots = new Quaternion[colliders.Length];
+            _poses = new Vector3[results.Length];
+            _rots = new Quaternion[results.Length];
 
-            if (colliders.Length == 0)
+            if (results.Length == 0)
                 Debug.Log("Pieces not found. Check LayerMask or radius");
             else
-                foreach (Collider t in colliders)
+                foreach (Collider t in results)
                     pieces.Add(t.attachedRigidbody.gameObject.GetComponent<Rigidbody>());
         }
         #endregion

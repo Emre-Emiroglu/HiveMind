@@ -7,15 +7,15 @@ namespace CodeCatGames.HiveMind.Core.Runtime.MVC.View
         where TView : View
     {
         #region Fields
-        protected readonly TView View;
+        private readonly TView _view;
         #endregion
 
         #region Getters
-        public TView GetView => View;
+        public TView GetView => _view;
         #endregion
 
         #region Constructor
-        public Mediator(TView view) => View = view;
+        public Mediator(TView view) => _view = view;
         #endregion
 
         #region PostConstruct

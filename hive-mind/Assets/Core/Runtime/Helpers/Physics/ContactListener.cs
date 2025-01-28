@@ -40,7 +40,9 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Helpers.Physics
         #endregion
 
         #region Logics
-        protected void ContactStatus(ContactStatusTypes contactStatusType, string tagName, Collision contactCollision = null, Collision2D contactCollision2D = null, Collider contactCollider = null, Collider2D contactCollider2D = null)
+        protected void ContactStatus(ContactStatusTypes contactStatusType, string tagName,
+            Collision contactCollision = null, Collision2D contactCollision2D = null, Collider contactCollider = null,
+            Collider2D contactCollider2D = null)
         {
             bool isContain = CompareCheck(tagName);
             if (isContain)

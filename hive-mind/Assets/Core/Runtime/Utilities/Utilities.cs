@@ -33,7 +33,6 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities
             }
         }
 #endif
-
         public static IEnumerator SetCanvasGroupAlpha(CanvasGroup canvasGroup, float targetValue, float duration = 1f)
         {
             float t = 0f;
@@ -45,7 +44,6 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities
                 yield return null;
             }
         }
-        
         public static Vector3 WorldToScreenPointForUICamera(Vector3 worldPos, Camera gameCamera, Canvas screenCanvas)
         {
             Vector3 canvasPos;
@@ -62,7 +60,6 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities
 
             return canvasPos;
         }
-
         public static List<T> Shuffle<T>(List<T> ts)
         {
             var newList = ts;
@@ -75,7 +72,6 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities
             }
             return newList;
         }
-
         public static IList<int> BubbleSort(IList<int> ts)
         {
             var newList = ts;
@@ -87,7 +83,6 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities
             
             return newList;
         }
-
         public static Matrix4x4 IsoMatrix(Quaternion rotate) => Matrix4x4.Rotate(rotate);
     }
 }

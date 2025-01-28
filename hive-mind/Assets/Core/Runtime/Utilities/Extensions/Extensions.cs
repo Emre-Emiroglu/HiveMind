@@ -22,13 +22,11 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities.Extensions
 
             return transform;
         }
-
         public static void LookAtWithAxis(this Transform transform, Transform target, Vector3 axis, float angleOffset = 0f)
         {
             transform.LookAt(target);
             transform.Rotate(axis, angleOffset, Space.Self);
         }
-
         public static void LookAtGradually(this Transform transform, Transform target, Vector3 axis, float maxRadiansDelta, bool stableUpVector = false)
         {
             Vector3 dir = target.position - transform.position;
@@ -38,7 +36,6 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities.Extensions
             if (stableUpVector)
                 transform.rotation = Quaternion.Euler(axis.normalized * transform.rotation.eulerAngles.magnitude);
         }
-
         public static Transform FindRecursive(this Transform transform, string name, bool includeInactive = false)
         {
             foreach (Transform child in transform.GetComponentsInChildren<Transform>(includeInactive))
@@ -48,7 +45,6 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities.Extensions
             }
             return null;
         }
-
         public static Vector3 InputToIso(this Vector3 input, Matrix4x4 matrix4X4) => matrix4X4.MultiplyPoint3x4(input); 
     }
 }

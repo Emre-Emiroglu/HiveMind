@@ -155,7 +155,7 @@ namespace CodeCatGames.HiveMind.Core.Runtime.Utilities.TimeCalculator
         #endregion
 
         #region Fetch
-        public async static Task RefreshDateTimeAsync()
+        public static async Task RefreshDateTimeAsync()
         {
             var localDate = await FetchCurrentLocalDate();
             Debug.Log($"Current local date: {localDate}");
