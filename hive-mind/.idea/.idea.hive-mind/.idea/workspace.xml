@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Materials/ProDebug.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/Runtime/Utilities/SerializedDictionary.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/Runtime/Utilities/SerializedDictionary/SerializedDictionary.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/Runtime/Utilities/SerializedDictionary/SerializedDictionary.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/CodeCatGames.HiveMind.Samples.Runtime.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/CodeCatGames.HiveMind.Samples.Runtime.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ScriptableObjects/CrossScene/AudioSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ScriptableObjects/CrossScene/AudioSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ScriptableObjects/CrossScene/CurrencySettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ScriptableObjects/CrossScene/CurrencySettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/AudioView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/AudioView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

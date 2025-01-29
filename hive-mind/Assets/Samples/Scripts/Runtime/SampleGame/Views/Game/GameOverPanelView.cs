@@ -1,8 +1,8 @@
 using System;
 using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
-using CodeCatGames.HiveMind.Core.Runtime.Utilities.SerializedDictionary;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.UI;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.UI;
+using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,5 +32,5 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
     }
 
     [Serializable]
-    public class GameOverPanels : SerializedDictionary<bool, GameObject> { }
+    public class GameOverPanels : SerializableDictionaryBase<bool, GameObject> { }
 }

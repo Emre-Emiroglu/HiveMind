@@ -39,6 +39,7 @@ MonoBehaviour:
     - PrimeTween.Debug
     - PrimeTween.Demo
     - PrimeTween.Runtime
+    - RotaryHeart.SerializableDictionaryLite
     - UniTask
     - UniTask.Addressables
     - UniTask.DOTween

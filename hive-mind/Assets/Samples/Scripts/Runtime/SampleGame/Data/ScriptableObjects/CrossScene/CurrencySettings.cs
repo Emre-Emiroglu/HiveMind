@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using CodeCatGames.HiveMind.Core.Runtime.Utilities.SerializedDictionary;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene
@@ -16,13 +16,13 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObject
         #endregion
 
         #region Getters
-        public Dictionary<CurrencyTypes, int> DefaultCurrencyValues => defaultCurrencyValues;
-        public Dictionary<CurrencyTypes, Sprite> CurrencyIcons => currencyIcons;
+        public Dictionary<CurrencyTypes, int> DefaultCurrencyValues => defaultCurrencyValues.Clone();
+        public Dictionary<CurrencyTypes, Sprite> CurrencyIcons => currencyIcons.Clone();
         #endregion
     }
 
     [Serializable]
-    public class DefaultCurrencyValuesMap : SerializedDictionary<CurrencyTypes, int> { }
+    public class DefaultCurrencyValuesMap : SerializableDictionaryBase<CurrencyTypes, int> { }
     [Serializable]
-    public class CurrencyIconsMap : SerializedDictionary<CurrencyTypes, Sprite> { }
+    public class CurrencyIconsMap : SerializableDictionaryBase<CurrencyTypes, Sprite> { }
 }

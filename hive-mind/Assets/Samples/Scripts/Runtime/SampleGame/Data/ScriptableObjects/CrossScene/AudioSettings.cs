@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using CodeCatGames.HiveMind.Core.Runtime.Utilities.SerializedDictionary;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -19,13 +19,13 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObject
 
         #region Getters
         public AudioMixer AudioMixer => audioMixer;
-        public Dictionary<MusicTypes, AudioClip> Musics => musics;
-        public Dictionary<SoundTypes, AudioClip> Sounds => sounds;
+        public Dictionary<MusicTypes, AudioClip> Musics => musics.Clone();
+        public Dictionary<SoundTypes, AudioClip> Sounds => sounds.Clone();
         #endregion
     }
     
     [Serializable]
-    public class MusicsMap : SerializedDictionary<MusicTypes, AudioClip> { }
+    public class MusicsMap : SerializableDictionaryBase<MusicTypes, AudioClip> { }
     [Serializable]
-    public class SoundsMap : SerializedDictionary<SoundTypes, AudioClip> { }
+    public class SoundsMap : SerializableDictionaryBase<SoundTypes, AudioClip> { }
 }
