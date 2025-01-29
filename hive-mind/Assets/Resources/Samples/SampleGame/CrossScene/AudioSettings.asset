@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d7b8b65864d9d46bf2960c4ad163c8, type: 3}
+  m_Name: AudioSettings
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 8300000, guid: 1f3ff4f1d4cdb4e4ea620ba5df4331ae, type: 3}
+    - {fileID: 8300000, guid: c64eb2cab36a50b468cf169b4d085006, type: 3}
+    - {fileID: 8300000, guid: 4ac00b4715a193743b8042c033f2ade4, type: 3}
+    - {fileID: 8300000, guid: 196d1b846dbde08429c135191d68f7e7, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _musics
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[HiveMindGameTemplate.Runtime.Enums.CrossScene.Audio.MusicTypes,
+        HiveMindGameTemplate.Runtime],[UnityEngine.AudioClip, UnityEngine.AudioModule]],
+        mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[HiveMindGameTemplate.Runtime.Enums.CrossScene.Audio.MusicTypes,
+        HiveMindGameTemplate.Runtime]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _sounds
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[HiveMindGameTemplate.Runtime.Enums.CrossScene.Audio.SoundTypes,
+        HiveMindGameTemplate.Runtime],[UnityEngine.AudioClip, UnityEngine.AudioModule]],
+        mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[HiveMindGameTemplate.Runtime.Enums.CrossScene.Audio.SoundTypes,
+        HiveMindGameTemplate.Runtime]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _audioMixer: {fileID: 24100000, guid: ea7a3d5e6799cbd47943169963c3ff75, type: 2}

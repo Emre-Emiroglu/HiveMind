@@ -1,34 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/indexLayout.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vsconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Core.Runtime.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Samples.HelpersSample.Runtime.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Samples.Runtime.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Tests.EditMode.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeCatGames.HiveMind.Tests.PlayMode.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HiveMind.Core.Helpers.Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HiveMind.Core.Helpers.Runtime.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HiveMind.Core.MVC.Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HiveMind.Core.MVC.Runtime.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HiveMind.Core.ProDebug.Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HiveMind.Core.ProDebug.Runtime.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HiveMind.Core.Utilities.Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HiveMind.Core.Utilities.Runtime.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zenject-Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zenject-IntegrationTests-Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zenject-IntegrationTests.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zenject-PoolMonitor-Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zenject-ReflectionBaking-Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zenject-TestFramework.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zenject-UnitTests-Editor.csproj.DotSettings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zenject.csproj.DotSettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Materials/ProDebug.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/CodeCatGames.HiveMind.Samples.Runtime.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/CodeCatGames.HiveMind.Samples.Runtime.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,25 +23,29 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2sH0Qp7QzIIIyJGnmnNRw07pwpP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.environmentSetup",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.environmentSetup&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.37f1\Editor\Unity.exe" />
@@ -110,6 +99,9 @@
       <option name="presentableId" value="Default" />
       <updated>1738097181786</updated>
       <workItem from="1738097184232" duration="149000" />
+      <workItem from="1738139292758" duration="1162000" />
+      <workItem from="1738140852863" duration="668000" />
+      <workItem from="1738141578191" duration="2890000" />
     </task>
     <servers />
   </component>
