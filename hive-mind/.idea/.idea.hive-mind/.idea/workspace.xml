@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="" />
+    <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/package.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +17,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -93,6 +101,11 @@
       <workItem from="1738140852863" duration="668000" />
       <workItem from="1738141578191" duration="2890000" />
       <workItem from="1738222561402" duration="3486000" />
+      <workItem from="1738236815538" duration="1961000" />
+      <workItem from="1738238851320" duration="263000" />
+      <workItem from="1738239189962" duration="446000" />
+      <workItem from="1738239734046" duration="292000" />
+      <workItem from="1738240114246" duration="2325000" />
     </task>
     <servers />
   </component>
