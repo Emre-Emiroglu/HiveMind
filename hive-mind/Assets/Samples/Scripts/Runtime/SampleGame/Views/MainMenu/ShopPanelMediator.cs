@@ -57,9 +57,9 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
         #region ButtonReceivers
         private void OnHomeButtonClicked()
         {
-            _signalBus.Fire<ChangeUIPanelSignal>(new(UIPanelTypes.StartPanel));
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.StartPanel));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         #endregion
     }

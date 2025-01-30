@@ -77,8 +77,8 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
         {
             SetVerticalGroupActivation(!_isVerticalGroupActive);
 
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         private void ExitButtonClicked()
         {
@@ -89,21 +89,21 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
                 case SceneID.Bootstrap:
                     break;
                 case SceneID.MainMenu:
-                    _signalBus.Fire<AppQuitSignal>(new());
+                    _signalBus.Fire(new AppQuitSignal());
                     break;
                 case SceneID.Game:
-                    _signalBus.Fire<GameExitSignal>(new());
-                    _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-                    _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+                    _signalBus.Fire(new GameExitSignal());
+                    _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                    _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
                     break;
             }
         }
         private void SettingsButtonClicked(SettingsTypes settingsType)
         {
-            _signalBus.Fire<SettingsButtonPressedSignal>(new(settingsType));
+            _signalBus.Fire(new SettingsButtonPressedSignal(settingsType));
 
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         #endregion
 

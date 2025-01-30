@@ -74,21 +74,21 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
         #region ButtonReceivers
         private void OnHomeButtonClicked()
         {
-            _signalBus.Fire<GameExitSignal>(new());
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new GameExitSignal());
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         private void OnRestartButtonClicked()
         {
-            _signalBus.Fire<PlayGameSignal>(new());
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new PlayGameSignal());
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         private void OnNextButtonClicked()
         {
-            _signalBus.Fire<PlayGameSignal>(new());
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new PlayGameSignal());
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         #endregion
     }

@@ -53,9 +53,9 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
         #region ButtonReceivers
         private void ButtonClicked()
         {
-            _signalBus.Fire<ChangeUIPanelSignal>(new(UIPanelTypes.ShopPanel));
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.ShopPanel));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         #endregion
 

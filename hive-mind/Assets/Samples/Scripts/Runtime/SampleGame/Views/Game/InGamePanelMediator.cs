@@ -1,4 +1,5 @@
 using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
@@ -71,26 +72,26 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
         #region ButtonReceivers
         private void OnWinButtonPressed()
         {
-            _signalBus.Fire<GameOverSignal>(new(true));
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new GameOverSignal(true));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         private void OnFailButtonPressed()
         {
-            _signalBus.Fire<GameOverSignal>(new(false));
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new GameOverSignal(false));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         private void OnAddCurrencyButtonPressed()
         {
-            _signalBus.Fire<SpawnCurrencyTrailSignal>(new(new(CurrencyTypes.Coin,
+            _signalBus.Fire(new SpawnCurrencyTrailSignal(new CurrencyTrailData(CurrencyTypes.Coin,
                                                               1,
                                                               .25f,
                                                               Ease.Linear,
                                                               GetView.CurrencyTrailStartTransform.position,
                                                               GetView.CurrencyTrailTargetTransform.position)));
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         #endregion
 

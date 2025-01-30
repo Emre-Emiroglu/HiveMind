@@ -31,7 +31,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Bootstrap
             
             await UniTask.Delay(millisecondsDelay);
 
-            _signalBus.Fire<LoadSceneSignal>(new(SceneID.MainMenu));
+            _signalBus.Fire(new LoadSceneSignal(SceneID.MainMenu));
         }
         #endregion
     }

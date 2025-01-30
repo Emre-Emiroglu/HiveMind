@@ -68,9 +68,9 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
         #region ButtonReceivers
         private void OnPlayButtonClicked()
         {
-            _signalBus.Fire<LoadSceneSignal>(new(SceneID.Game));
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new LoadSceneSignal(SceneID.Game));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         #endregion
 

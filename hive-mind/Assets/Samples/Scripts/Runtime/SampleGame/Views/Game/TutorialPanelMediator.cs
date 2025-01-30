@@ -66,9 +66,9 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
         {
             _tutorialModel.SetTutorial(true);
 
-            _signalBus.Fire<PlayGameSignal>(new());
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
-            _signalBus.Fire<PlayHapticSignal>(new(HapticPatterns.PresetType.LightImpact));
+            _signalBus.Fire(new PlayGameSignal());
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
         }
         #endregion
     }
