@@ -4,36 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/Bootstrap/LogoHolder/LogoHolderPanelView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/Bootstrap/LogoHolder/LogoHolderPanelView.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/CrossScene/Currency/CurrencyTrailCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/CrossScene/Currency/CurrencyTrailCanvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/CrossScene/Loading/LoadingScreenCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/CrossScene/Loading/LoadingScreenCanvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/CrossScene/Loading/LoadingScreenPanelView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/CrossScene/Loading/LoadingScreenPanelView.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/Game/GameOver/GameOverPanelView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/Game/GameOver/GameOverPanelView.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/Game/InGame/InGamePanelView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/Game/InGame/InGamePanelView.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/Game/Tutorial/TutorialPanelView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/Game/Tutorial/TutorialPanelView.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/MainMenu/Shop/ShopPanelView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/MainMenu/Shop/ShopPanelView.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/MainMenu/Start/StartPanelView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/MainMenu/Start/StartPanelView.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/Bootstrap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/Bootstrap.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/Bootstrap/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/Bootstrap/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/Game/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/Game/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/MainMenu/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scenes/SampleGame/MainMenu/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Controllers/Bootstrap/InitializeBootstrapCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Controllers/Bootstrap/InitializeBootstrapCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/CurrencyMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/CurrencyMediator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/SettingsButtonMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/SettingsButtonMediator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelMediator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/InGamePanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/InGamePanelMediator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/TutorialPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/TutorialPanelMediator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/ShopPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/ShopPanelMediator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/StartPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/StartPanelMediator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-    </list>
+    <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,7 +92,7 @@
       <workItem from="1738139292758" duration="1162000" />
       <workItem from="1738140852863" duration="668000" />
       <workItem from="1738141578191" duration="2890000" />
-      <workItem from="1738222561402" duration="3280000" />
+      <workItem from="1738222561402" duration="3486000" />
     </task>
     <servers />
   </component>
