@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Application
 {
-    public class AppQuitCommand : Command<AppQuitSignal>
+    public sealed class AppQuitCommand : Command<AppQuitSignal>
     {
         #region ReadonlyFields
         private readonly AudioModel _audioModel;

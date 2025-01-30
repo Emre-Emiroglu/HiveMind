@@ -8,17 +8,15 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
 {
-    public class GameOverPanelMediator : Mediator<GameOverPanelView>
+    public sealed class GameOverPanelMediator : Mediator<GameOverPanelView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
         #endregion
 
         #region Constructor
-        public GameOverPanelMediator(GameOverPanelView view, SignalBus signalBus) : base(view)
-        {
+        public GameOverPanelMediator(GameOverPanelView view, SignalBus signalBus) : base(view) =>
             _signalBus = signalBus;
-        }
         #endregion
 
         #region PostConstruct

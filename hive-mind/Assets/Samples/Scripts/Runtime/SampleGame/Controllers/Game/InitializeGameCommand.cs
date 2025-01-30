@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
 {
-    public class InitializeGameCommand : Command<InitializeGameSignal>
+    public sealed class InitializeGameCommand : Command<InitializeGameSignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -25,12 +25,12 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
         #region Executes
         public override void Execute(InitializeGameSignal signal)
         {
-            _signalBus.Fire<ChangeLoadingScreenActivationSignal>(new(false, null));
+            _signalBus.Fire(new ChangeLoadingScreenActivationSignal(false, null));
 
             if (_tutorialModel.IsTutorialShowed)
-                _signalBus.Fire<PlayGameSignal>(new());
+                _signalBus.Fire(new PlayGameSignal());
             else
-                _signalBus.Fire<ChangeUIPanelSignal>(new(UIPanelTypes.TutorialPanel));
+                _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.TutorialPanel));
         }
         #endregion
     }

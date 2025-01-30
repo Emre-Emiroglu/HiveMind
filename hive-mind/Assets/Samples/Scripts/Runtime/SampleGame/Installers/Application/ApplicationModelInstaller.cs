@@ -3,7 +3,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Application
 {
-    public class ApplicationModelInstaller : Installer
+    public sealed class ApplicationModelInstaller : Installer
     {
         #region Bindings
         public override void InstallBindings() =>

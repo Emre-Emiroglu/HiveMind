@@ -4,7 +4,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.CrossScene
 {
-    public class CrossSceneSignalInstaller: Installer
+    public sealed class CrossSceneSignalInstaller: Installer
     {
         #region Bindings
         public override void InstallBindings()

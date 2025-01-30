@@ -6,7 +6,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 {
-    public class AudioMediator : Mediator<AudioView>
+    public sealed class AudioMediator : Mediator<AudioView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -26,18 +26,13 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
         #endregion
 
         #region Core
-        public override void Initialize()
-        {
-            _signalBus.Subscribe<PlayAudioSignal>(OnPlayAudio);
-        }
-        public override void Dispose()
-        {
-            _signalBus.Unsubscribe<PlayAudioSignal>(OnPlayAudio);
-        }
+        public override void Initialize() => _signalBus.Subscribe<PlayAudioSignal>(OnPlayAudio);
+        public override void Dispose() => _signalBus.Unsubscribe<PlayAudioSignal>(OnPlayAudio);
         #endregion
 
         #region SignalReceivers
-        private void OnPlayAudio(PlayAudioSignal signal) => PlayAudioProcess(signal.AudioType, signal.MusicType, signal.SoundType);
+        private void OnPlayAudio(PlayAudioSignal signal) =>
+            PlayAudioProcess(signal.AudioType, signal.MusicType, signal.SoundType);
         #endregion
 
         #region Executes

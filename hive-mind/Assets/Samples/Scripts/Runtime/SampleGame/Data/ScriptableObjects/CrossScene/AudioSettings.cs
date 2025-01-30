@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene
 {
     [CreateAssetMenu(fileName = "AudioSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/CrossScene/AudioSettings")]
-    public class AudioSettings : ScriptableObject
+    public sealed class AudioSettings : ScriptableObject
     {
         #region Fields
         [Header("Audio Settings Fields")]
@@ -25,7 +25,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObject
     }
     
     [Serializable]
-    public class MusicsMap : SerializableDictionaryBase<MusicTypes, AudioClip> { }
+    public sealed class MusicsMap : SerializableDictionaryBase<MusicTypes, AudioClip> { }
     [Serializable]
-    public class SoundsMap : SerializableDictionaryBase<SoundTypes, AudioClip> { }
+    public sealed class SoundsMap : SerializableDictionaryBase<SoundTypes, AudioClip> { }
 }

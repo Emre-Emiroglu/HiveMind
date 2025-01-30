@@ -7,7 +7,7 @@ using UnityEngine;
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene
 {
     [CreateAssetMenu(fileName = "CurrencySettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/CrossScene/CurrencySettings")]
-    public class CurrencySettings : ScriptableObject
+    public sealed class CurrencySettings : ScriptableObject
     {
         #region Fields
         [Header("Currency Settings Fields")]
@@ -22,7 +22,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObject
     }
 
     [Serializable]
-    public class DefaultCurrencyValuesMap : SerializableDictionaryBase<CurrencyTypes, int> { }
+    public sealed class DefaultCurrencyValuesMap : SerializableDictionaryBase<CurrencyTypes, int> { }
     [Serializable]
-    public class CurrencyIconsMap : SerializableDictionaryBase<CurrencyTypes, Sprite> { }
+    public sealed class CurrencyIconsMap : SerializableDictionaryBase<CurrencyTypes, Sprite> { }
 }

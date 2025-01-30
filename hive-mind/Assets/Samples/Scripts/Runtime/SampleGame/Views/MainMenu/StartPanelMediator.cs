@@ -8,7 +8,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
 {
-    public class StartPanelMediator: Mediator<StartPanelView>
+    public sealed class StartPanelMediator: Mediator<StartPanelView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;

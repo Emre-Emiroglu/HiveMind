@@ -3,7 +3,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
 {
-    public class BootstrapMonoInstaller : MonoInstaller
+    public sealed class BootstrapMonoInstaller : MonoInstaller
     {
         #region Bindings
         public override void InstallBindings()
@@ -15,7 +15,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
         #endregion
 
         #region Cycle
-        public override void Start() => Container.Resolve<SignalBus>().Fire<InitializeBootstrapSignal>(new());
+        public override void Start() => Container.Resolve<SignalBus>().Fire(new InitializeBootstrapSignal());
         #endregion
     }
 }

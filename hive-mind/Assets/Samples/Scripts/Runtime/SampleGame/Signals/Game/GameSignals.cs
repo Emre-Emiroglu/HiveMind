@@ -13,10 +13,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game
         #endregion
 
         #region Constructor
-        public GameOverSignal(bool isSuccess)
-        {
-            _isSuccess = isSuccess;
-        }
+        public GameOverSignal(bool isSuccess) => _isSuccess = isSuccess;
         #endregion
     } // Has Command
     public readonly struct GameExitSignal { } // Has Command
@@ -31,10 +28,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game
         #endregion
 
         #region Constructor
-        public SetupGameOverPanelSignal(bool isSuccess)
-        {
-            _isSuccess = isSuccess;
-        }
+        public SetupGameOverPanelSignal(bool isSuccess) => _isSuccess = isSuccess;
         #endregion
     }
 }

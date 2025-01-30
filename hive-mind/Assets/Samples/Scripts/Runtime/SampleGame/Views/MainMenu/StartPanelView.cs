@@ -8,10 +8,10 @@ using UnityEngine.UI;
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class StartPanelView: View, IUIPanel
+    public sealed class StartPanelView: View, IUIPanel
     {
         #region Fields
-        [Header("Main Scene Panel View Fields")]
+        [Header("Start Panel View Fields")]
         [SerializeField] private UIPanelVo uiPanelVo;
         [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private Button playButton;

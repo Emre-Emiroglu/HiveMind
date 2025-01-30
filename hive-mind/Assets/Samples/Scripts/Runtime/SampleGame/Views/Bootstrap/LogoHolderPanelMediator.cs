@@ -4,17 +4,15 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.Extensions;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Bootstrap
 {
-    public class LogoHolderPanelMediator : Mediator<LogoHolderPanelView>
+    public sealed class LogoHolderPanelMediator : Mediator<LogoHolderPanelView>
     {
         #region ReadonlyFields
         private readonly BootstrapModel _bootstrapModel;
         #endregion
 
         #region Constructor
-        public LogoHolderPanelMediator(LogoHolderPanelView view, BootstrapModel bootstrapModel) : base(view)
-        {
+        public LogoHolderPanelMediator(LogoHolderPanelView view, BootstrapModel bootstrapModel) : base(view) =>
             _bootstrapModel = bootstrapModel;
-        }
         #endregion
 
         #region PostConstruct

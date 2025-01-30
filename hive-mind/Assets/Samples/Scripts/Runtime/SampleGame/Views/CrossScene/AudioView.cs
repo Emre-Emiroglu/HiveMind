@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 {
-    public class AudioView : View
+    public sealed class AudioView : View
     {
         #region Fields
         [Header("Audio View Fields")]
@@ -20,5 +20,5 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
     }
     
     [Serializable]
-    public class AudioSourcesMap : SerializableDictionaryBase<AudioTypes, AudioSource> { }
+    public sealed class AudioSourcesMap : SerializableDictionaryBase<AudioTypes, AudioSource> { }
 }

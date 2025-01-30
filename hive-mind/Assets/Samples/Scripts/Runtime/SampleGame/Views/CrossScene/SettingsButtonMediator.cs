@@ -12,7 +12,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 {
-    public class SettingsButtonMediator : Mediator<SettingsButtonView>
+    public sealed class SettingsButtonMediator : Mediator<SettingsButtonView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -67,14 +67,9 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
         #endregion
 
         #region SignalReceivers
-        private void OnChangeUIPanelSignal(ChangeUIPanelSignal signal)
-        {
-            SetVerticalGroupActivation(false);
-        }
-        private void OnSettingsButtonRefreshSignal(SettingsButtonRefreshSignal signal)
-        {
+        private void OnChangeUIPanelSignal(ChangeUIPanelSignal signal) => SetVerticalGroupActivation(false);
+        private void OnSettingsButtonRefreshSignal(SettingsButtonRefreshSignal signal) =>
             SetupVisual(signal.SettingsType);
-        }
         #endregion
 
         #region ButtonReceivers

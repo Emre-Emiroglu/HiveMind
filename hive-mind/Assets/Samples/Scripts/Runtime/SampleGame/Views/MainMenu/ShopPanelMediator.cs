@@ -7,17 +7,14 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
 {
-    public class ShopPanelMediator : Mediator<ShopPanelView>
+    public sealed class ShopPanelMediator : Mediator<ShopPanelView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
         #endregion
 
         #region Constructor
-        public ShopPanelMediator(ShopPanelView view, SignalBus signalBus) : base(view)
-        {
-            _signalBus = signalBus;
-        }
+        public ShopPanelMediator(ShopPanelView view, SignalBus signalBus) : base(view) => _signalBus = signalBus;
         #endregion
 
         #region PostConstruct

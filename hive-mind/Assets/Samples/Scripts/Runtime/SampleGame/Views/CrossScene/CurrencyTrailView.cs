@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 {
-    public class CurrencyTrailView : MonoBehaviour
+    public sealed class CurrencyTrailView : MonoBehaviour
     {
         #region Fields
         [Header("Currency Trail View Fields")]

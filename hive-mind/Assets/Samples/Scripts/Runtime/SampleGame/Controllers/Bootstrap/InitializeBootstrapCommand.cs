@@ -8,7 +8,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Bootstrap
 {
-    public class InitializeBootstrapCommand : Command<InitializeBootstrapSignal>
+    public sealed class InitializeBootstrapCommand : Command<InitializeBootstrapSignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -24,6 +24,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Bootstrap
         #endregion
 
         #region Executes
+        // ReSharper disable once AsyncVoidMethod
         public override async void Execute(InitializeBootstrapSignal signal)
         {
             int millisecondsDelay = (int)(_bootstrapModel.GetSettings.SceneActivationDuration * 1000f);

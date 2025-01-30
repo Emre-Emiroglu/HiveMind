@@ -5,7 +5,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene
 {
-    public class ChangeCurrencyCommand : Command<ChangeCurrencySignal>
+    public sealed class ChangeCurrencyCommand : Command<ChangeCurrencySignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -25,7 +25,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScen
         {
             _currencyModel.ChangeCurrencyValue(signal.CurrencyType, signal.Amount, signal.IsSet);
 
-            _signalBus.Fire<RefreshCurrencyVisualSignal>(new(signal.CurrencyType));
+            _signalBus.Fire(new RefreshCurrencyVisualSignal(signal.CurrencyType));
         }
         #endregion
     }

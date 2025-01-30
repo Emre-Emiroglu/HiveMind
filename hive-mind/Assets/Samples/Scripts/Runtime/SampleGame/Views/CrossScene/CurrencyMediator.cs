@@ -9,7 +9,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 {
-     public class CurrencyMediator : Mediator<CurrencyView>
+     public sealed class CurrencyMediator : Mediator<CurrencyView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -46,10 +46,8 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
         #endregion
 
         #region SignalReceivers
-        private void OnRefreshCurrencyVisualSignal(RefreshCurrencyVisualSignal signal)
-        {
+        private void OnRefreshCurrencyVisualSignal(RefreshCurrencyVisualSignal signal) =>
             RefreshCurrencyVisual(signal.CurrencyType);
-        }
         #endregion
 
         #region ButtonReceivers
@@ -62,10 +60,8 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
         #endregion
 
         #region Executes
-        private void RefreshAllCurrencyVisual()
-        {
+        private void RefreshAllCurrencyVisual() =>
             _currencyModel.CurrencyValues.Keys.ToList().ForEach(RefreshCurrencyVisual);
-        }
         private void RefreshCurrencyVisual(CurrencyTypes currencyType)
         {
             int value = _currencyModel.CurrencyValues[currencyType];

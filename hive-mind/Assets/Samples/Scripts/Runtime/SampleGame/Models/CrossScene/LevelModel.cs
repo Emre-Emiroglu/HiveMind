@@ -4,7 +4,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossSc
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
 {
-    public class LevelModel : Model<LevelSettings>
+    public sealed class LevelModel : Model<LevelSettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/CrossScene/LevelSettings";
@@ -45,10 +45,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
 
             Save();
         }
-        public void Save()
-        {
-            ES3.Save(nameof(_levelPersistentData), _levelPersistentData, LevelPersistentDataPath);
-        }
+        public void Save() => ES3.Save(nameof(_levelPersistentData), _levelPersistentData, LevelPersistentDataPath);
         #endregion
     }
 }

@@ -3,7 +3,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Ga
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Game
 {
-    public class TutorialModel : Model<TutorialSettings>
+    public sealed class TutorialModel : Model<TutorialSettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/Game/TutorialSettings";
@@ -19,10 +19,8 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Game
         #endregion
 
         #region Constructor
-        public TutorialModel() : base(ResourcePath)
-        {
+        public TutorialModel() : base(ResourcePath) =>
             _isTutorialShowed = ES3.Load(nameof(_isTutorialShowed), TutorialPath, false);
-        }
         #endregion
 
         #region PostConstruct
@@ -33,6 +31,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Game
         public void SetTutorial(bool isActive)
         {
             _isTutorialShowed = isActive;
+            
             ES3.Save(nameof(_isTutorialShowed), _isTutorialShowed, TutorialPath);
         }
         #endregion

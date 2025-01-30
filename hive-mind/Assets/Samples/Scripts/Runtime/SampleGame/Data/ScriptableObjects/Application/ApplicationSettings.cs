@@ -3,7 +3,7 @@ using UnityEngine;
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Application
 {
     [CreateAssetMenu(fileName = "ApplicationSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/Application/ApplicationSettings")]
-    public class ApplicationSettings : ScriptableObject
+    public sealed class ApplicationSettings : ScriptableObject
     {
         #region Fields
         [Header("Application Settings Fields")]

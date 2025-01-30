@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Bootstrap
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class LogoHolderPanelView : View, IUIPanel
+    public sealed class LogoHolderPanelView : View, IUIPanel
     {
         #region Fields
         [Header("Logo Holder Panel View Fields")]

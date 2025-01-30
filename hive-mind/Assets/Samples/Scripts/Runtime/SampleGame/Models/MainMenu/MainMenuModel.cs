@@ -3,7 +3,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Ma
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.MainMenu
 {
-    public class MainMenuModel : Model<MainMenuSettings>
+    public sealed class MainMenuModel : Model<MainMenuSettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/MainMenu/MainMenuSettings";

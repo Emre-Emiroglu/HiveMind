@@ -5,7 +5,7 @@ using Lofelt.NiceVibrations;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene
 {
-    public class PlayHapticCommand : Command<PlayHapticSignal>
+    public sealed class PlayHapticCommand : Command<PlayHapticSignal>
     {
         #region ReadonlyFields
         private readonly HapticModel _hapticModel;

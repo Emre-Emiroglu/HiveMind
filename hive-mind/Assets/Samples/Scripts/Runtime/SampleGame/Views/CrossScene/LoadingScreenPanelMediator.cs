@@ -8,7 +8,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 {
-    public class LoadingScreenPanelMediator : Mediator<LoadingScreenPanelView>
+    public sealed class LoadingScreenPanelMediator : Mediator<LoadingScreenPanelView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -20,10 +20,8 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
         #endregion
 
         #region Constructor
-        public LoadingScreenPanelMediator(LoadingScreenPanelView view, SignalBus signalBus) : base(view)
-        {
+        public LoadingScreenPanelMediator(LoadingScreenPanelView view, SignalBus signalBus) : base(view) =>
             _signalBus = signalBus;
-        }
         #endregion
 
         #region PostConstruct
@@ -37,13 +35,12 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 
             _signalBus.Subscribe<ChangeLoadingScreenActivationSignal>(OnChangeLoadingScreenActivationSignal);
         }
-        public override void Dispose()
-        {
+        public override void Dispose() =>
             _signalBus.Unsubscribe<ChangeLoadingScreenActivationSignal>(OnChangeLoadingScreenActivationSignal);
-        }
         #endregion
 
         #region SignalReceivers
+        // ReSharper disable once AsyncVoidMethod
         private async void OnChangeLoadingScreenActivationSignal(ChangeLoadingScreenActivationSignal signal)
         {
             bool isActive = signal.IsActive;
@@ -51,13 +48,16 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
             if (isActive)
             {
                 ResetProgressBar();
+                
                 _loadOperation = signal.AsyncOperation;
+                
                 ChangePanelActivation(true);
                 WaitUntilSceneIsLoaded();
             }
             else
             {
                 await UniTask.WaitUntil(() => _loadingCompleted);
+                
                 ChangePanelActivation(false);
             }
         }
@@ -110,11 +110,9 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
                 Console.WriteLine(e);
             }
         }
-        private void LerpProgressBar(float targetProgress)
-        {
+        private void LerpProgressBar(float targetProgress) =>
             GetView.FillImage.fillAmount = Mathf.Lerp(GetView.FillImage.fillAmount, targetProgress,
                 Time.fixedDeltaTime * 10f);
-        }
         #endregion
     }
 }

@@ -6,7 +6,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
 {
-    public class GameExitCommand : Command<GameExitSignal>
+    public sealed class GameExitCommand : Command<GameExitSignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -17,7 +17,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
         #endregion
 
         #region Executes
-        public override void Execute(GameExitSignal signal) => _signalBus.Fire<LoadSceneSignal>(new(SceneID.MainMenu));
+        public override void Execute(GameExitSignal signal) => _signalBus.Fire(new LoadSceneSignal(SceneID.MainMenu));
         #endregion
     }
 }

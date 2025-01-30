@@ -9,7 +9,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
 {
-    public class TutorialPanelMediator : Mediator<TutorialPanelView>
+    public sealed class TutorialPanelMediator : Mediator<TutorialPanelView>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;

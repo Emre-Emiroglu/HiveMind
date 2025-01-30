@@ -36,10 +36,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene
         #endregion
 
         #region Constructor
-        public LoadSceneSignal(SceneID sceneId)
-        {
-            _sceneId = sceneId;
-        }
+        public LoadSceneSignal(SceneID sceneId) => _sceneId = sceneId;
         #endregion
     } // Has Command
     public readonly struct PlayAudioSignal
@@ -76,10 +73,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene
         #endregion
 
         #region Constructor
-        public PlayHapticSignal(HapticPatterns.PresetType hapticType)
-        {
-            _hapticType = hapticType;
-        }
+        public PlayHapticSignal(HapticPatterns.PresetType hapticType) => _hapticType = hapticType;
         #endregion
     } // Has Command
     public readonly struct ChangeCurrencySignal
@@ -116,10 +110,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene
         #endregion
 
         #region Constructor
-        public SpawnCurrencyTrailSignal(CurrencyTrailData currencyTrailData)
-        {
-            _currencyTrailData = currencyTrailData;
-        }
+        public SpawnCurrencyTrailSignal(CurrencyTrailData currencyTrailData) => _currencyTrailData = currencyTrailData;
         #endregion
     }
     public readonly struct RefreshCurrencyVisualSignal
@@ -133,10 +124,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene
         #endregion
 
         #region Constructor
-        public RefreshCurrencyVisualSignal(CurrencyTypes currencyType)
-        {
-            _currencyType = currencyType;
-        }
+        public RefreshCurrencyVisualSignal(CurrencyTypes currencyType) => _currencyType = currencyType;
         #endregion
     }
     public readonly struct SettingsButtonPressedSignal
@@ -150,10 +138,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene
         #endregion
 
         #region Constructor
-        public SettingsButtonPressedSignal(SettingsTypes settingsType)
-        {
-            _settingsType = settingsType;
-        }
+        public SettingsButtonPressedSignal(SettingsTypes settingsType) => _settingsType = settingsType;
         #endregion
     } // Has Command
     public readonly struct SettingsButtonRefreshSignal
@@ -167,10 +152,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene
         #endregion
 
         #region Constructor
-        public SettingsButtonRefreshSignal(SettingsTypes settingsType)
-        {
-            _settingsType = settingsType;
-        }
+        public SettingsButtonRefreshSignal(SettingsTypes settingsType) => _settingsType = settingsType;
         #endregion
     }
     public readonly struct ChangeUIPanelSignal
@@ -184,10 +166,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene
         #endregion
 
         #region Constructor
-        public ChangeUIPanelSignal(UIPanelTypes uiPanelType)
-        {
-            _uiPanelType = uiPanelType;
-        }
+        public ChangeUIPanelSignal(UIPanelTypes uiPanelType) => _uiPanelType = uiPanelType;
         #endregion
     }
 }

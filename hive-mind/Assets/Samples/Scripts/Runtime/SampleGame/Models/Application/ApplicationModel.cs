@@ -3,7 +3,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Ap
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Application
 {
-    public class ApplicationModel : Model<ApplicationSettings>
+    public sealed class ApplicationModel : Model<ApplicationSettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/Application/ApplicationSettings";

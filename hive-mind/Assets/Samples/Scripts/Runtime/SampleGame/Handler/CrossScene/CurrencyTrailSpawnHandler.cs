@@ -5,10 +5,11 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handler.CrossScene
 {
-    public class CurrencyTrailSpawnHandler : SpawnHandler<CurrencyModel, CurrencyTrailFactory>
+    public sealed class CurrencyTrailSpawnHandler : SpawnHandler<CurrencyModel, CurrencyTrailFactory>
     {
         #region Constructor
-        public CurrencyTrailSpawnHandler(SignalBus signalBus, CurrencyModel model, CurrencyTrailFactory factory) : base(signalBus, model, factory) => SetSubscriptions(true);
+        public CurrencyTrailSpawnHandler(SignalBus signalBus, CurrencyModel model, CurrencyTrailFactory factory) :
+            base(signalBus, model, factory) => SetSubscriptions(true);
         #endregion
 
         #region Dispose
@@ -16,7 +17,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handler.CrossScene
         #endregion
 
         #region Subscriptions
-        protected sealed override void SetSubscriptions(bool isSub)
+        protected override void SetSubscriptions(bool isSub)
         {
             if (isSub)
                 SignalBus.Subscribe<SpawnCurrencyTrailSignal>(OnSpawnCurrencyTrailSignal);

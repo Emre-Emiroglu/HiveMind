@@ -5,7 +5,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.MainMenu
 {
-    public class MainMenuMediationInstaller : Installer
+    public sealed class MainMenuMediationInstaller : Installer
     {
         #region Bindings
         public override void InstallBindings()

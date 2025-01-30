@@ -3,7 +3,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.MainMenu
 {
-    public class MainMenuMonoInstaller : MonoInstaller
+    public sealed class MainMenuMonoInstaller : MonoInstaller
     {
         #region Bindings
         public override void InstallBindings()
@@ -15,7 +15,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.MainMenu
         #endregion
 
         #region Cycle
-        public override void Start() => Container.Resolve<SignalBus>().Fire<InitializeMainMenuSignal>(new());
+        public override void Start() => Container.Resolve<SignalBus>().Fire(new InitializeMainMenuSignal());
         #endregion
     }
 }

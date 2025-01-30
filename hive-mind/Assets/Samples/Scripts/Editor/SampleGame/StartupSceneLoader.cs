@@ -43,46 +43,32 @@ namespace CodeCatGames.HiveMind.Samples.Editor.SampleGame
         #endregion
 
         #region Constructor
-        static StartupSceneLoader()
-        {
+        static StartupSceneLoader() =>
             EditorApplication.playModeStateChanged += EditorApplicationOnPlayModeStateChanged;
-        }
         #endregion
 
         #region MenuItems
         [MenuItem(LoadStartupSceneOnPlay, true)]
-        private static bool ShowLoadStartupSceneOnPlay()
-        {
-            return !ShouldLoadStartupScene;
-        }
+        private static bool ShowLoadStartupSceneOnPlay() => !ShouldLoadStartupScene;
         [MenuItem(LoadStartupSceneOnPlay)]
-        private static void EnableLoadStartupSceneOnPlay()
-        {
-            ShouldLoadStartupScene = true;
-        }
+        private static void EnableLoadStartupSceneOnPlay() => ShouldLoadStartupScene = true;
         [MenuItem(DontLoadStartupSceneOnPlay, true)]
-        private static bool ShowDoNotLoadStartupSceneOnPlay()
-        {
-            return ShouldLoadStartupScene;
-        }
+        private static bool ShowDoNotLoadStartupSceneOnPlay() => ShouldLoadStartupScene;
         [MenuItem(DontLoadStartupSceneOnPlay)]
-        private static void DisableDoNotLoadBootstrapSceneOnPlay()
-        {
-            ShouldLoadStartupScene = false;
-        }
+        private static void DisableDoNotLoadBootstrapSceneOnPlay() => ShouldLoadStartupScene = false;
         #endregion
 
         #region Executes
         private static void EditorApplicationOnPlayModeStateChanged(PlayModeStateChange playModeStateChange)
         {
-            if (!ShouldLoadStartupScene) return;
+            if (!ShouldLoadStartupScene)
+                return;
 
             if (_restartingToSwitchedScene) //error check as multiple starts and stops happening
             {
                 if (playModeStateChange == PlayModeStateChange.EnteredPlayMode)
-                {
                     _restartingToSwitchedScene = false;
-                }
+                
                 return;
             }
 
@@ -123,9 +109,7 @@ namespace CodeCatGames.HiveMind.Samples.Editor.SampleGame
             else if (playModeStateChange == PlayModeStateChange.EnteredEditMode)
             {
                 if (!string.IsNullOrEmpty(PreviousScene))
-                {
                     EditorSceneManager.OpenScene(PreviousScene);
-                }
             }
         }
         #endregion

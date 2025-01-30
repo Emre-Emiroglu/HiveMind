@@ -6,7 +6,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene
 {
-    public class SettingsButtonPressedCommand : Command<SettingsButtonPressedSignal>
+    public sealed class SettingsButtonPressedCommand : Command<SettingsButtonPressedSignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -39,7 +39,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScen
                     break;
             }
 
-            _signalBus.Fire<SettingsButtonRefreshSignal>(new(signal.SettingsType));
+            _signalBus.Fire(new SettingsButtonRefreshSignal(signal.SettingsType));
         }
         #endregion
     }

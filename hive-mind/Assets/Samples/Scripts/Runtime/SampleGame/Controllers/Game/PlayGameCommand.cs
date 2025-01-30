@@ -6,7 +6,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
 {
-    public class PlayGameCommand : Command<PlayGameSignal>
+    public sealed class PlayGameCommand : Command<PlayGameSignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -18,7 +18,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
 
         #region Executes
         public override void Execute(PlayGameSignal signal) =>
-            _signalBus.Fire<ChangeUIPanelSignal>(new(UIPanelTypes.InGamePanel));
+            _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.InGamePanel));
         #endregion
     }
 }

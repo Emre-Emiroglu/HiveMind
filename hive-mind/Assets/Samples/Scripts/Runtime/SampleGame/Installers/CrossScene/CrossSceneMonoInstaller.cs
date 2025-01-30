@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.CrossScene
 {
-    public class CrossSceneMonoInstaller : MonoInstaller
+    public sealed class CrossSceneMonoInstaller : MonoInstaller
     {
         #region Fields
         [Header("Factories Fields")]

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
 {
-    public class AudioModel : Model<AudioSettings>, IInitializable
+    public sealed class AudioModel : Model<AudioSettings>, IInitializable
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/CrossScene/AudioSettings";
@@ -14,13 +14,16 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
         private const string SoundParam = "SOUND_PARAM";
         #endregion
 
+        #region ReadonlyFields
+        private readonly AudioMixer _audioMixer;
+        #endregion
+
         #region Fields
         private bool _isSoundMuted;
         private bool _isMusicMuted;
         #endregion
 
         #region Getters
-        private AudioMixer _audioMixer;
         public bool IsSoundMuted => _isSoundMuted;
         public bool IsMusicMuted => _isMusicMuted;
         #endregion

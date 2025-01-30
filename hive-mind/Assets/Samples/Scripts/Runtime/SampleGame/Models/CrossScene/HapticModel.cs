@@ -3,7 +3,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Cr
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
 {
-    public class HapticModel : Model<HapticSettings>
+    public sealed class HapticModel : Model<HapticSettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/CrossScene/HapticSettings";
@@ -38,10 +38,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
             
             Save();
         }
-        public void Save()
-        {
-            ES3.Save(nameof(_isHapticMuted), _isHapticMuted, HapticPath);
-        }
+        public void Save() => ES3.Save(nameof(_isHapticMuted), _isHapticMuted, HapticPath);
         #endregion
     }
 }

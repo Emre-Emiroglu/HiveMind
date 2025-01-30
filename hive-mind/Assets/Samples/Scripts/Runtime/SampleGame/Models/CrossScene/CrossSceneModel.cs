@@ -3,7 +3,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Cr
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
 {
-    public class CrossSceneModel : Model<CrossSceneSettings>
+    public sealed class CrossSceneModel : Model<CrossSceneSettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/CrossScene/CrossSceneSettings";

@@ -3,7 +3,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Bo
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Bootstrap
 {
-    public class BootstrapModel : Model<BootstrapSettings>
+    public sealed class BootstrapModel : Model<BootstrapSettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/Bootstrap/BootstrapSettings";

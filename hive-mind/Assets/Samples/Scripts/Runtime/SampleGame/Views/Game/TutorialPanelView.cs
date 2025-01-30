@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class TutorialPanelView : View, IUIPanel
+    public sealed class TutorialPanelView : View, IUIPanel
     {
         #region Fields
         [Header("Tutorial Panel View Fields")]

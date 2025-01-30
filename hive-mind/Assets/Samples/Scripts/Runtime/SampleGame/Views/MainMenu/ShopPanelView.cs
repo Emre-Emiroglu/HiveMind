@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class ShopPanelView : View, IUIPanel
+    public sealed class ShopPanelView : View, IUIPanel
     {
         #region Fields
         [Header("Shop Panel View Fields")]

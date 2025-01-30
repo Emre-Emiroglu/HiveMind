@@ -3,7 +3,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
 {
-    public class BootstrapMediationInstaller : Installer
+    public sealed class BootstrapMediationInstaller : Installer
     {
         #region Bindings
         public override void InstallBindings()

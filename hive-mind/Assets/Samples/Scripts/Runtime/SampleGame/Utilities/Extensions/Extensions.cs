@@ -29,6 +29,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.Extensions
         #endregion
 
         #region Timeline
+        // ReSharper disable once AsyncVoidMethod
         public static async void TimelineReversePlay(this PlayableDirector timeline, Action reversePlayEnding = null)
         {
             DirectorUpdateMode defaultUpdateMode = timeline.timeUpdateMode;

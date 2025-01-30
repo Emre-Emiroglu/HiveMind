@@ -1,10 +1,12 @@
 using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Application;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Application;
+using UnityEngine;
+using Screen = UnityEngine.Device.Screen;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Application
 {
-    public class InitializeApplicationCommand : Command<InitializeApplicationSignal>
+    public sealed class InitializeApplicationCommand : Command<InitializeApplicationSignal>
     {
         #region ReadonlyFields
         private readonly ApplicationModel _applicationModel;
@@ -19,6 +21,8 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Applicati
         {
             UnityEngine.Application.targetFrameRate = _applicationModel.GetSettings.TargetFrameRate;
             UnityEngine.Application.runInBackground = _applicationModel.GetSettings.RunInBackground;
+
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
         #endregion
     }

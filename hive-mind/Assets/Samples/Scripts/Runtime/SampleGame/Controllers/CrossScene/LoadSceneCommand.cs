@@ -6,7 +6,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene
 {
-    public class LoadSceneCommand : Command<LoadSceneSignal>
+    public sealed class LoadSceneCommand : Command<LoadSceneSignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -21,7 +21,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScen
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)signal.SceneId);
 
-            _signalBus.Fire<ChangeLoadingScreenActivationSignal>(new(true, asyncOperation));
+            _signalBus.Fire(new ChangeLoadingScreenActivationSignal(true, asyncOperation));
         }
         #endregion
     }

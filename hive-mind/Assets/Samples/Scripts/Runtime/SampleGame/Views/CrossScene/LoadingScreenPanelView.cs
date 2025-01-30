@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class LoadingScreenPanelView : View, IUIPanel
+    public sealed class LoadingScreenPanelView : View, IUIPanel
     {
         #region Fields
         [Header("Logo Holder Panel View Fields")]

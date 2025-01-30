@@ -4,7 +4,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Game
 {
-    public class GameSignalInstaller : Installer
+    public sealed class GameSignalInstaller : Installer
     {
         #region Bindings
         public override void InstallBindings()

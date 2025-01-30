@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
 {
-    public class CurrencyTrailMediator : MonoBehaviour, IPoolable<CurrencyTrailData, IMemoryPool>
+    public sealed class CurrencyTrailMediator : MonoBehaviour, IPoolable<CurrencyTrailData, IMemoryPool>
     {
         #region Injects
         private SignalBus _signalBus;
@@ -37,10 +37,7 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
             SetVisual(data);
             PlayTween(data);
         }
-        public void OnDespawned()
-        {
-            _memoryPool = null;
-        }
+        public void OnDespawned() => _memoryPool = null;
         #endregion
 
         #region Executes
@@ -53,11 +50,9 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
             
             _view.AmountText.SetText($"{data.Amount}x");
         }
-        private void PlayTween(CurrencyTrailData data)
-        {
+        private void PlayTween(CurrencyTrailData data) =>
             Tween.Position(transform, data.TargetPosition, data.Duration, data.Ease)
                 .OnComplete(() => TweenCompleteCallback(data));
-        }
         private void TweenCompleteCallback(CurrencyTrailData data)
         {
             _signalBus.Fire(new ChangeCurrencySignal(data.CurrencyType, data.Amount, false));

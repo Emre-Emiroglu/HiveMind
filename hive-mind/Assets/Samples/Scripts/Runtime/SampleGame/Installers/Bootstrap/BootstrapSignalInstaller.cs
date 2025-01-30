@@ -4,7 +4,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
 {
-    public class BootstrapSignalInstaller : Installer
+    public sealed class BootstrapSignalInstaller : Installer
     {
         #region Bindings
         public override void InstallBindings()
@@ -13,7 +13,8 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
 
             Container.BindInterfacesAndSelfTo<InitializeBootstrapCommand>().AsSingle().NonLazy();
 
-            Container.BindSignal<InitializeBootstrapSignal>().ToMethod<InitializeBootstrapCommand>((x, s) => x.Execute(s)).FromResolve();
+            Container.BindSignal<InitializeBootstrapSignal>()
+                .ToMethod<InitializeBootstrapCommand>((x, s) => x.Execute(s)).FromResolve();
         }
         #endregion
     }

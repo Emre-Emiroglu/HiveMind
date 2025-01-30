@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
 {
-    public class GameOverCommand : Command<GameOverSignal>
+    public sealed class GameOverCommand : Command<GameOverSignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -25,10 +25,11 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
         #region Executes
         public override void Execute(GameOverSignal signal)
         {
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Sound, MusicTypes.BackgroundMusic, signal.IsSuccess ? SoundTypes.GameWin : SoundTypes.GameFail));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic,
+                signal.IsSuccess ? SoundTypes.GameWin : SoundTypes.GameFail));
 
-            _signalBus.Fire<ChangeUIPanelSignal>(new(UIPanelTypes.GameOverPanel));
-            _signalBus.Fire<SetupGameOverPanelSignal>(new(signal.IsSuccess));
+            _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.GameOverPanel));
+            _signalBus.Fire(new SetupGameOverPanelSignal(signal.IsSuccess));
 
             _levelModel.UpdateCurrentLevelIndex(false, signal.IsSuccess ? 1 : 0);
         }

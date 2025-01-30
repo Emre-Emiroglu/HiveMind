@@ -6,7 +6,7 @@ using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.MainMenu
 {
-    public class InitializeMainMenuCommand : Command<InitializeMainMenuSignal>
+    public sealed class InitializeMainMenuCommand : Command<InitializeMainMenuSignal>
     {
         #region ReadonlyFields
         private readonly SignalBus _signalBus;
@@ -19,9 +19,9 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.MainMenu
         #region Executes
         public override void Execute(InitializeMainMenuSignal signal)
         {
-            _signalBus.Fire<ChangeLoadingScreenActivationSignal>(new(false, null));
-            _signalBus.Fire<ChangeUIPanelSignal>(new(UIPanelTypes.StartPanel));
-            _signalBus.Fire<PlayAudioSignal>(new(AudioTypes.Music, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+            _signalBus.Fire(new ChangeLoadingScreenActivationSignal(false, null));
+            _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.StartPanel));
+            _signalBus.Fire(new PlayAudioSignal(AudioTypes.Music, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
         }
         #endregion
     }

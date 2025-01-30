@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene
 {
-    public struct CurrencyTrailData
+    public readonly struct CurrencyTrailData
     {
         #region ReadonlyFields
         private readonly CurrencyTypes _currencyType;

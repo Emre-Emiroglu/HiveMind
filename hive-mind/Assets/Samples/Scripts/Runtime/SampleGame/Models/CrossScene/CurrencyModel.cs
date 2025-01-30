@@ -5,7 +5,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
 {
-    public class CurrencyModel : Model<CurrencySettings>
+    public sealed class CurrencyModel : Model<CurrencySettings>
     {
         #region Constants
         private const string ResourcePath = "Samples/SampleGame/CrossScene/CurrencySettings";
