@@ -6,8 +6,59 @@
   <component name="ChangeListManager">
     <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/package.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/Runtime/MVC/View/View.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Runtime/MVC/View/View.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Easy Save 3/Resources/ES3/ES3Defaults.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dependincies/Easy Save 3/Resources/ES3/ES3Defaults.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Documentation.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Documentation.pdf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/DrawKeyAsPropertyAttribute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/DrawKeyAsPropertyAttribute.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/Constants.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/Constants.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/Definer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/Definer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/DictionaryPropertyDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/DictionaryPropertyDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/PreferencesWindow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/PreferencesWindow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/RotaryHeart.SerializableDictionaryLite.Editor.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/RotaryHeart.SerializableDictionaryLite.Editor.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/SupportWindow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/Editor/SupportWindow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/IDAttribute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/IDAttribute.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/References.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/References/References.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/References/References.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/References/RequiredReferences.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/References/RequiredReferences.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/ReorderableList.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/ReorderableList/ReorderableList.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/ReorderableList/ReorderableList.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/RotaryHeart.SerializableDictionaryLite.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/RotaryHeart.SerializableDictionaryLite.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/SerializableDictionaryBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/SerializableDictionaryLite/SerializableDictionaryBase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/Shared.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/Shared/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/Shared/Editor/BaseSupportWindow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/Shared/Editor/BaseSupportWindow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/Shared/Editor/Definer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/Shared/Editor/Definer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/Shared/Editor/RotaryHeart.Editor.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dependincies/Rotary Heart/Shared/Editor/RotaryHeart.Editor.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Samples/SampleGame/CrossScene/AudioSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Samples/SampleGame/CrossScene/AudioSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Samples/SampleGame/CrossScene/CurrencySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Samples/SampleGame/CrossScene/CurrencySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/CrossScene/Audio/AudioView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Prefabs/SampleGame/CrossScene/Audio/AudioView.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/CodeCatGames.HiveMind.Samples.Runtime.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/CodeCatGames.HiveMind.Samples.Runtime.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ScriptableObjects/CrossScene/AudioSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ScriptableObjects/CrossScene/AudioSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ScriptableObjects/CrossScene/CurrencySettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ScriptableObjects/CrossScene/CurrencySettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/AudioView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/AudioView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/CurrencyView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/CurrencyView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/SettingsButtonView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/SettingsButtonView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,6 +157,7 @@
       <workItem from="1738239189962" duration="446000" />
       <workItem from="1738239734046" duration="292000" />
       <workItem from="1738240114246" duration="2325000" />
+      <workItem from="1738331333417" duration="622000" />
     </task>
     <servers />
   </component>

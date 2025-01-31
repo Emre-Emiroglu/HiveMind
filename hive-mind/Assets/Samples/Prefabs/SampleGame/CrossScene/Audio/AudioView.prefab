@@ -78,34 +78,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07cc8c1588e84445ae7722f0eda8cc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSources:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues: 0000000001000000
-    _keys: 0000000001000000
-    _values:
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
     - {fileID: 981444976310190836}
     - {fileID: 52447538166106480}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _audioSources
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene.AudioTypes,
+        CodeCatGames.HiveMind.Samples.Runtime],[UnityEngine.AudioSource, UnityEngine.AudioModule]],
+        mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene.AudioTypes,
+        CodeCatGames.HiveMind.Samples.Runtime]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &3617651634142643977
 GameObject:
   m_ObjectHideFlags: 0

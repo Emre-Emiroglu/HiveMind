@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
-using RotaryHeart.Lib.SerializableDictionary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,18 +11,13 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
     {
         #region Fields
         [Header("Currency View Fields")]
-        [SerializeField] private CurrencyTextsMap currencyTexts;
-        [SerializeField] private CurrencyButtonsMap currencyButtons;
+        [SerializeField] private Dictionary<CurrencyTypes, TextMeshProUGUI> _currencyTexts;
+        [SerializeField] private Dictionary<CurrencyTypes, Button> _currencyButtons;
         #endregion
 
         #region Getters
-        public Dictionary<CurrencyTypes, TextMeshProUGUI> CurrencyTexts => currencyTexts.Clone();
-        public Dictionary<CurrencyTypes, Button> CurrencyButtons => currencyButtons.Clone();
+        public Dictionary<CurrencyTypes, TextMeshProUGUI> CurrencyTexts => _currencyTexts;
+        public Dictionary<CurrencyTypes, Button> CurrencyButtons => _currencyButtons;
         #endregion
     }
-    
-    [Serializable]
-    public sealed class CurrencyTextsMap : SerializableDictionaryBase<CurrencyTypes, TextMeshProUGUI> { }
-    [Serializable]
-    public sealed class CurrencyButtonsMap : SerializableDictionaryBase<CurrencyTypes, Button> { }
 }

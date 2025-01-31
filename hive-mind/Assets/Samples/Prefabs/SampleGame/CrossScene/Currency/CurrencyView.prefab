@@ -172,60 +172,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55788549c7204ba89979d67719b7edf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currencyTexts:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues: 00000000
-    _keys: 00000000
-    _values:
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
     - {fileID: 5361205290379058306}
-  currencyButtons:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues: 00000000
-    _keys: 00000000
-    _values:
     - {fileID: 1678547908656029}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _currencyTexts
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene.CurrencyTypes,
+        CodeCatGames.HiveMind.Samples.Runtime],[TMPro.TextMeshProUGUI, Unity.TextMeshPro]],
+        mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene.CurrencyTypes,
+        CodeCatGames.HiveMind.Samples.Runtime]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _currencyButtons
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene.CurrencyTypes,
+        CodeCatGames.HiveMind.Samples.Runtime],[UnityEngine.UI.Button, UnityEngine.UI]],
+        mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 1
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!95 &7674572017609673808
 Animator:
   serializedVersion: 5
