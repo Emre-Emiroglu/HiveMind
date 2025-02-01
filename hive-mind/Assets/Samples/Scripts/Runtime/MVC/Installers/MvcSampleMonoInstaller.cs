@@ -12,8 +12,6 @@ namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Installers
         #region Bindings
         public override void InstallBindings()
         {
-            SignalBusInstaller.Install(Container);
-            
             Container.BindInterfacesAndSelfTo<MvcSampleModel>().AsSingle().NonLazy();
             
             Container.Bind<ColorChangerView>().FromComponentsInHierarchy().AsSingle().NonLazy();
