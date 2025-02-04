@@ -32,8 +32,8 @@ This project is developed using Unity version 2022.3.37f1.
   * Command: If the Command class has a signal structure attached to it and this signal is fired, it runs the Execute method. Thanks to the Command class, MVC architectural pattern and signal-oriented development are applied together.
   * ViewMediatorInstaller: It is a Zenject Installer specially developed to ensure that the one-to-one relationship between the Mediator class and the View component can be implemented in cases where there is more than one View component in the game scene.
 * Pro Debug: Contains classes that provides writing log messages in color and different formats.
-  * Colorize: This class provides log messages to be written in color.
-  * TextFormat: This class provides log messages to be written in bold or italic formats.
+  * Colorize: This class is a utility for coloring text in Unity's Debug.Log messages and other text outputs, supporting both RGB and HEX color formats.
+  * TextFormat: This class is a utility for formatting text in Unity's Debug.Log messages and other text outputs, allowing text to be bold or italic.
 * Utilities: Contains utility classes that are useful and frequently needed in game development processes.
   * Extensions: This class adds extension methods to the Transform component in Unity, enabling axis-based position setting, looking at a target along a specific axis, gradual look direction adjustment, hierarchical object searching, and isometric transformation.
   * FPSDisplay: This class is a Unity component that displays the FPS (frames per second) value on the screen and updates it at set intervals for performance monitoring.
