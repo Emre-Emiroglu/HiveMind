@@ -228,6 +228,22 @@ This project is developed using Unity version 2022.3.37f1.
         }
     }
     ```
+    ```csharp
+    namespace CodeCatGames.HiveMind.Core.Runtime.Helpers.Enums
+    {
+        public enum PiecesFindingTypes
+        {
+            Inspector,
+            Physic
+        }
+    
+        public enum RefreshTypes
+        {
+            NonSmooth,
+            Smooth
+        }
+    }
+    ```
   * Follower: This component manages a tracking system that allows an object to follow a designated target in various position and rotation spaces, offering different smoothing (lerp) options.
     ```csharp
     using CodeCatGames.HiveMind.Core.Runtime.Helpers.Enums;
@@ -411,6 +427,27 @@ This project is developed using Unity version 2022.3.37f1.
         }
     }
     ```
+    ```csharp
+    using System;
+    
+    namespace CodeCatGames.HiveMind.Core.Runtime.Helpers.Enums
+    {
+        [Flags]
+        public enum FollowTypes
+        {
+            None = 0,
+            Position = 1,
+            Rotation = 2,
+            Everything = 3,
+        }
+    
+        public enum LerpTypes
+        {
+            Lerp,
+            NonLerp
+        }
+    }
+    ```
   * Physics: These components detects and handles physical collisions and contacts, managing enter, stay, and exit events for specified objects.
     ```csharp
     using System;
@@ -573,6 +610,23 @@ This project is developed using Unity version 2022.3.37f1.
                     ContactStatus(ContactStatusTypes.Exit, contactCollision.gameObject.tag, contactCollision);
             }
             #endregion
+        }
+    }
+    ```
+    ```csharp
+    namespace CodeCatGames.HiveMind.Core.Runtime.Helpers.Enums
+    {
+        public enum ContactTypes
+        {
+            Trigger,
+            Collision
+        }
+    
+        public enum ContactStatusTypes
+        {
+            Enter,
+            Stay,
+            Exit
         }
     }
     ```
