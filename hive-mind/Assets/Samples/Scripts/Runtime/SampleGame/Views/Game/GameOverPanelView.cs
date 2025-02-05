@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
-using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.UI;
-using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.UI;
+using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene;
 using UnityEngine;
 using UnityEngine.UI;
 

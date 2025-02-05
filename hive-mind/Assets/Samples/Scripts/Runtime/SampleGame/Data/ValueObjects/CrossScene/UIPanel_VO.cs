@@ -3,7 +3,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.UI
+namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene
 {
     [Serializable]
     public struct UIPanelVo

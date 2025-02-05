@@ -2007,6 +2007,36 @@ This project is developed using Unity version 2022.3.37f1.
     }
     ```
 * SampleGame: It uses HiveMind's components and classes, as well as its own components and classes. It is a template that shows how to develop a game with HiveMind.
+  * StartupSceneLoader:
+  * Application:
+    * Installers:
+    * Models & Data:
+    * Commands & Signals:
+  * CrossScene:
+    * Installers:
+    * Factories:
+    * Handlers:
+    * Enums:
+    * Models & Data:
+    * View & Mediators:
+    * Commands & Signals:
+    * Interfaces:
+    * Utilities:
+  * Bootstrap:
+    * Installers:
+    * Models & Data:
+    * View & Mediators:
+    * Commands & Signals:
+  * MainMenu:
+    * Installers:
+    * Models & Data:
+    * View & Mediators:
+    * Commands & Signals:
+  * Game:
+    * Installers:
+    * Models & Data:
+    * View & Mediators:
+    * Commands & Signals:
 
 ## Acknowledgments
 Special thanks to the developers of Zenject, UniTask, Prime Tween, Easy Save 3, Feel/Nice Vibrations, Sirenix/Odin Inspector and the Unity community for their invaluable resources and tools.

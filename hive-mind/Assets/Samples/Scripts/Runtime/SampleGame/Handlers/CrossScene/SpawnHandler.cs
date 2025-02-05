@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handler
+namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handlers.CrossScene
 {
     public abstract class SpawnHandler<TModel, TFactory> : IDisposable
          where TModel : class

@@ -3,9 +3,9 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.Extensions
+namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene
 {
-    public static class Extensions
+    public static class UIExtensions
     {
         #region UIPanel
         public static void ChangeUIPanelCanvasGroupActivation(this CanvasGroup canvasGroup, bool isActive)

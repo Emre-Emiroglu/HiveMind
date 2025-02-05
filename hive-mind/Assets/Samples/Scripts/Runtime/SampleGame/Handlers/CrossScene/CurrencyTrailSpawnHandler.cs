@@ -1,9 +1,9 @@
-﻿using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Factories;
+﻿using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Factories.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
 using Zenject;
 
-namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handler.CrossScene
+namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handlers.CrossScene
 {
     public sealed class CurrencyTrailSpawnHandler : SpawnHandler<CurrencyModel, CurrencyTrailFactory>
     {

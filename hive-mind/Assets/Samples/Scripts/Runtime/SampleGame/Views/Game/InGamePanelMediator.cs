@@ -4,7 +4,7 @@ using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
-using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.Extensions;
+using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
 using Lofelt.NiceVibrations;
 using PrimeTween;
 using Zenject;

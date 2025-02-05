@@ -1,6 +1,6 @@
 using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Bootstrap;
-using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.Extensions;
+using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Bootstrap
 {

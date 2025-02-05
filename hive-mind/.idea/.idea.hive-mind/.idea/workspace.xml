@@ -4,7 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="" />
+    <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Factories/CrossScene.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ValueObjects/UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ValueObjects/UI/UIPanel_VO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ValueObjects/CrossScene/UIPanel_VO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ValueObjects/UI/UIPanel_VO.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Data/ValueObjects/CrossScene/UIPanel_VO.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Factories/CurrencyTrailFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Factories/CrossScene/CurrencyTrailFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Factories/CurrencyTrailFactory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Factories/CrossScene/CurrencyTrailFactory.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handler.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handlers.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handler/CrossScene.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handlers/CrossScene.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handler/CrossScene/CurrencyTrailSpawnHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handlers/CrossScene/CurrencyTrailSpawnHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handler/CrossScene/CurrencyTrailSpawnHandler.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handlers/CrossScene/CurrencyTrailSpawnHandler.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handler/SpawnHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handlers/CrossScene/SpawnHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handler/SpawnHandler.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Handlers/CrossScene/SpawnHandler.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Installers/CrossScene/CrossSceneMonoInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Installers/CrossScene/CrossSceneMonoInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Interfaces/UI.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Interfaces/CrossScene.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Interfaces/UI/IUIPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Interfaces/CrossScene/IUIPanel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Interfaces/UI/IUIPanel.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Interfaces/CrossScene/IUIPanel.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Utilities/Extensions.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Utilities/CrossScene.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Utilities/Extensions/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Utilities/CrossScene/UIExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Utilities/Extensions/Extensions.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Utilities/CrossScene/UIExtensions.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Bootstrap/LogoHolderPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Bootstrap/LogoHolderPanelMediator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Bootstrap/LogoHolderPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Bootstrap/LogoHolderPanelView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/LoadingScreenPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/LoadingScreenPanelMediator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/LoadingScreenPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/CrossScene/LoadingScreenPanelView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelMediator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/GameOverPanelView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/InGamePanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/InGamePanelMediator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/InGamePanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/InGamePanelView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/TutorialPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/TutorialPanelMediator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/TutorialPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/Game/TutorialPanelView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/ShopPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/ShopPanelMediator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/ShopPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/ShopPanelView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/StartPanelMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/StartPanelMediator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/StartPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Scripts/Runtime/SampleGame/Views/MainMenu/StartPanelView.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,6 +141,7 @@
       <workItem from="1738579289281" duration="14748000" />
       <workItem from="1738666855751" duration="652000" />
       <workItem from="1738674813887" duration="7168000" />
+      <workItem from="1738751403417" duration="8103000" />
     </task>
     <servers />
   </component>

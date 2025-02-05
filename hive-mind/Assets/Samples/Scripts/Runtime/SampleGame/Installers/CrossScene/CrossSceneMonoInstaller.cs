@@ -1,6 +1,6 @@
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
-using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Factories;
-using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handler.CrossScene;
+using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Factories.CrossScene;
+using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handlers.CrossScene;
 using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene;
 using UnityEngine;
 using Zenject;
