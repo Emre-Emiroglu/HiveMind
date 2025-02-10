@@ -1666,7 +1666,7 @@ This project is developed using Unity version 2022.3.37f1.
     }
     ```
 * MVC: Contains components and classes that demonstrating how to use MVC components and classes.
-  * Models & Data: These components and classes demonstrating how to use the Model class.
+  * Models & Data: This component and class demonstrating how to use the Model class.
     ```csharp
     using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
     using CodeCatGames.HiveMind.Samples.Runtime.MVC.Data.ScriptableObjects;
@@ -2007,36 +2007,36 @@ This project is developed using Unity version 2022.3.37f1.
     }
     ```
 * SampleGame: It uses HiveMind's components and classes, as well as its own components and classes. It is a template that shows how to develop a game with HiveMind.
-  * StartupSceneLoader:
-  * Application:
-    * Installers:
-    * Models & Data:
-    * Commands & Signals:
-  * CrossScene:
-    * Installers:
-    * Factories:
-    * Handlers:
-    * Enums:
-    * Models & Data:
-    * View & Mediators:
-    * Commands & Signals:
-    * Interfaces:
-    * Utilities:
-  * Bootstrap:
-    * Installers:
-    * Models & Data:
-    * View & Mediators:
-    * Commands & Signals:
-  * MainMenu:
-    * Installers:
-    * Models & Data:
-    * View & Mediators:
-    * Commands & Signals:
-  * Game:
-    * Installers:
-    * Models & Data:
-    * View & Mediators:
-    * Commands & Signals:
+  * StartupSceneLoader: This class automatically loads the startup scene when playing the game in the Unity editor and returns to the previous scene after exiting play mode.
+  * Application: Contains components and classes of application management. Located in Zenject's ProjectContext.
+    * Installers: These components and classes perform the Zenject bindings required for application management.
+    * Models & Data: This component and class contains the data needed in application management.
+    * Commands & Signals: These classes and structs are entry and exit points of the application.
+  * CrossScene: Contains components and classes that may need to be used in all scenes of the SampleGame. Located in Zenject's ProjectContext.
+    * Installers: These components and classes perform the Zenject binding required for CrossScene's contents.
+    * Factories: These classes are the factory and pool classes required to spawn CurrencyTrail.
+    * Handlers: These classes base and specialized handler classes that manage in-game object spawning processes based on signals.
+    * Enums: These enums are used in CrossScene's components and classes.
+    * Models & Data: These components, classes, and structs contains the data needed for CrossScene's contents.
+    * View & Mediators: These components and classes contains the views and mediation operations of CrossScene's content.
+    * Commands & Signals: These classes and signals provide signal-driven implementation of CrossScene's contents.
+    * Interfaces: This interface is for UIPanels in CrossScene.
+    * Utilities: This class is for UIPanels in CrossScene.
+  * Bootstrap: Contains components and classes for SampleGame's splash screen.
+    * Installers: These components and classes perform the Zenject bindings required for SampleGame's splash screen.
+    * Models & Data: This component and class contains the data needed for SampleGame's splash screen.
+    * View & Mediators: This component and class contains the views and mediation operations of SampleGame's splash screen.
+    * Commands & Signals: This class and signal is entry point of SampleGame's splash screen.
+  * MainMenu: Contains the components and classes required for MainMenu operations.
+    * Installers: These components and classes perform the Zenject binding required for MainMenu operations.
+    * Models & Data: This component and class contains the data needed for MainMenu operations.
+    * View & Mediators: These components and classes contains the views and mediation operations of MainMenu.
+    * Commands & Signals: This class and signal is entry point of MainMenu.
+  * Game: Contains the necessary gameplay components and classes for a sample game.
+    * Installers: These components and classes perform the Zenject binding required for gameplay.
+    * Models & Data: These components and classes contains the data needed for gameplay.
+    * View & Mediators: These components and classes contains the views and mediation operations of gameplay.
+    * Commands & Signals: These classes and structures provide entry and exit points to gameplay.
 
 ## Acknowledgments
 Special thanks to the developers of Zenject, UniTask, Prime Tween, Easy Save 3, Feel/Nice Vibrations, Sirenix/Odin Inspector and the Unity community for their invaluable resources and tools.
