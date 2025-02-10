@@ -1668,6 +1668,27 @@ This project is developed using Unity version 2022.3.37f1.
 * MVC: Contains components and classes that demonstrating how to use MVC components and classes.
   * Models & Data: This component and class demonstrating how to use the Model class.
     ```csharp
+    using UnityEngine;
+
+    namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Data.ScriptableObjects
+    {
+        [CreateAssetMenu(fileName = "MvcSampleSettings", menuName = "CodeCatGames/HiveMind/Samples/MVC/MvcSampleSettings", order = 0)]
+        public sealed class MvcSampleSettings : ScriptableObject
+        {
+            #region Fields
+            [Header("Mvc Sample Settings Fields")]
+            [SerializeField] private Color[] colors;
+            [SerializeField] private string[] colorNames;
+            #endregion
+    
+            #region Getters
+            public Color[] Colors => colors;
+            public string[] ColorNames => colorNames;
+            #endregion
+        }
+    }
+    ```
+    ```csharp
     using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
     using CodeCatGames.HiveMind.Samples.Runtime.MVC.Data.ScriptableObjects;
     
@@ -1685,27 +1706,6 @@ This project is developed using Unity version 2022.3.37f1.
             
             #region PostConstruct
             public override void PostConstruct() { }
-            #endregion
-        }
-    }
-    ```
-    ```csharp
-    using UnityEngine;
-
-    namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Data.ScriptableObjects
-    {
-        [CreateAssetMenu(fileName = "MvcSampleSettings", menuName = "CodeCatGames/HiveMind/Samples/MVC/MvcSampleSettings", order = 0)]
-        public sealed class MvcSampleSettings : ScriptableObject
-        {
-            #region Fields
-            [Header("Mvc Sample Settings Fields")]
-            [SerializeField] private Color[] colors;
-            [SerializeField] private string[] colorNames;
-            #endregion
-    
-            #region Getters
-            public Color[] Colors => colors;
-            public string[] ColorNames => colorNames;
             #endregion
         }
     }
@@ -2008,35 +2008,3243 @@ This project is developed using Unity version 2022.3.37f1.
     ```
 * SampleGame: It uses HiveMind's components and classes, as well as its own components and classes. It is a template that shows how to develop a game with HiveMind.
   * StartupSceneLoader: This class automatically loads the startup scene when playing the game in the Unity editor and returns to the previous scene after exiting play mode.
+    ```csharp
+    using UnityEditor;
+    using UnityEditor.SceneManagement;
+    using UnityEngine.SceneManagement;
+    
+    namespace CodeCatGames.HiveMind.Samples.Editor.SampleGame
+    {
+        [InitializeOnLoad]
+        public class StartupSceneLoader
+        {
+            #region Constants
+            private const string PreviousSceneKey = "PreviousScene";
+            private const string ShouldLoadStartupSceneKey = "LoadStartupScene";
+            private const string LoadStartupSceneOnPlay = "HiveMind/Samples/SampleGame/Load Startup Scene On Play";
+            private const string DontLoadStartupSceneOnPlay = "HiveMind/Samples/SampleGame/Don't Load Startup Scene On Play";
+            #endregion
+    
+            #region Fields
+            private static bool _restartingToSwitchedScene;
+            #endregion
+    
+            #region Getters
+            private static string StartupScene => EditorBuildSettings.scenes[0].path;
+            #endregion
+    
+            #region Props
+            private static string PreviousScene
+            {
+                get => EditorPrefs.GetString(PreviousSceneKey);
+                set => EditorPrefs.SetString(PreviousSceneKey, value);
+            }
+            private static bool ShouldLoadStartupScene
+            {
+                get
+                {
+                    if (!EditorPrefs.HasKey(ShouldLoadStartupSceneKey))
+                        EditorPrefs.SetBool(ShouldLoadStartupSceneKey, true);
+    
+                    return EditorPrefs.GetBool(ShouldLoadStartupSceneKey);
+                }
+    
+                set => EditorPrefs.SetBool(ShouldLoadStartupSceneKey, value);
+            }
+            #endregion
+    
+            #region Constructor
+            static StartupSceneLoader() =>
+                EditorApplication.playModeStateChanged += EditorApplicationOnPlayModeStateChanged;
+            #endregion
+    
+            #region MenuItems
+            [MenuItem(LoadStartupSceneOnPlay, true)]
+            private static bool ShowLoadStartupSceneOnPlay() => !ShouldLoadStartupScene;
+            [MenuItem(LoadStartupSceneOnPlay)]
+            private static void EnableLoadStartupSceneOnPlay() => ShouldLoadStartupScene = true;
+            [MenuItem(DontLoadStartupSceneOnPlay, true)]
+            private static bool ShowDoNotLoadStartupSceneOnPlay() => ShouldLoadStartupScene;
+            [MenuItem(DontLoadStartupSceneOnPlay)]
+            private static void DisableDoNotLoadBootstrapSceneOnPlay() => ShouldLoadStartupScene = false;
+            #endregion
+    
+            #region Executes
+            private static void EditorApplicationOnPlayModeStateChanged(PlayModeStateChange playModeStateChange)
+            {
+                if (!ShouldLoadStartupScene)
+                    return;
+    
+                if (_restartingToSwitchedScene) //error check as multiple starts and stops happening
+                {
+                    if (playModeStateChange == PlayModeStateChange.EnteredPlayMode)
+                        _restartingToSwitchedScene = false;
+                    
+                    return;
+                }
+    
+                if (playModeStateChange == PlayModeStateChange.ExitingEditMode)
+                {
+                    // cache previous scene to return to it after play session ends
+                    PreviousScene = SceneManager.GetActiveScene().path;
+    
+                    if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                    {
+                        // user either hit "Save" or "Don't Save"; open bootstrap scene
+    
+                        if (!string.IsNullOrEmpty(StartupScene) && System.Array.Exists(EditorBuildSettings.scenes, scene => scene.path == StartupScene))
+                        {
+                            Scene activeScene = SceneManager.GetActiveScene();
+    
+                            _restartingToSwitchedScene = activeScene.path == string.Empty || !StartupScene.Contains(activeScene.path);
+    
+                            // only switch if editor is in an empty scene or active scene is not startup scene
+                            if (_restartingToSwitchedScene)
+                            {
+                                EditorApplication.isPlaying = false;
+    
+                                // scene is included in build settings; open it
+                                EditorSceneManager.OpenScene(StartupScene);
+    
+                                EditorApplication.isPlaying = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // user either hit "Cancel" or exited window; don't open startup scene & return to editor
+                        EditorApplication.isPlaying = false;
+                    }
+                }
+                //return to last open scene
+                else if (playModeStateChange == PlayModeStateChange.EnteredEditMode)
+                {
+                    if (!string.IsNullOrEmpty(PreviousScene))
+                        EditorSceneManager.OpenScene(PreviousScene);
+                }
+            }
+            #endregion
+        }
+    }
+    ```
   * Application: Contains components and classes of application management. Located in Zenject's ProjectContext.
     * Installers: These components and classes perform the Zenject bindings required for application management.
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Application;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Application
+      {
+          public sealed class ApplicationMonoInstaller : MonoInstaller
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  SignalBusInstaller.Install(Container);
+      
+                  Container.Install<ApplicationModelInstaller>();
+                  Container.Install<ApplicationSignalInstaller>();
+              }
+              #endregion
+      
+              #region Cycle
+              public override void Start() => Container.Resolve<SignalBus>().Fire(new InitializeApplicationSignal());
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Application;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Application
+      {
+          public sealed class ApplicationModelInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings() =>
+                  Container.BindInterfacesAndSelfTo<ApplicationModel>().AsSingle().NonLazy();
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Application;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Application;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Application
+      {
+          public sealed class ApplicationSignalInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.DeclareSignal<InitializeApplicationSignal>();
+                  Container.DeclareSignal<AppQuitSignal>();
+      
+                  Container.BindInterfacesAndSelfTo<InitializeApplicationCommand>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<AppQuitCommand>().AsSingle().NonLazy();
+      
+                  Container.BindSignal<InitializeApplicationSignal>()
+                      .ToMethod<InitializeApplicationCommand>((x, s) => x.Execute(s)).FromResolve();
+                  Container.BindSignal<AppQuitSignal>().ToMethod<AppQuitCommand>((x, s) => x.Execute(s)).FromResolve();
+              }
+              #endregion
+          }
+      }
+      ```
     * Models & Data: This component and class contains the data needed in application management.
+      ```csharp
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Application
+      {
+          [CreateAssetMenu(fileName = "ApplicationSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/Application/ApplicationSettings")]
+          public sealed class ApplicationSettings : ScriptableObject
+          {
+              #region Fields
+              [Header("Application Settings Fields")]
+              [Range(30, 240)][SerializeField] private int targetFrameRate;
+              [SerializeField] private bool runInBackground;
+              #endregion
+      
+              #region Getters
+              public int TargetFrameRate => targetFrameRate;
+              public bool RunInBackground => runInBackground;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Application;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Application
+      {
+          public sealed class ApplicationModel : Model<ApplicationSettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/Application/ApplicationSettings";
+              #endregion
+      
+              #region Constructor
+              public ApplicationModel() : base(ResourcePath) { }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+          }
+      }
+      ```
     * Commands & Signals: These classes and structs are entry and exit points of the application.
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Application;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Application;
+      using UnityEngine;
+      using Screen = UnityEngine.Device.Screen;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Application
+      {
+          public sealed class InitializeApplicationCommand : Command<InitializeApplicationSignal>
+          {
+              #region ReadonlyFields
+              private readonly ApplicationModel _applicationModel;
+              #endregion
+      
+              #region Constructor
+              public InitializeApplicationCommand(ApplicationModel applicationModel) => _applicationModel = applicationModel;
+              #endregion
+      
+              #region Executes
+              public override void Execute(InitializeApplicationSignal signal)
+              {
+                  UnityEngine.Application.targetFrameRate = _applicationModel.GetSettings.TargetFrameRate;
+                  UnityEngine.Application.runInBackground = _applicationModel.GetSettings.RunInBackground;
+      
+                  Screen.sleepTimeout = SleepTimeout.NeverSleep;
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Application;
+      using UnityEditor;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Application
+      {
+          public sealed class AppQuitCommand : Command<AppQuitSignal>
+          {
+              #region ReadonlyFields
+              private readonly AudioModel _audioModel;
+              private readonly HapticModel _hapticModel;
+              private readonly CurrencyModel _currencyModel;
+              private readonly LevelModel _levelModel;
+              #endregion
+      
+              #region Constructor
+              public AppQuitCommand(AudioModel audioModel, HapticModel hapticModel, CurrencyModel currencyModel, LevelModel levelModel)
+              {
+                  _audioModel = audioModel;
+                  _hapticModel = hapticModel;
+                  _currencyModel = currencyModel;
+                  _levelModel = levelModel;
+              }
+              #endregion
+      
+              #region Executes
+              public override void Execute(AppQuitSignal signal)
+              {
+                  _audioModel.Save();
+                  _hapticModel.Save();
+                  _currencyModel.Save();
+                  _levelModel.Save();
+      
+      #if UNITY_EDITOR
+                  EditorApplication.ExitPlaymode();
+      #else
+                  UnityEngine.Application.Quit();
+      #endif
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Application
+      {
+          public readonly struct InitializeApplicationSignal { } // Has Command
+          public readonly struct AppQuitSignal { } // Has Command
+      }
+      ```
   * CrossScene: Contains components and classes that may need to be used in all scenes of the SampleGame. Located in Zenject's ProjectContext.
     * Installers: These components and classes perform the Zenject binding required for CrossScene's contents.
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Factories.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handlers.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene;
+      using UnityEngine;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.CrossScene
+      {
+          public sealed class CrossSceneMonoInstaller : MonoInstaller
+          {
+              #region Fields
+              [Header("Factories Fields")]
+              [SerializeField] private Transform currencyTrailParent;
+              [SerializeField] private GameObject currencyTrailPrefab;
+              #endregion
+      
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.Install<CrossSceneModelInstaller>();
+                  Container.Install<CrossSceneMediationInstaller>();
+                  Container.Install<CrossSceneSignalInstaller>();
+      
+                  Container.BindInterfacesAndSelfTo<CurrencyTrailSpawnHandler>().AsSingle().NonLazy();
+      
+                  Container.BindFactory<CurrencyTrailData, CurrencyTrailMediator, CurrencyTrailFactory>()
+                    .FromPoolableMemoryPool<CurrencyTrailData, CurrencyTrailMediator, CurrencyTrailPool>
+                    (poolBinder => poolBinder
+                        .WithInitialSize(5)
+                        .FromSubContainerResolve()
+                        .ByNewPrefabInstaller<CurrencyTrailInstaller>(currencyTrailPrefab)
+                        .UnderTransform(currencyTrailParent)
+                    );
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.CrossScene
+      {
+          public sealed class CrossSceneModelInstaller: Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.BindInterfacesAndSelfTo<CrossSceneModel>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<AudioModel>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<CurrencyModel>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<HapticModel>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<LevelModel>().AsSingle().NonLazy();
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.CrossScene
+      {
+          public sealed class CrossSceneMediationInstaller: Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.Bind<LoadingScreenPanelView>().FromComponentInHierarchy().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<LoadingScreenPanelMediator>().AsSingle().NonLazy();
+      
+                  Container.Bind<AudioView>().FromComponentInHierarchy().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<AudioMediator>().AsSingle().NonLazy();
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.CrossScene
+      {
+          public sealed class CrossSceneSignalInstaller: Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.DeclareSignal<ChangeLoadingScreenActivationSignal>();
+                  Container.DeclareSignal<LoadSceneSignal>();
+                  Container.DeclareSignal<PlayAudioSignal>();
+                  Container.DeclareSignal<PlayHapticSignal>();
+                  Container.DeclareSignal<ChangeCurrencySignal>();
+                  Container.DeclareSignal<SpawnCurrencyTrailSignal>();
+                  Container.DeclareSignal<RefreshCurrencyVisualSignal>();
+                  Container.DeclareSignal<SettingsButtonPressedSignal>();
+                  Container.DeclareSignal<SettingsButtonRefreshSignal>();
+                  Container.DeclareSignal<ChangeUIPanelSignal>();
+      
+                  Container.BindInterfacesAndSelfTo<ChangeCurrencyCommand>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<LoadSceneCommand>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<PlayHapticCommand>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<SettingsButtonPressedCommand>().AsSingle().NonLazy();
+      
+                  Container.BindSignal<ChangeCurrencySignal>().ToMethod<ChangeCurrencyCommand>((x, s) => x.Execute(s))
+                      .FromResolve();
+                  Container.BindSignal<LoadSceneSignal>().ToMethod<LoadSceneCommand>((x, s) => x.Execute(s)).FromResolve();
+                  Container.BindSignal<PlayHapticSignal>().ToMethod<PlayHapticCommand>((x, s) => x.Execute(s)).FromResolve();
+                  Container.BindSignal<SettingsButtonPressedSignal>()
+                      .ToMethod<SettingsButtonPressedCommand>((x, s) => x.Execute(s)).FromResolve();
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.CrossScene
+      {
+          public sealed class CurrencyTrailInstaller : Installer<CurrencyTrailInstaller>
+          {
+              #region Bindings
+              public override void InstallBindings() { }
+              #endregion
+          }
+      }
+      ```
     * Factories: These classes are the factory and pool classes required to spawn CurrencyTrail.
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Factories.CrossScene
+      {
+          public sealed class CurrencyTrailFactory : PlaceholderFactory<CurrencyTrailData, CurrencyTrailMediator> { }
+          public sealed class CurrencyTrailPool : MonoPoolableMemoryPool<CurrencyTrailData, IMemoryPool, CurrencyTrailMediator> { }
+      }
+      ```
     * Handlers: These classes base and specialized handler classes that manage in-game object spawning processes based on signals.
+      ```csharp
+      using System;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handlers.CrossScene
+      {
+          public abstract class SpawnHandler<TModel, TFactory> : IDisposable
+               where TModel : class
+               where TFactory : IPlaceholderFactory
+          {
+              #region ReadonlyFields
+              protected readonly SignalBus SignalBus;
+              protected readonly TModel Model;
+              protected readonly TFactory Factory;
+              #endregion
+      
+              #region Constructor
+              public SpawnHandler(SignalBus signalBus, TModel model, TFactory factory)
+              {
+                  SignalBus = signalBus;
+                  Model = model;
+                  Factory = factory;
+              }
+              #endregion
+      
+              #region Dispose
+              public abstract void Dispose();
+              #endregion
+      
+              #region Subscriptions
+              protected abstract void SetSubscriptions(bool isSub);
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Factories.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Handlers.CrossScene
+      {
+          public sealed class CurrencyTrailSpawnHandler : SpawnHandler<CurrencyModel, CurrencyTrailFactory>
+          {
+              #region Constructor
+              public CurrencyTrailSpawnHandler(SignalBus signalBus, CurrencyModel model, CurrencyTrailFactory factory) :
+                  base(signalBus, model, factory) => SetSubscriptions(true);
+              #endregion
+      
+              #region Dispose
+              public override void Dispose() => SetSubscriptions(false);
+              #endregion
+      
+              #region Subscriptions
+              protected override void SetSubscriptions(bool isSub)
+              {
+                  if (isSub)
+                      SignalBus.Subscribe<SpawnCurrencyTrailSignal>(OnSpawnCurrencyTrailSignal);
+                  else
+                      SignalBus.Unsubscribe<SpawnCurrencyTrailSignal>(OnSpawnCurrencyTrailSignal);
+              }
+              #endregion
+      
+              #region SignalReceivers
+              private void OnSpawnCurrencyTrailSignal(SpawnCurrencyTrailSignal signal) => SpawnCurrencyTrailProcess(signal);
+              #endregion
+      
+              #region Executes
+              private void SpawnCurrencyTrailProcess(SpawnCurrencyTrailSignal signal) =>
+                  Factory.Create(signal.CurrencyTrailData);
+              #endregion
+          }
+      }
+      ```
     * Enums: These enums are used in CrossScene's components and classes.
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene
+      {
+          public enum AudioTypes : int
+          {
+              Music = 0,
+              Sound = 1,
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene
+      {
+          public enum CurrencyTypes : int
+          {
+              Coin = 0
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene
+      {
+          public enum MusicTypes : int
+          {
+              BackgroundMusic = 0,
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene
+      {
+          public enum SceneID : int
+          {
+              Bootstrap = 0,
+              MainMenu = 1,
+              Game = 2,
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene
+      {
+          public enum SettingsTypes : int
+          {
+              Music = 0,
+              Sound = 1,
+              Haptic = 2,
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene
+      {
+          public enum SoundTypes : int
+          {
+              UIClick = 0,
+              GameWin = 1,
+              GameFail = 2,
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene
+      {
+          public enum UIPanelTypes : int
+          {
+              LogoHolder = 0,
+              LoadingScreen = 1,
+              StartPanel = 2,
+              InGamePanel = 3,
+              GameOverPanel = 4,
+              ShopPanel = 5,
+              TutorialPanel = 6,
+          }
+      }
+      ```
     * Models & Data: These components, classes, and structs contains the data needed for CrossScene's contents.
+      ```csharp
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene
+      {
+          [CreateAssetMenu(fileName = "CrossSceneSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/CrossScene/CrossSceneSettings")]
+          public sealed class CrossSceneSettings : ScriptableObject
+          {
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
+      {
+          public sealed class CrossSceneModel : Model<CrossSceneSettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/CrossScene/CrossSceneSettings";
+              #endregion
+      
+              #region Constructor
+              public CrossSceneModel() : base(ResourcePath) { }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System.Collections.Generic;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using Sirenix.OdinInspector;
+      using UnityEngine;
+      using UnityEngine.Audio;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene
+      {
+          [CreateAssetMenu(fileName = "AudioSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/CrossScene/AudioSettings")]
+          public sealed class AudioSettings : SerializedScriptableObject
+          {
+              #region Fields
+              [Header("Audio Settings Fields")]
+              [SerializeField] private AudioMixer audioMixer;
+              [SerializeField] private Dictionary<MusicTypes, AudioClip> _musics;
+              [SerializeField] private Dictionary<SoundTypes, AudioClip> _sounds;
+              #endregion
+      
+              #region Getters
+              public AudioMixer AudioMixer => audioMixer;
+              public Dictionary<MusicTypes, AudioClip> Musics => _musics;
+              public Dictionary<SoundTypes, AudioClip> Sounds => _sounds;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene;
+      using UnityEngine.Audio;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
+      {
+          public sealed class AudioModel : Model<AudioSettings>, IInitializable
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/CrossScene/AudioSettings";
+              private const string AudioPath = "AUDIO_PATH";
+              private const string MusicParam = "MUSIC_PARAM";
+              private const string SoundParam = "SOUND_PARAM";
+              #endregion
+      
+              #region ReadonlyFields
+              private readonly AudioMixer _audioMixer;
+              #endregion
+      
+              #region Fields
+              private bool _isSoundMuted;
+              private bool _isMusicMuted;
+              #endregion
+      
+              #region Getters
+              public bool IsSoundMuted => _isSoundMuted;
+              public bool IsMusicMuted => _isMusicMuted;
+              #endregion
+      
+              #region Constructor
+              public AudioModel() : base(ResourcePath)
+              {
+                  _audioMixer = GetSettings.AudioMixer;
+      
+                  _isMusicMuted = ES3.Load(nameof(_isMusicMuted), AudioPath, false);
+                  _isSoundMuted = ES3.Load(nameof(_isSoundMuted), AudioPath, false);
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public void Initialize()
+              {
+                  SetMusic(_isMusicMuted);
+                  SetSound(_isSoundMuted);
+              }
+              #endregion
+      
+              #region Executes
+              public void SetMusic(bool isActive)
+              {
+                  _isMusicMuted = isActive;
+                  _audioMixer.SetFloat(MusicParam, _isMusicMuted ? -80 : -20);
+      
+                  Save();
+              }
+              public void SetSound(bool isActive)
+              {
+                  _isSoundMuted = isActive;
+                  _audioMixer.SetFloat(SoundParam, _isSoundMuted ? -80 : -10);
+      
+                  Save();
+              }
+              public void Save()
+              {
+                  ES3.Save(nameof(_isMusicMuted), _isMusicMuted, AudioPath);
+                  ES3.Save(nameof(_isSoundMuted), _isSoundMuted, AudioPath);
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System.Collections.Generic;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using Sirenix.OdinInspector;
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene
+      {
+          [CreateAssetMenu(fileName = "CurrencySettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/CrossScene/CurrencySettings")]
+          public sealed class CurrencySettings : SerializedScriptableObject
+          {
+              #region Fields
+              [Header("Currency Settings Fields")]
+              [SerializeField] private Dictionary<CurrencyTypes, int> _defaultCurrencyValues;
+              [SerializeField] private Dictionary<CurrencyTypes, Sprite> _currencyIcons;
+              #endregion
+      
+              #region Getters
+              public Dictionary<CurrencyTypes, int> DefaultCurrencyValues => _defaultCurrencyValues;
+              public Dictionary<CurrencyTypes, Sprite> CurrencyIcons => _currencyIcons;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System.Collections.Generic;
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
+      {
+          public sealed class CurrencyModel : Model<CurrencySettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/CrossScene/CurrencySettings";
+              private const string CurrencyPath = "CURRENCY_PATH";
+              #endregion
+      
+              #region Fields
+              private Dictionary<CurrencyTypes, int> _currencyValues;
+              #endregion
+      
+              #region Getters
+              public Dictionary<CurrencyTypes, int> CurrencyValues => _currencyValues;
+              #endregion
+      
+              #region Constructor
+              public CurrencyModel() : base(ResourcePath)
+              {
+                  _currencyValues = ES3.Load(nameof(_currencyValues), CurrencyPath,
+                      new Dictionary<CurrencyTypes, int>(GetSettings.DefaultCurrencyValues));
+      
+                  Save();
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Executes
+              public void ChangeCurrencyValue(CurrencyTypes currencyType, int amount, bool isSet)
+              {
+                  int lasValue = _currencyValues[currencyType];
+                  _currencyValues[currencyType] = isSet ? amount : lasValue + amount;
+      
+                  Save();
+              }
+              public void Save() => ES3.Save(nameof(_currencyValues), _currencyValues, CurrencyPath);
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene
+      {
+          [CreateAssetMenu(fileName = "HapticSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/CrossScene/HapticSettings")]
+          public sealed class HapticSettings : ScriptableObject
+          {
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
+      {
+          public sealed class HapticModel : Model<HapticSettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/CrossScene/HapticSettings";
+              private const string HapticPath = "HAPTIC_PATH";
+              #endregion
+      
+              #region Fields
+              private bool _isHapticMuted;
+              #endregion
+      
+              #region Getters
+              public bool IsHapticMuted => _isHapticMuted;
+              #endregion
+      
+              #region Constructor
+              public HapticModel() : base(ResourcePath)
+              {
+                  _isHapticMuted = ES3.Load(nameof(_isHapticMuted), HapticPath, false);
+      
+                  SetHaptic(_isHapticMuted);
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Executes
+              public void SetHaptic(bool isActive)
+              {
+                  _isHapticMuted = isActive;
+                  
+                  Save();
+              }
+              public void Save() => ES3.Save(nameof(_isHapticMuted), _isHapticMuted, HapticPath);
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene
+      {
+          [CreateAssetMenu(fileName = "LevelSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/CrossScene/LevelSettings")]
+          public sealed class LevelSettings : ScriptableObject
+          {
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene
+      {
+          public sealed class LevelModel : Model<LevelSettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/CrossScene/LevelSettings";
+              private const string LevelPersistentDataPath = "LEVEL_PERSISTENT_DATA_PATH";
+              #endregion
+      
+              #region Fields
+              private LevelPersistentData _levelPersistentData;
+              #endregion
+      
+              #region Getters
+              public LevelPersistentData LevelPersistentData => _levelPersistentData;
+              #endregion
+      
+              #region Constructor
+              public LevelModel() : base(ResourcePath)
+              {
+                  _levelPersistentData = ES3.Load(nameof(_levelPersistentData), LevelPersistentDataPath, new LevelPersistentData(0));
+      
+                  Save();
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region DataExecutes
+              public void ResetLevelPersistentData()
+              {
+                  _levelPersistentData = new(0);
+      
+                  Save();
+              }
+              public void UpdateCurrentLevelIndex(bool isSet, int value)
+              {
+                  _levelPersistentData.CurrentLevelIndex = isSet ? value : _levelPersistentData.CurrentLevelIndex + value;
+      
+                  Save();
+              }
+              public void Save() => ES3.Save(nameof(_levelPersistentData), _levelPersistentData, LevelPersistentDataPath);
+              #endregion
+          }
+      }
+      ```
     * View & Mediators: These components and classes contains the views and mediation operations of CrossScene's content.
+       ```csharp
+       using System.Collections.Generic;
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          public sealed class AudioView : View
+          {
+              #region Fields
+              [Header("Audio View Fields")]
+              [SerializeField] private Dictionary<AudioTypes, AudioSource> _audioSources;
+              #endregion
+      
+              #region Getters
+              public Dictionary<AudioTypes, AudioSource> AudioSources => _audioSources;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          public sealed class AudioMediator : Mediator<AudioView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly AudioModel _audioModel;
+              #endregion
+      
+              #region Constructor
+              public AudioMediator(AudioView view, SignalBus signalBus, AudioModel audioModel) : base(view)
+              {
+                  _signalBus = signalBus;
+                  _audioModel = audioModel;
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize() => _signalBus.Subscribe<PlayAudioSignal>(OnPlayAudio);
+              public override void Dispose() => _signalBus.Unsubscribe<PlayAudioSignal>(OnPlayAudio);
+              #endregion
+      
+              #region SignalReceivers
+              private void OnPlayAudio(PlayAudioSignal signal) =>
+                  PlayAudioProcess(signal.AudioType, signal.MusicType, signal.SoundType);
+              #endregion
+      
+              #region Executes
+              private void PlayAudioProcess(AudioTypes audioType, MusicTypes musicType, SoundTypes soundType)
+              {
+                  switch (audioType)
+                  {
+                      case AudioTypes.Music:
+                          GetView.AudioSources[audioType].clip = _audioModel.GetSettings.Musics[musicType];
+                          GetView.AudioSources[audioType].loop = true;
+                          GetView.AudioSources[audioType].Play();
+                          break;
+                      case AudioTypes.Sound:
+                          GetView.AudioSources[audioType].PlayOneShot(_audioModel.GetSettings.Sounds[soundType]);
+                          break;
+                  }
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System.Collections.Generic;
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using TMPro;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          public sealed class CurrencyView : View
+          {
+              #region Fields
+              [Header("Currency View Fields")]
+              [SerializeField] private Dictionary<CurrencyTypes, TextMeshProUGUI> _currencyTexts;
+              [SerializeField] private Dictionary<CurrencyTypes, Button> _currencyButtons;
+              #endregion
+      
+              #region Getters
+              public Dictionary<CurrencyTypes, TextMeshProUGUI> CurrencyTexts => _currencyTexts;
+              public Dictionary<CurrencyTypes, Button> CurrencyButtons => _currencyButtons;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System.Linq;
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Core.Runtime.Utilities.TextFormatter;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using Lofelt.NiceVibrations;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+           public sealed class CurrencyMediator : Mediator<CurrencyView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly CurrencyModel _currencyModel;
+              #endregion
+      
+              #region Constructor
+              public CurrencyMediator(CurrencyView view, SignalBus signalBus, CurrencyModel currencyModel) : base(view)
+              {
+                  _signalBus = signalBus;
+                  _currencyModel = currencyModel;
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize()
+              {
+                  RefreshAllCurrencyVisual();
+      
+                  _signalBus.Subscribe<RefreshCurrencyVisualSignal>(OnRefreshCurrencyVisualSignal);
+      
+                  GetView.CurrencyButtons.Values.ToList().ForEach(x => x.onClick.AddListener(ButtonClicked));
+              }
+              public override void Dispose()
+              {
+                  _signalBus.Unsubscribe<RefreshCurrencyVisualSignal>(OnRefreshCurrencyVisualSignal);
+                  
+                  GetView.CurrencyButtons.Values.ToList().ForEach(x => x.onClick.RemoveAllListeners());
+              }
+              #endregion
+      
+              #region SignalReceivers
+              private void OnRefreshCurrencyVisualSignal(RefreshCurrencyVisualSignal signal) =>
+                  RefreshCurrencyVisual(signal.CurrencyType);
+              #endregion
+      
+              #region ButtonReceivers
+              private void ButtonClicked()
+              {
+                  _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.ShopPanel));
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              #endregion
+      
+              #region Executes
+              private void RefreshAllCurrencyVisual() =>
+                  _currencyModel.CurrencyValues.Keys.ToList().ForEach(RefreshCurrencyVisual);
+              private void RefreshCurrencyVisual(CurrencyTypes currencyType)
+              {
+                  int value = _currencyModel.CurrencyValues[currencyType];
+      
+                  GetView.CurrencyTexts[currencyType].SetText(TextFormatter.FormatNumber(value));
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          [RequireComponent(typeof(CanvasGroup))]
+          public sealed class LoadingScreenPanelView : View, IUIPanel
+          {
+              #region Fields
+              [Header("Logo Holder Panel View Fields")]
+              [SerializeField] private UIPanelVo uiPanelVo;
+              [SerializeField] private Image fillImage;
+              #endregion
+      
+              #region Getters
+              public UIPanelVo UIPanelVo => uiPanelVo;
+              public Image FillImage => fillImage;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System;
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
+      using Cysharp.Threading.Tasks;
+      using UnityEngine;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          public sealed class LoadingScreenPanelMediator : Mediator<LoadingScreenPanelView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              #endregion
+      
+              #region Fields
+              private AsyncOperation _loadOperation;
+              private bool _loadingCompleted;
+              #endregion
+      
+              #region Constructor
+              public LoadingScreenPanelMediator(LoadingScreenPanelView view, SignalBus signalBus) : base(view) =>
+                  _signalBus = signalBus;
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize()
+              {
+                  ChangePanelActivation(false);
+      
+                  _signalBus.Subscribe<ChangeLoadingScreenActivationSignal>(OnChangeLoadingScreenActivationSignal);
+              }
+              public override void Dispose() =>
+                  _signalBus.Unsubscribe<ChangeLoadingScreenActivationSignal>(OnChangeLoadingScreenActivationSignal);
+              #endregion
+      
+              #region SignalReceivers
+              // ReSharper disable once AsyncVoidMethod
+              private async void OnChangeLoadingScreenActivationSignal(ChangeLoadingScreenActivationSignal signal)
+              {
+                  bool isActive = signal.IsActive;
+      
+                  if (isActive)
+                  {
+                      ResetProgressBar();
+                      
+                      _loadOperation = signal.AsyncOperation;
+                      
+                      ChangePanelActivation(true);
+                      WaitUntilSceneIsLoaded();
+                  }
+                  else
+                  {
+                      await UniTask.WaitUntil(() => _loadingCompleted);
+                      
+                      ChangePanelActivation(false);
+                  }
+              }
+              #endregion
+      
+              #region Executes
+              private void ChangePanelActivation(bool isActive)
+              {
+                  GetView.UIPanelVo.CanvasGroup.ChangeUIPanelCanvasGroupActivation(isActive);
+                  GetView.UIPanelVo.PlayableDirector.ChangeUIPanelTimelineActivation(isActive);
+              }
+              private void ResetProgressBar()
+              {
+                  GetView.FillImage.fillAmount = 0f;
+                  _loadOperation = null;
+                  _loadingCompleted = false;
+              }
+              private async void WaitUntilSceneIsLoaded()
+              {
+                  try
+                  {
+                      while (!_loadOperation.isDone)
+                      {
+                          float progress = _loadOperation.progress;
+                          float targetProgress = _loadOperation.isDone ? 1f : progress;
+      
+                          // Lerp fill amount towards target progress
+                          LerpProgressBar(targetProgress);
+      
+                          await UniTask.Yield();
+                      }
+      
+                      //async operation finishes at 90%, lerp to full value for a while
+                      float time = 0.5f;
+                      while (time > 0)
+                      {
+                          time -= Time.deltaTime;
+                          // Lerp fill amount towards target progress
+                          LerpProgressBar(1f);
+      
+                          await UniTask.Yield();
+                      }
+      
+                      await UniTask.Yield();
+      
+                      _loadingCompleted = true;
+                  }
+                  catch (Exception e)
+                  {
+                      Console.WriteLine(e);
+                  }
+              }
+              private void LerpProgressBar(float targetProgress) =>
+                  GetView.FillImage.fillAmount = Mathf.Lerp(GetView.FillImage.fillAmount, targetProgress,
+                      Time.fixedDeltaTime * 10f);
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System.Collections.Generic;
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          public sealed class SettingsButtonView: View
+          {
+              #region Fields
+              [Header("Settings Button View Fields")]
+              [SerializeField] private GameObject verticalGroup;
+              [SerializeField] private Button button;
+              [SerializeField] private Button exitButton;
+              [SerializeField] private Dictionary<SettingsTypes, Button> _settingsButtons;
+              [SerializeField] private Dictionary<SettingsTypes, GameObject> _settingsOnImages;
+              [SerializeField] private Dictionary<SettingsTypes, GameObject> _settingsOffImages;
+              #endregion
+      
+              #region Getters
+              public GameObject VerticalGroup => verticalGroup;
+              public Button Button => button;
+              public Button ExitButton => exitButton;
+              public Dictionary<SettingsTypes, Button> SettingsButtons => _settingsButtons;
+              public Dictionary<SettingsTypes, GameObject> SettingsOnImages => _settingsOnImages;
+              public Dictionary<SettingsTypes, GameObject> SettingsOffImages => _settingsOffImages;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System.Collections.Generic;
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Application;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using Lofelt.NiceVibrations;
+      using UnityEngine.SceneManagement;
+      using UnityEngine.UI;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          public sealed class SettingsButtonMediator : Mediator<SettingsButtonView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly AudioModel _audioModel;
+              private readonly HapticModel _hapticModel;
+              #endregion
+      
+              #region Fields
+              private bool _isVerticalGroupActive;
+              #endregion
+      
+              #region Constructor
+              public SettingsButtonMediator(SettingsButtonView view, SignalBus signalBus, AudioModel audioModel, HapticModel hapticModel) : base(view)
+              {
+                  _signalBus = signalBus;
+                  _audioModel = audioModel;
+                  _hapticModel = hapticModel;
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize()
+              {
+                  _signalBus.Subscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+                  _signalBus.Subscribe<SettingsButtonRefreshSignal>(OnSettingsButtonRefreshSignal);
+      
+                  GetView.Button.onClick.AddListener(ButtonClicked);
+                  GetView.ExitButton.onClick.AddListener(ExitButtonClicked);
+      
+                  foreach (KeyValuePair<SettingsTypes, Button> item in GetView.SettingsButtons)
+                  {
+                      SetupVisual(item.Key);
+      
+                      item.Value.onClick.AddListener(() => SettingsButtonClicked(item.Key));
+                  }
+              }
+              public override void Dispose()
+              {
+                  _signalBus.Unsubscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+                  _signalBus.Unsubscribe<SettingsButtonRefreshSignal>(OnSettingsButtonRefreshSignal);
+      
+                  GetView.Button.onClick.RemoveListener(ButtonClicked);
+                  GetView.ExitButton.onClick.RemoveListener(ExitButtonClicked);
+      
+                  foreach (KeyValuePair<SettingsTypes, Button> item in GetView.SettingsButtons)
+                      item.Value.onClick.RemoveListener(() => SettingsButtonClicked(item.Key));
+              }
+              #endregion
+      
+              #region SignalReceivers
+              private void OnChangeUIPanelSignal(ChangeUIPanelSignal signal) => SetVerticalGroupActivation(false);
+              private void OnSettingsButtonRefreshSignal(SettingsButtonRefreshSignal signal) =>
+                  SetupVisual(signal.SettingsType);
+              #endregion
+      
+              #region ButtonReceivers
+              private void ButtonClicked()
+              {
+                  SetVerticalGroupActivation(!_isVerticalGroupActive);
+      
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              private void ExitButtonClicked()
+              {
+                  SceneID currentSceneID = (SceneID)SceneManager.GetActiveScene().buildIndex;
+      
+                  switch (currentSceneID)
+                  {
+                      case SceneID.Bootstrap:
+                          break;
+                      case SceneID.MainMenu:
+                          _signalBus.Fire(new AppQuitSignal());
+                          break;
+                      case SceneID.Game:
+                          _signalBus.Fire(new GameExitSignal());
+                          _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                          _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+                          break;
+                  }
+              }
+              private void SettingsButtonClicked(SettingsTypes settingsType)
+              {
+                  _signalBus.Fire(new SettingsButtonPressedSignal(settingsType));
+      
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              #endregion
+      
+              #region Executes
+              private void SetupVisual(SettingsTypes settingsType)
+              {
+                  bool isActive = false;
+      
+                  switch (settingsType)
+                  {
+                      case SettingsTypes.Music:
+                          isActive = !_audioModel.IsMusicMuted;
+                          break;
+                      case SettingsTypes.Sound:
+                          isActive = !_audioModel.IsSoundMuted;
+                          break;
+                      case SettingsTypes.Haptic:
+                          isActive = !_hapticModel.IsHapticMuted;
+                          break;
+                  }
+      
+                  GetView.SettingsOnImages[settingsType].SetActive(isActive);
+                  GetView.SettingsOffImages[settingsType].SetActive(!isActive);
+              }
+              private void SetVerticalGroupActivation(bool isActive)
+              {
+                  _isVerticalGroupActive = isActive;
+                  GetView.VerticalGroup.SetActive(_isVerticalGroupActive);
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using TMPro;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          public sealed class CurrencyTrailView : MonoBehaviour
+          {
+              #region Fields
+              [Header("Currency Trail View Fields")]
+              [SerializeField] private Image iconImage;
+              [SerializeField] private TextMeshProUGUI amountText;
+              #endregion
+      
+              #region Getters
+              public Image IconImage => iconImage;
+              public TextMeshProUGUI AmountText => amountText;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using PrimeTween;
+      using UnityEngine;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene
+      {
+          public sealed class CurrencyTrailMediator : MonoBehaviour, IPoolable<CurrencyTrailData, IMemoryPool>
+          {
+              #region Injects
+              private SignalBus _signalBus;
+              private CurrencyModel _currencyModel;
+              private CurrencyTrailView _view;
+              #endregion
+      
+              #region Fields
+              private IMemoryPool _memoryPool;
+              #endregion
+      
+              #region PostConstruct
+              [Inject]
+              private void PostConstruct(SignalBus signalBus, CurrencyModel currencyModel, CurrencyTrailView view)
+              {
+                  _signalBus = signalBus;
+                  _currencyModel = currencyModel;
+                  _view = view;
+              }
+              #endregion
+      
+              #region Pool
+              public void OnSpawned(CurrencyTrailData data, IMemoryPool memoryPool)
+              {
+                  _memoryPool = memoryPool;
+                  
+                  SetVisual(data);
+                  PlayTween(data);
+              }
+              public void OnDespawned() => _memoryPool = null;
+              #endregion
+      
+              #region Executes
+              private void SetVisual(CurrencyTrailData data)
+              {
+                  transform.position = data.StartPosition;
+                  
+                  _view.IconImage.sprite = _currencyModel.GetSettings.CurrencyIcons[data.CurrencyType];
+                  _view.IconImage.preserveAspect = true;
+                  
+                  _view.AmountText.SetText($"{data.Amount}x");
+              }
+              private void PlayTween(CurrencyTrailData data) =>
+                  Tween.Position(transform, data.TargetPosition, data.Duration, data.Ease)
+                      .OnComplete(() => TweenCompleteCallback(data));
+              private void TweenCompleteCallback(CurrencyTrailData data)
+              {
+                  _signalBus.Fire(new ChangeCurrencySignal(data.CurrencyType, data.Amount, false));
+                  
+                  _memoryPool.Despawn(this);
+              }
+              #endregion
+          }
+      }
+      ```
     * Commands & Signals: These classes and signals provide signal-driven implementation of CrossScene's contents.
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene
+      {
+          public sealed class ChangeCurrencyCommand : Command<ChangeCurrencySignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly CurrencyModel _currencyModel;
+              #endregion
+      
+              #region Constructor
+              public ChangeCurrencyCommand(SignalBus signalBus, CurrencyModel currencyModel)
+              {
+                  _signalBus = signalBus;
+                  _currencyModel = currencyModel;
+              }
+              #endregion
+      
+              #region Executes
+              public override void Execute(ChangeCurrencySignal signal)
+              {
+                  _currencyModel.ChangeCurrencyValue(signal.CurrencyType, signal.Amount, signal.IsSet);
+      
+                  _signalBus.Fire(new RefreshCurrencyVisualSignal(signal.CurrencyType));
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using UnityEngine;
+      using UnityEngine.SceneManagement;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene
+      {
+          public sealed class LoadSceneCommand : Command<LoadSceneSignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              #endregion
+      
+              #region Constructor
+              public LoadSceneCommand(SignalBus signalBus) => _signalBus = signalBus;
+              #endregion
+      
+              #region Executes
+              public override void Execute(LoadSceneSignal signal)
+              {
+                  AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)signal.SceneId);
+      
+                  _signalBus.Fire(new ChangeLoadingScreenActivationSignal(true, asyncOperation));
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using Lofelt.NiceVibrations;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene
+      {
+          public sealed class PlayHapticCommand : Command<PlayHapticSignal>
+          {
+              #region ReadonlyFields
+              private readonly HapticModel _hapticModel;
+              #endregion
+      
+              #region Constructor
+              public PlayHapticCommand(HapticModel hapticModel) => _hapticModel = hapticModel;
+              #endregion
+      
+              #region Executes
+              public override void Execute(PlayHapticSignal signal)
+              {
+                  if (_hapticModel.IsHapticMuted)
+                      return;
+      
+                  HapticPatterns.PlayPreset(signal.HapticType);
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.CrossScene
+      {
+          public sealed class SettingsButtonPressedCommand : Command<SettingsButtonPressedSignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly AudioModel _audioModel;
+              private readonly HapticModel _hapticModel;
+              #endregion
+      
+              #region Constructor
+              public SettingsButtonPressedCommand(SignalBus signalBus, AudioModel audioModel, HapticModel hapticModel)
+              {
+                  _signalBus = signalBus;
+                  _audioModel = audioModel;
+                  _hapticModel = hapticModel;
+              }
+              #endregion
+      
+              #region Executes
+              public override void Execute(SettingsButtonPressedSignal signal)
+              {
+                  switch (signal.SettingsType)
+                  {
+                      case SettingsTypes.Music:
+                          _audioModel.SetMusic(!_audioModel.IsMusicMuted);
+                          break;
+                      case SettingsTypes.Sound:
+                          _audioModel.SetSound(!_audioModel.IsSoundMuted);
+                          break;
+                      case SettingsTypes.Haptic:
+                          _hapticModel.SetHaptic(!_hapticModel.IsHapticMuted);
+                          break;
+                  }
+      
+                  _signalBus.Fire(new SettingsButtonRefreshSignal(signal.SettingsType));
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using Lofelt.NiceVibrations;
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene
+      {
+          public readonly struct ChangeLoadingScreenActivationSignal
+          {
+              #region ReadonlyFields
+              private readonly bool _isActive;
+              private readonly AsyncOperation _asyncOperation;
+              #endregion
+      
+              #region Getters
+              public bool IsActive => _isActive;
+              public AsyncOperation AsyncOperation => _asyncOperation;
+              #endregion
+      
+              #region Constructor
+              public ChangeLoadingScreenActivationSignal(bool isActive, AsyncOperation asyncOperation)
+              {
+                  _isActive = isActive;
+                  _asyncOperation = asyncOperation;
+              }
+              #endregion
+          }
+          public readonly struct LoadSceneSignal
+          {
+              #region ReadonlyFields
+              private readonly SceneID _sceneId;
+              #endregion
+      
+              #region Getters
+              public SceneID SceneId => _sceneId;
+              #endregion
+      
+              #region Constructor
+              public LoadSceneSignal(SceneID sceneId) => _sceneId = sceneId;
+              #endregion
+          } // Has Command
+          public readonly struct PlayAudioSignal
+          {
+              #region ReadonlyFields
+              private readonly AudioTypes _audioType;
+              private readonly MusicTypes _musicType;
+              private readonly SoundTypes _soundType;
+              #endregion
+      
+              #region Getters
+              public AudioTypes AudioType => _audioType;
+              public MusicTypes MusicType => _musicType;
+              public SoundTypes SoundType => _soundType;
+              #endregion
+      
+              #region Constructor
+              public PlayAudioSignal(AudioTypes audioType, MusicTypes musicType, SoundTypes soundType)
+              {
+                  _audioType = audioType;
+                  _musicType = musicType;
+                  _soundType = soundType;
+              }
+              #endregion
+          }
+          public readonly struct PlayHapticSignal
+          {
+              #region ReadonlyFields
+              private readonly HapticPatterns.PresetType _hapticType;
+              #endregion
+      
+              #region Getters
+              public HapticPatterns.PresetType HapticType => _hapticType;
+              #endregion
+      
+              #region Constructor
+              public PlayHapticSignal(HapticPatterns.PresetType hapticType) => _hapticType = hapticType;
+              #endregion
+          } // Has Command
+          public readonly struct ChangeCurrencySignal
+          {
+              #region ReadonlyFields
+              private readonly CurrencyTypes _currencyType;
+              private readonly int _amount;
+              private readonly bool _isSet;
+              #endregion
+      
+              #region Getters
+              public CurrencyTypes CurrencyType => _currencyType;
+              public int Amount => _amount;
+              public bool IsSet => _isSet;
+              #endregion
+      
+              #region Constructor
+              public ChangeCurrencySignal(CurrencyTypes currencyType, int amount, bool isSet)
+              {
+                  _currencyType = currencyType;
+                  _amount = amount;
+                  _isSet = isSet;
+              }
+              #endregion
+          } // Has Command
+          public readonly struct SpawnCurrencyTrailSignal
+          {
+              #region ReadonlyFields
+              private readonly CurrencyTrailData _currencyTrailData;
+              #endregion
+      
+              #region Getters
+              public CurrencyTrailData CurrencyTrailData => _currencyTrailData;
+              #endregion
+      
+              #region Constructor
+              public SpawnCurrencyTrailSignal(CurrencyTrailData currencyTrailData) => _currencyTrailData = currencyTrailData;
+              #endregion
+          }
+          public readonly struct RefreshCurrencyVisualSignal
+          {
+              #region Fields
+              private readonly CurrencyTypes _currencyType;
+              #endregion
+      
+              #region Getters
+              public CurrencyTypes CurrencyType => _currencyType;
+              #endregion
+      
+              #region Constructor
+              public RefreshCurrencyVisualSignal(CurrencyTypes currencyType) => _currencyType = currencyType;
+              #endregion
+          }
+          public readonly struct SettingsButtonPressedSignal
+          {
+              #region ReadonlyFields
+              private readonly SettingsTypes _settingsType;
+              #endregion
+      
+              #region Getters
+              public SettingsTypes SettingsType => _settingsType;
+              #endregion
+      
+              #region Constructor
+              public SettingsButtonPressedSignal(SettingsTypes settingsType) => _settingsType = settingsType;
+              #endregion
+          } // Has Command
+          public readonly struct SettingsButtonRefreshSignal
+          {
+              #region ReadonlyFields
+              private readonly SettingsTypes _settingsType;
+              #endregion
+      
+              #region Getters
+              public SettingsTypes SettingsType => _settingsType;
+              #endregion
+      
+              #region Constructor
+              public SettingsButtonRefreshSignal(SettingsTypes settingsType) => _settingsType = settingsType;
+              #endregion
+          }
+          public readonly struct ChangeUIPanelSignal
+          {
+              #region ReadonlyFields
+              private readonly UIPanelTypes _uiPanelType;
+              #endregion
+      
+              #region Getters
+              public UIPanelTypes UIPanelType => _uiPanelType;
+              #endregion
+      
+              #region Constructor
+              public ChangeUIPanelSignal(UIPanelTypes uiPanelType) => _uiPanelType = uiPanelType;
+              #endregion
+          }
+      }
+      ```
     * Interfaces: This interface is for UIPanels in CrossScene.
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene
+      {
+          public interface IUIPanel
+          {
+              public UIPanelVo UIPanelVo { get; }
+          }
+      }
+      ```
     * Utilities: This class is for UIPanels in CrossScene.
+      ```csharp
+      using System;
+      using Cysharp.Threading.Tasks;
+      using UnityEngine;
+      using UnityEngine.Playables;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene
+      {
+          public static class UIExtensions
+          {
+              #region UIPanel
+              public static void ChangeUIPanelCanvasGroupActivation(this CanvasGroup canvasGroup, bool isActive)
+              {
+                  canvasGroup.alpha = isActive ? 1 : 0;
+                  canvasGroup.interactable = isActive;
+                  canvasGroup.blocksRaycasts = isActive;
+              }
+              public static void ChangeUIPanelTimelineActivation(this PlayableDirector timeline, bool isActive, bool withReversePlay = false, Action reversePlayEnding = null)
+              {
+                  if (isActive)
+                      timeline?.Play();
+                  else
+                  {
+                      if (withReversePlay)
+                          TimelineReversePlay(timeline, reversePlayEnding);
+                      else
+                          timeline?.Stop();
+                  }
+              }
+              #endregion
+      
+              #region Timeline
+              // ReSharper disable once AsyncVoidMethod
+              public static async void TimelineReversePlay(this PlayableDirector timeline, Action reversePlayEnding = null)
+              {
+                  DirectorUpdateMode defaultUpdateMode = timeline.timeUpdateMode;
+                  timeline.timeUpdateMode = DirectorUpdateMode.Manual;
+      
+                  if (timeline.time.ApproxEquals(timeline.duration) || timeline.time.ApproxEquals(0))
+                  {
+                      timeline.time = timeline.duration;
+                  }
+                  
+                  timeline.Evaluate();
+      
+                  await UniTask.NextFrame();
+      
+                  float duration = (float)timeline.duration;
+                  while (duration > 0f)
+                  {
+                      duration -= Time.deltaTime / (float)timeline.duration;
+                      timeline.time = Mathf.Max(duration, 0f);
+                      timeline.Evaluate();
+      
+                      await UniTask.NextFrame();
+                  }
+      
+                  timeline.time = 0;
+                  timeline.Evaluate();
+                  timeline.timeUpdateMode = defaultUpdateMode;
+                  timeline.Stop();
+                  
+                  reversePlayEnding?.Invoke();
+              }
+              #endregion
+      
+              #region Math
+              public static bool ApproxEquals(this double num, float other) => Mathf.Approximately((float)num, other);
+              public static bool ApproxEquals(this double num, double other) => Mathf.Approximately((float)num, (float)other);
+              #endregion
+          }
+      }
+      ```
   * Bootstrap: Contains components and classes for SampleGame's splash screen.
     * Installers: These components and classes perform the Zenject bindings required for SampleGame's splash screen.
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Bootstrap;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
+      {
+          public sealed class BootstrapMonoInstaller : MonoInstaller
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.Install<BootstrapModelInstaller>();
+                  Container.Install<BootstrapMediationInstaller>();
+                  Container.Install<BootstrapSignalInstaller>();
+              }
+              #endregion
+      
+              #region Cycle
+              public override void Start() => Container.Resolve<SignalBus>().Fire(new InitializeBootstrapSignal());
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Bootstrap;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
+      {
+          public sealed class BootstrapModelInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings() =>
+                  Container.BindInterfacesAndSelfTo<BootstrapModel>().AsSingle().NonLazy();
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Bootstrap;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
+      {
+          public sealed class BootstrapMediationInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.Bind<LogoHolderPanelView>().FromComponentInHierarchy().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<LogoHolderPanelMediator>().AsSingle().NonLazy();
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Bootstrap;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Bootstrap;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Bootstrap
+      {
+          public sealed class BootstrapSignalInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.DeclareSignal<InitializeBootstrapSignal>();
+      
+                  Container.BindInterfacesAndSelfTo<InitializeBootstrapCommand>().AsSingle().NonLazy();
+      
+                  Container.BindSignal<InitializeBootstrapSignal>()
+                      .ToMethod<InitializeBootstrapCommand>((x, s) => x.Execute(s)).FromResolve();
+              }
+              #endregion
+          }
+      }
+      ```
     * Models & Data: This component and class contains the data needed for SampleGame's splash screen.
+      ```csharp
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Bootstrap
+      {
+          [CreateAssetMenu(fileName = "BootstrapSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/Bootstrap/BootstrapSettings")]
+          public sealed class BootstrapSettings : ScriptableObject
+          {
+              #region Fields
+              [Header("Bootstrap Settings Fields")]
+              [SerializeField] private Sprite logoSprite;
+              [SerializeField] private float sceneActivationDuration;
+              #endregion
+      
+              #region Getters
+              public Sprite LogoSprite => logoSprite;
+              public float SceneActivationDuration => sceneActivationDuration;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Bootstrap;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Bootstrap
+      {
+          public sealed class BootstrapModel : Model<BootstrapSettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/Bootstrap/BootstrapSettings";
+              #endregion
+      
+              #region Constructor
+              public BootstrapModel() : base(ResourcePath) { }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+          }
+      }
+      ```
     * View & Mediators: This component and class contains the views and mediation operations of SampleGame's splash screen.
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Bootstrap
+      {
+          [RequireComponent(typeof(CanvasGroup))]
+          public sealed class LogoHolderPanelView : View, IUIPanel
+          {
+              #region Fields
+              [Header("Logo Holder Panel View Fields")]
+              [SerializeField] private UIPanelVo uiPanelVo;
+              [SerializeField] private Image logoImage;
+              #endregion
+      
+              #region Getters
+              public UIPanelVo UIPanelVo => uiPanelVo;
+              public Image LogoImage => logoImage;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Bootstrap;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Bootstrap
+      {
+          public sealed class LogoHolderPanelMediator : Mediator<LogoHolderPanelView>
+          {
+              #region ReadonlyFields
+              private readonly BootstrapModel _bootstrapModel;
+              #endregion
+      
+              #region Constructor
+              public LogoHolderPanelMediator(LogoHolderPanelView view, BootstrapModel bootstrapModel) : base(view) =>
+                  _bootstrapModel = bootstrapModel;
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize()
+              {
+                  GetView.LogoImage.sprite = _bootstrapModel.GetSettings.LogoSprite;
+                  GetView.LogoImage.preserveAspect = true;
+      
+                  GetView.UIPanelVo.CanvasGroup.ChangeUIPanelCanvasGroupActivation(true);
+                  GetView.UIPanelVo.PlayableDirector.ChangeUIPanelTimelineActivation(true);
+              }
+              public override void Dispose() { }
+              #endregion
+          }
+      }
+      ```
     * Commands & Signals: This class and signal is entry point of SampleGame's splash screen.
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Bootstrap;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Bootstrap;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using Cysharp.Threading.Tasks;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Bootstrap
+      {
+          public sealed class InitializeBootstrapCommand : Command<InitializeBootstrapSignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly BootstrapModel _bootstrapModel;
+              #endregion
+      
+              #region Constructor
+              public InitializeBootstrapCommand(SignalBus signalBus, BootstrapModel bootstrapModel)
+              {
+                  _signalBus = signalBus;
+                  _bootstrapModel = bootstrapModel;
+              }
+              #endregion
+      
+              #region Executes
+              // ReSharper disable once AsyncVoidMethod
+              public override async void Execute(InitializeBootstrapSignal signal)
+              {
+                  int millisecondsDelay = (int)(_bootstrapModel.GetSettings.SceneActivationDuration * 1000f);
+                  
+                  await UniTask.Delay(millisecondsDelay);
+      
+                  _signalBus.Fire(new LoadSceneSignal(SceneID.MainMenu));
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Bootstrap
+      {
+          public readonly struct InitializeBootstrapSignal { } // Has Command
+      }
+      ```
   * MainMenu: Contains the components and classes required for MainMenu operations.
     * Installers: These components and classes perform the Zenject binding required for MainMenu operations.
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.MainMenu;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.MainMenu
+      {
+          public sealed class MainMenuMonoInstaller : MonoInstaller
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.Install<MainMenuModelInstaller>();
+                  Container.Install<MainMenuMediationInstaller>();
+                  Container.Install<MainMenuSignalInstaller>();
+              }
+              #endregion
+      
+              #region Cycle
+              public override void Start() => Container.Resolve<SignalBus>().Fire(new InitializeMainMenuSignal());
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.MainMenu;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.MainMenu
+      {
+          public sealed class MainMenuModelInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings() =>
+                  Container.BindInterfacesAndSelfTo<MainMenuModel>().AsSingle().NonLazy();
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Installers;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.MainMenu
+      {
+          public sealed class MainMenuMediationInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.Bind<StartPanelView>().FromComponentInHierarchy().AsSingle().NonLazy();
+                  Container.Bind<ShopPanelView>().FromComponentInHierarchy().AsSingle().NonLazy();
+      
+                  Container.BindInterfacesAndSelfTo<StartPanelMediator>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<ShopPanelMediator>().AsSingle().NonLazy();
+      
+                  Container.Install<ViewMediatorInstaller<CurrencyView, CurrencyMediator>>();
+                  Container.Install<ViewMediatorInstaller<SettingsButtonView, SettingsButtonMediator>>();
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.MainMenu;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.MainMenu;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.MainMenu
+      {
+          public sealed class MainMenuSignalInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.DeclareSignal<InitializeMainMenuSignal>();
+      
+                  Container.BindInterfacesAndSelfTo<InitializeMainMenuCommand>().AsSingle().NonLazy();
+      
+                  Container.BindSignal<InitializeMainMenuSignal>().ToMethod<InitializeMainMenuCommand>((x, s) => x.Execute(s))
+                      .FromResolve();
+              }
+              #endregion
+          }
+      }
+      ```
     * Models & Data: This component and class contains the data needed for MainMenu operations.
+      ```csharp
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.MainMenu
+      {
+          [CreateAssetMenu(fileName = "MainMenuSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/MainMenu/MainMenuSettings")]
+          public sealed class MainMenuSettings: ScriptableObject
+          {
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.MainMenu;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.MainMenu
+      {
+          public sealed class MainMenuModel : Model<MainMenuSettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/MainMenu/MainMenuSettings";
+              #endregion
+      
+              #region Constructor
+              public MainMenuModel() : base(ResourcePath) { }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+          }
+      }
+      ```
     * View & Mediators: These components and classes contains the views and mediation operations of MainMenu.
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene;
+      using TMPro;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
+      {
+          [RequireComponent(typeof(CanvasGroup))]
+          public sealed class StartPanelView: View, IUIPanel
+          {
+              #region Fields
+              [Header("Start Panel View Fields")]
+              [SerializeField] private UIPanelVo uiPanelVo;
+              [SerializeField] private TextMeshProUGUI levelText;
+              [SerializeField] private Button playButton;
+              #endregion
+      
+              #region Getters
+              public UIPanelVo UIPanelVo => uiPanelVo;
+              public TextMeshProUGUI LevelText => levelText;
+              public Button PlayButton => playButton;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
+      using Lofelt.NiceVibrations;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
+      {
+          public sealed class StartPanelMediator: Mediator<StartPanelView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly LevelModel _levelModel;
+              #endregion
+      
+              #region Constructor
+              public StartPanelMediator(StartPanelView view, SignalBus signalBus, LevelModel levelModel) : base(view)
+              {
+                  _signalBus = signalBus;
+                  _levelModel = levelModel;
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize() => SetCycleSubscriptions(true);
+              public override void Dispose() => SetCycleSubscriptions(false);
+              #endregion
+      
+              #region Subscriptions
+              private void SetCycleSubscriptions(bool isSub)
+              {
+                  if (isSub)
+                  {
+                      _signalBus.Subscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+      
+                      GetView.PlayButton.onClick.AddListener(OnPlayButtonClicked);
+                  }
+                  else
+                  {
+                      _signalBus.Unsubscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+      
+                      GetView.PlayButton.onClick.RemoveListener(OnPlayButtonClicked);
+                  }
+              }
+              #endregion
+              
+              #region SignalReceivers
+              private void OnChangeUIPanelSignal(ChangeUIPanelSignal signal)
+              {
+                  bool isShow = signal.UIPanelType == GetView.UIPanelVo.UIPanelType;
+      
+                  GetView.PlayButton.interactable = isShow;
+      
+                  GetView.UIPanelVo.CanvasGroup.ChangeUIPanelCanvasGroupActivation(isShow);
+                  GetView.UIPanelVo.PlayableDirector.ChangeUIPanelTimelineActivation(isShow);
+                  
+                  if (isShow)
+                      SetLevelText();
+              }
+              #endregion
+      
+              #region ButtonReceivers
+              private void OnPlayButtonClicked()
+              {
+                  _signalBus.Fire(new LoadSceneSignal(SceneID.Game));
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              #endregion
+      
+              #region Executes
+              private void SetLevelText()
+              {
+                  int levelNumber = _levelModel.LevelPersistentData.CurrentLevelIndex + 1;
+                  GetView.LevelText.SetText($"Level {levelNumber}");
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
+      {
+          [RequireComponent(typeof(CanvasGroup))]
+          public sealed class ShopPanelView : View, IUIPanel
+          {
+              #region Fields
+              [Header("Shop Panel View Fields")]
+              [SerializeField] private UIPanelVo uiPanelVo;
+              [SerializeField] private Button homeButton;
+              #endregion
+      
+              #region Getters
+              public UIPanelVo UIPanelVo => uiPanelVo;
+              public Button HomeButton => homeButton;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
+      using Lofelt.NiceVibrations;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.MainMenu
+      {
+          public sealed class ShopPanelMediator : Mediator<ShopPanelView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              #endregion
+      
+              #region Constructor
+              public ShopPanelMediator(ShopPanelView view, SignalBus signalBus) : base(view) => _signalBus = signalBus;
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize() => SetCycleSubscriptions(true);
+              public override void Dispose() => SetCycleSubscriptions(false);
+              #endregion
+      
+              #region Subscriptions
+              private void SetCycleSubscriptions(bool isSub)
+              {
+                  if (isSub)
+                  {
+                      _signalBus.Subscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+      
+                      GetView.HomeButton.onClick.AddListener(OnHomeButtonClicked);
+                  }
+                  else
+                  {
+                      _signalBus.Unsubscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+      
+                      GetView.HomeButton.onClick.RemoveListener(OnHomeButtonClicked);
+                  }
+              }
+              #endregion
+              
+              #region SignalReceivers
+              private void OnChangeUIPanelSignal(ChangeUIPanelSignal signal)
+              {
+                  bool isShow = signal.UIPanelType == GetView.UIPanelVo.UIPanelType;
+      
+                  GetView.UIPanelVo.CanvasGroup.ChangeUIPanelCanvasGroupActivation(isShow);
+                  GetView.UIPanelVo.PlayableDirector.ChangeUIPanelTimelineActivation(isShow);
+              }
+              #endregion
+      
+              #region ButtonReceivers
+              private void OnHomeButtonClicked()
+              {
+                  _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.StartPanel));
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              #endregion
+          }
+      }
+      ```
     * Commands & Signals: This class and signal is entry point of MainMenu.
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.MainMenu;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.MainMenu
+      {
+          public sealed class InitializeMainMenuCommand : Command<InitializeMainMenuSignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              #endregion
+      
+              #region Constructor
+              public InitializeMainMenuCommand(SignalBus signalBus) => _signalBus = signalBus;
+              #endregion
+      
+              #region Executes
+              public override void Execute(InitializeMainMenuSignal signal)
+              {
+                  _signalBus.Fire(new ChangeLoadingScreenActivationSignal(false, null));
+                  _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.StartPanel));
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Music, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.MainMenu
+      {
+          public readonly struct InitializeMainMenuSignal { } // Has Command
+      }
+      ```
   * Game: Contains the necessary gameplay components and classes for a sample game.
     * Installers: These components and classes perform the Zenject binding required for gameplay.
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Game
+      {
+          public sealed class GameMonoInstaller : MonoInstaller
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.Install<GameModelInstaller>();
+                  Container.Install<GameMediationInstaller>();
+                  Container.Install<GameSignalInstaller>();
+              }
+              #endregion
+      
+              #region Cycle
+              public override void Start() => Container.Resolve<SignalBus>().Fire(new InitializeGameSignal());
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Game;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Game
+      {
+          public sealed class GameModelInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.BindInterfacesAndSelfTo<GameModel>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<TutorialModel>().AsSingle().NonLazy();
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Installers;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Game
+      {
+          public sealed class GameMediationInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.Bind<GameOverPanelView>().FromComponentInHierarchy().AsSingle().NonLazy();
+                  Container.Bind<InGamePanelView>().FromComponentInHierarchy().AsSingle().NonLazy();
+                  Container.Bind<TutorialPanelView>().FromComponentInHierarchy().AsSingle().NonLazy();
+      
+                  Container.BindInterfacesAndSelfTo<GameOverPanelMediator>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<InGamePanelMediator>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<TutorialPanelMediator>().AsSingle().NonLazy();
+      
+                  Container.Install<ViewMediatorInstaller<CurrencyView, CurrencyMediator>>();
+                  Container.Install<ViewMediatorInstaller<SettingsButtonView, SettingsButtonMediator>>();
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Installers.Game
+      {
+          public sealed class GameSignalInstaller : Installer
+          {
+              #region Bindings
+              public override void InstallBindings()
+              {
+                  Container.DeclareSignal<InitializeGameSignal>();
+                  Container.DeclareSignal<PlayGameSignal>();
+                  Container.DeclareSignal<GameOverSignal>();
+                  Container.DeclareSignal<GameExitSignal>();
+                  Container.DeclareSignal<SetupGameOverPanelSignal>();
+      
+                  Container.BindInterfacesAndSelfTo<InitializeGameCommand>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<PlayGameCommand>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<GameOverCommand>().AsSingle().NonLazy();
+                  Container.BindInterfacesAndSelfTo<GameExitCommand>().AsSingle().NonLazy();
+      
+                  Container.BindSignal<InitializeGameSignal>().ToMethod<InitializeGameCommand>((x, s) => x.Execute(s))
+                      .FromResolve();
+                  Container.BindSignal<PlayGameSignal>().ToMethod<PlayGameCommand>((x, s) => x.Execute(s)).FromResolve();
+                  Container.BindSignal<GameOverSignal>().ToMethod<GameOverCommand>((x, s) => x.Execute(s)).FromResolve();
+                  Container.BindSignal<GameExitSignal>().ToMethod<GameExitCommand>((x, s) => x.Execute(s)).FromResolve();
+              }
+              #endregion
+          }
+      }
+      ```
     * Models & Data: These components and classes contains the data needed for gameplay.
+      ```csharp
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Game
+      {
+          [CreateAssetMenu(fileName = "GameSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/Game/GameSettings")]
+          public sealed class GameSettings : ScriptableObject
+          {
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Game;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Game
+      {
+          public sealed class GameModel : Model<GameSettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/Game/GameSettings";
+              #endregion
+      
+              #region Constructor
+              public GameModel() : base(ResourcePath) { }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using UnityEngine;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Game
+      {
+          [CreateAssetMenu(fileName = "TutorialSettings", menuName = "CodeCatGames/HiveMind/Samples/SampleGame/Game/TutorialSettings")]
+          public sealed class TutorialSettings : ScriptableObject
+          {
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Model;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ScriptableObjects.Game;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Game
+      {
+          public sealed class TutorialModel : Model<TutorialSettings>
+          {
+              #region Constants
+              private const string ResourcePath = "Samples/SampleGame/Game/TutorialSettings";
+              private const string TutorialPath = "TUTORIAL_PATH";
+              #endregion
+      
+              #region Fields
+              private bool _isTutorialShowed;
+              #endregion
+      
+              #region Getters
+              public bool IsTutorialShowed => _isTutorialShowed;
+              #endregion
+      
+              #region Constructor
+              public TutorialModel() : base(ResourcePath) =>
+                  _isTutorialShowed = ES3.Load(nameof(_isTutorialShowed), TutorialPath, false);
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Executes
+              public void SetTutorial(bool isActive)
+              {
+                  _isTutorialShowed = isActive;
+                  
+                  ES3.Save(nameof(_isTutorialShowed), _isTutorialShowed, TutorialPath);
+              }
+              #endregion
+          }
+      }
+      ```
     * View & Mediators: These components and classes contains the views and mediation operations of gameplay.
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene;
+      using TMPro;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
+      {
+          [RequireComponent(typeof(CanvasGroup))]
+          public sealed class InGamePanelView : View, IUIPanel
+          {
+              #region Fields
+              [Header("In Game Panel View Fields")]
+              [SerializeField] private UIPanelVo uiPanelVo;
+              [SerializeField] private TextMeshProUGUI levelText;
+              [SerializeField] private Transform currencyTrailStartTransform;
+              [SerializeField] private Transform currencyTrailTargetTransform;
+              [SerializeField] private Button winButton;
+              [SerializeField] private Button failButton;
+              [SerializeField] private Button addCurrencyButton;
+              #endregion
+      
+              #region Getters
+              public UIPanelVo UIPanelVo => uiPanelVo;
+              public TextMeshProUGUI LevelText => levelText;
+              public Transform CurrencyTrailStartTransform => currencyTrailStartTransform;
+              public Transform CurrencyTrailTargetTransform => currencyTrailTargetTransform;
+              public Button WinButton => winButton;
+              public Button FailButton => failButton;
+              public Button AddCurrencyButton => addCurrencyButton;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
+      using Lofelt.NiceVibrations;
+      using PrimeTween;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
+      {
+          public sealed class InGamePanelMediator : Mediator<InGamePanelView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly LevelModel _levelModel;
+              #endregion
+      
+              #region Constructor
+              public InGamePanelMediator(InGamePanelView view, SignalBus signalBus, LevelModel levelModel) : base(view)
+              {
+                  _signalBus = signalBus;
+                  _levelModel = levelModel;
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize() => SetCycleSubscriptions(true);
+              public override void Dispose() => SetCycleSubscriptions(false);
+              #endregion
+      
+              #region Subscriptions
+              private void SetCycleSubscriptions(bool isSub)
+              {
+                  if (isSub)
+                  {
+                      _signalBus.Subscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+      
+                      GetView.WinButton.onClick.AddListener(OnWinButtonPressed);
+                      GetView.FailButton.onClick.AddListener(OnFailButtonPressed);
+                      GetView.AddCurrencyButton.onClick.AddListener(OnAddCurrencyButtonPressed);
+                  }
+                  else
+                  {
+                      _signalBus.Unsubscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+      
+                      GetView.WinButton.onClick.RemoveListener(OnWinButtonPressed);
+                      GetView.FailButton.onClick.RemoveListener(OnFailButtonPressed);
+                      GetView.AddCurrencyButton.onClick.RemoveListener(OnAddCurrencyButtonPressed);
+                  }
+              }
+              #endregion
+      
+              #region SignalReceivers
+              private void OnChangeUIPanelSignal(ChangeUIPanelSignal signal)
+              {
+                  bool isShow = signal.UIPanelType == GetView.UIPanelVo.UIPanelType;
+                  GetView.UIPanelVo.CanvasGroup.ChangeUIPanelCanvasGroupActivation(isShow);
+                  GetView.UIPanelVo.PlayableDirector.ChangeUIPanelTimelineActivation(isShow);
+      
+                  if (isShow)
+                      SetLevelText();
+              }
+              #endregion
+      
+              #region ButtonReceivers
+              private void OnWinButtonPressed()
+              {
+                  _signalBus.Fire(new GameOverSignal(true));
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              private void OnFailButtonPressed()
+              {
+                  _signalBus.Fire(new GameOverSignal(false));
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              private void OnAddCurrencyButtonPressed()
+              {
+                  _signalBus.Fire(new SpawnCurrencyTrailSignal(new CurrencyTrailData(CurrencyTypes.Coin,
+                                                                    1,
+                                                                    .25f,
+                                                                    Ease.Linear,
+                                                                    GetView.CurrencyTrailStartTransform.position,
+                                                                    GetView.CurrencyTrailTargetTransform.position)));
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              #endregion
+      
+              #region Executes
+              private void SetLevelText()
+              {
+                  int levelNumber = _levelModel.LevelPersistentData.CurrentLevelIndex + 1;
+                  GetView.LevelText.SetText($"Level {levelNumber}");
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using System.Collections.Generic;
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
+      {
+          [RequireComponent(typeof(CanvasGroup))]
+          public sealed class GameOverPanelView : View, IUIPanel
+          {
+              #region Fields
+              [Header("Game Over Panel View Fields")]
+              [SerializeField] private UIPanelVo uiPanelVo;
+              [SerializeField] private Dictionary<bool, GameObject> _gameOverPanels;
+              [SerializeField] private Button failHomeButton;
+              [SerializeField] private Button successHomeButton;
+              [SerializeField] private Button restartButton;
+              [SerializeField] private Button nextButton;
+              #endregion
+      
+              #region Getters
+              public UIPanelVo UIPanelVo => uiPanelVo;
+              public Dictionary<bool, GameObject> GameOverPanels => _gameOverPanels;
+              public Button FailHomeButton => failHomeButton;
+              public Button SuccessHomeButton => successHomeButton;
+              public Button RestartButton => restartButton;
+              public Button NextButton => nextButton;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
+      using Lofelt.NiceVibrations;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
+      {
+          public sealed class GameOverPanelMediator : Mediator<GameOverPanelView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              #endregion
+      
+              #region Constructor
+              public GameOverPanelMediator(GameOverPanelView view, SignalBus signalBus) : base(view) =>
+                  _signalBus = signalBus;
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize() => SetCycleSubscriptions(true);
+              public override void Dispose() => SetCycleSubscriptions(false);
+              #endregion
+      
+              #region Subscriptions
+              private void SetCycleSubscriptions(bool isSub)
+              {
+                  if (isSub)
+                  {
+                      _signalBus.Subscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+                      _signalBus.Subscribe<SetupGameOverPanelSignal>(OnSetupGameOverPanelSignal);
+      
+                      GetView.FailHomeButton.onClick.AddListener(OnHomeButtonClicked);
+                      GetView.SuccessHomeButton.onClick.AddListener(OnHomeButtonClicked);
+                      GetView.RestartButton.onClick.AddListener(OnRestartButtonClicked);
+                      GetView.NextButton.onClick.AddListener(OnNextButtonClicked);
+                  }
+                  else
+                  {
+                      _signalBus.Unsubscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+                      _signalBus.Unsubscribe<SetupGameOverPanelSignal>(OnSetupGameOverPanelSignal);
+      
+                      GetView.FailHomeButton.onClick.RemoveListener(OnHomeButtonClicked);
+                      GetView.SuccessHomeButton.onClick.RemoveListener(OnHomeButtonClicked);
+                      GetView.RestartButton.onClick.RemoveListener(OnRestartButtonClicked);
+                      GetView.NextButton.onClick.RemoveListener(OnNextButtonClicked);
+                  }
+              }
+              #endregion
+      
+              #region SignalReceivers
+              private void OnChangeUIPanelSignal(ChangeUIPanelSignal signal)
+              {
+                  bool isShow = signal.UIPanelType == GetView.UIPanelVo.UIPanelType;
+                  GetView.UIPanelVo.CanvasGroup.ChangeUIPanelCanvasGroupActivation(isShow);
+                  GetView.UIPanelVo.PlayableDirector.ChangeUIPanelTimelineActivation(isShow);
+              }
+              private void OnSetupGameOverPanelSignal(SetupGameOverPanelSignal signal)
+              {
+                  foreach (var item in GetView.GameOverPanels)
+                  {
+                      bool isActive = item.Key == signal.IsSuccess;
+                      item.Value.SetActive(isActive);
+                  }
+              }
+              #endregion
+      
+              #region ButtonReceivers
+              private void OnHomeButtonClicked()
+              {
+                  _signalBus.Fire(new GameExitSignal());
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              private void OnRestartButtonClicked()
+              {
+                  _signalBus.Fire(new PlayGameSignal());
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              private void OnNextButtonClicked()
+              {
+                  _signalBus.Fire(new PlayGameSignal());
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Data.ValueObjects.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Interfaces.CrossScene;
+      using UnityEngine;
+      using UnityEngine.UI;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
+      {
+          [RequireComponent(typeof(CanvasGroup))]
+          public sealed class TutorialPanelView : View, IUIPanel
+          {
+              #region Fields
+              [Header("Tutorial Panel View Fields")]
+              [SerializeField] private UIPanelVo uiPanelVo;
+              [SerializeField] private Button closeButton;
+              #endregion
+      
+              #region Getters
+              public UIPanelVo UIPanelVo => uiPanelVo;
+              public Button CloseButton => closeButton;
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Game;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Utilities.CrossScene;
+      using Lofelt.NiceVibrations;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Views.Game
+      {
+          public sealed class TutorialPanelMediator : Mediator<TutorialPanelView>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly TutorialModel _tutorialModel;
+              #endregion
+      
+              #region Constructor
+              public TutorialPanelMediator(TutorialPanelView view, SignalBus signalBus, TutorialModel tutorialModel) : base(view)
+              {
+                  _signalBus = signalBus;
+                  _tutorialModel = tutorialModel;
+              }
+              #endregion
+      
+              #region PostConstruct
+              public override void PostConstruct() { }
+              #endregion
+      
+              #region Core
+              public override void Initialize() => SetCycleSubscriptions(true);
+              public override void Dispose() => SetCycleSubscriptions(false);
+              #endregion
+      
+              #region Subscriptions
+              private void SetCycleSubscriptions(bool isSub)
+              {
+                  if (isSub)
+                  {
+                      _signalBus.Subscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+      
+                      GetView.CloseButton.onClick.AddListener(OnCloseButtonClicked);
+                  }
+                  else
+                  {
+                      _signalBus.Unsubscribe<ChangeUIPanelSignal>(OnChangeUIPanelSignal);
+      
+                      GetView.CloseButton.onClick.RemoveListener(OnCloseButtonClicked);
+                  }
+              }
+              #endregion
+      
+              #region SignalReceivers
+              private void OnChangeUIPanelSignal(ChangeUIPanelSignal signal)
+              {
+                  bool isShow = signal.UIPanelType == GetView.UIPanelVo.UIPanelType;
+      
+                  GetView.UIPanelVo.CanvasGroup.ChangeUIPanelCanvasGroupActivation(isShow);
+                  GetView.UIPanelVo.PlayableDirector.ChangeUIPanelTimelineActivation(isShow);
+              }
+              #endregion
+      
+              #region ButtonReceivers
+              private void OnCloseButtonClicked()
+              {
+                  _tutorialModel.SetTutorial(true);
+      
+                  _signalBus.Fire(new PlayGameSignal());
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic, SoundTypes.UIClick));
+                  _signalBus.Fire(new PlayHapticSignal(HapticPatterns.PresetType.LightImpact));
+              }
+              #endregion
+          }
+      }
+      ```
     * Commands & Signals: These classes and structures provide entry and exit points to gameplay.
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.Game;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
+      {
+          public sealed class InitializeGameCommand : Command<InitializeGameSignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly TutorialModel _tutorialModel;
+              #endregion
+      
+              #region Constructor
+              public InitializeGameCommand(SignalBus signalBus, TutorialModel tutorialModel)
+              {
+                  _signalBus = signalBus;
+                  _tutorialModel = tutorialModel;
+              }
+              #endregion
+      
+              #region Executes
+              public override void Execute(InitializeGameSignal signal)
+              {
+                  _signalBus.Fire(new ChangeLoadingScreenActivationSignal(false, null));
+      
+                  if (_tutorialModel.IsTutorialShowed)
+                      _signalBus.Fire(new PlayGameSignal());
+                  else
+                      _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.TutorialPanel));
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
+      {
+          public sealed class PlayGameCommand : Command<PlayGameSignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              #endregion
+      
+              #region Constructor
+              public PlayGameCommand(SignalBus signalBus) => _signalBus = signalBus;
+              #endregion
+      
+              #region Executes
+              public override void Execute(PlayGameSignal signal) =>
+                  _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.InGamePanel));
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Models.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
+      {
+          public sealed class GameOverCommand : Command<GameOverSignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              private readonly LevelModel _levelModel;
+              #endregion
+      
+              #region Constructor
+              public GameOverCommand(SignalBus signalBus, LevelModel levelModel)
+              {
+                  _signalBus = signalBus;
+                  _levelModel = levelModel;
+              }
+              #endregion
+      
+              #region Executes
+              public override void Execute(GameOverSignal signal)
+              {
+                  _signalBus.Fire(new PlayAudioSignal(AudioTypes.Sound, MusicTypes.BackgroundMusic,
+                      signal.IsSuccess ? SoundTypes.GameWin : SoundTypes.GameFail));
+      
+                  _signalBus.Fire(new ChangeUIPanelSignal(UIPanelTypes.GameOverPanel));
+                  _signalBus.Fire(new SetupGameOverPanelSignal(signal.IsSuccess));
+      
+                  _levelModel.UpdateCurrentLevelIndex(false, signal.IsSuccess ? 1 : 0);
+              }
+              #endregion
+          }
+      }
+      ```
+      ```csharp
+      using CodeCatGames.HiveMind.Core.Runtime.MVC.Controller;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Enums.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.CrossScene;
+      using CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Signals.Game;
+      using Zenject;
+      
+      namespace CodeCatGames.HiveMind.Samples.Runtime.SampleGame.Controllers.Game
+      {
+          public sealed class GameExitCommand : Command<GameExitSignal>
+          {
+              #region ReadonlyFields
+              private readonly SignalBus _signalBus;
+              #endregion
+      
+              #region Constructor
+              public GameExitCommand(SignalBus signalBus) => _signalBus = signalBus;
+              #endregion
+      
+              #region Executes
+              public override void Execute(GameExitSignal signal) => _signalBus.Fire(new LoadSceneSignal(SceneID.MainMenu));
+              #endregion
+          }
+      }
+      ```
 
 ## Acknowledgments
 Special thanks to the developers of Zenject, UniTask, Prime Tween, Easy Save 3, Feel/Nice Vibrations, Sirenix/Odin Inspector and the Unity community for their invaluable resources and tools.
