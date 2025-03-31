@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83cd44bb-92f5-4fea-90ce-274ca76fb9c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.hive-mind/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +43,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.37f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Users\Emre\Desktop\HiveMind\Leo Games\UnityProjects\HiveMind\hive-mind&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Emre\Desktop\HiveMind\Leo Games\UnityProjects\HiveMind\hive-mind" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -52,7 +51,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.37f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Users\Emre\Desktop\HiveMind\Leo Games\UnityProjects\HiveMind\hive-mind&quot; -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Emre\Desktop\HiveMind\Leo Games\UnityProjects\HiveMind\hive-mind" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -113,6 +112,7 @@
       <workItem from="1739169562072" duration="285000" />
       <workItem from="1739169913486" duration="5847000" />
       <workItem from="1739192078823" duration="1454000" />
+      <workItem from="1743418571769" duration="306000" />
     </task>
     <servers />
   </component>
