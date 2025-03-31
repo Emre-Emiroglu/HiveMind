@@ -8,11 +8,11 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_PhysicMaterial() : base(typeof(UnityEngine.PhysicMaterial)){ Instance = this; }
+		public ES3Type_PhysicMaterial() : base(typeof(UnityEngine.PhysicsMaterial)){ Instance = this; }
 
 		protected override void WriteObject(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.PhysicMaterial)obj;
+			var instance = (UnityEngine.PhysicsMaterial)obj;
 			
 			writer.WriteProperty("dynamicFriction", instance.dynamicFriction, ES3Type_float.Instance);
 			writer.WriteProperty("staticFriction", instance.staticFriction, ES3Type_float.Instance);
@@ -23,7 +23,7 @@ namespace ES3Types
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.PhysicMaterial)obj;
+			var instance = (UnityEngine.PhysicsMaterial)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
@@ -39,10 +39,10 @@ namespace ES3Types
 						instance.bounciness = reader.Read<System.Single>(ES3Type_float.Instance);
 						break;
 					case "frictionCombine":
-						instance.frictionCombine = reader.Read<UnityEngine.PhysicMaterialCombine>();
+						instance.frictionCombine = reader.Read<UnityEngine.PhysicsMaterialCombine>();
 						break;
 					case "bounceCombine":
-						instance.bounceCombine = reader.Read<UnityEngine.PhysicMaterialCombine>();
+						instance.bounceCombine = reader.Read<UnityEngine.PhysicsMaterialCombine>();
 						break;
 					default:
 						reader.Skip();
@@ -53,7 +53,7 @@ namespace ES3Types
 
 		protected override object ReadObject<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.PhysicMaterial();
+			var instance = new UnityEngine.PhysicsMaterial();
 			ReadObject<T>(reader, instance);
 			return instance;
 		}
@@ -63,7 +63,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_PhysicMaterialArray() : base(typeof(UnityEngine.PhysicMaterial[]), ES3Type_PhysicMaterial.Instance)
+		public ES3Type_PhysicMaterialArray() : base(typeof(UnityEngine.PhysicsMaterial[]), ES3Type_PhysicMaterial.Instance)
 		{
 			Instance = this;
 		}

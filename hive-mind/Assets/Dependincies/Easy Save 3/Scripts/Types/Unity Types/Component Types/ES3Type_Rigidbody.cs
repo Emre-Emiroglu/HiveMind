@@ -16,10 +16,10 @@ namespace ES3Types
 		{
 			var instance = (UnityEngine.Rigidbody)obj;
 			
-			writer.WriteProperty("velocity", instance.velocity, ES3Type_Vector3.Instance);
+			writer.WriteProperty("velocity", instance.linearVelocity, ES3Type_Vector3.Instance);
 			writer.WriteProperty("angularVelocity", instance.angularVelocity, ES3Type_Vector3.Instance);
-			writer.WriteProperty("drag", instance.drag, ES3Type_float.Instance);
-			writer.WriteProperty("angularDrag", instance.angularDrag, ES3Type_float.Instance);
+			writer.WriteProperty("drag", instance.linearDamping, ES3Type_float.Instance);
+			writer.WriteProperty("angularDrag", instance.angularDamping, ES3Type_float.Instance);
 			writer.WriteProperty("mass", instance.mass, ES3Type_float.Instance);
 			writer.WriteProperty("useGravity", instance.useGravity, ES3Type_bool.Instance);
 			writer.WriteProperty("maxDepenetrationVelocity", instance.maxDepenetrationVelocity, ES3Type_float.Instance);
@@ -47,16 +47,16 @@ namespace ES3Types
 				{
 					
 					case "velocity":
-						instance.velocity = reader.Read<UnityEngine.Vector3>(ES3Type_Vector3.Instance);
+						instance.linearVelocity = reader.Read<UnityEngine.Vector3>(ES3Type_Vector3.Instance);
 						break;
 					case "angularVelocity":
 						instance.angularVelocity = reader.Read<UnityEngine.Vector3>(ES3Type_Vector3.Instance);
 						break;
 					case "drag":
-						instance.drag = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.linearDamping = reader.Read<System.Single>(ES3Type_float.Instance);
 						break;
 					case "angularDrag":
-						instance.angularDrag = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.angularDamping = reader.Read<System.Single>(ES3Type_float.Instance);
 						break;
 					case "mass":
 						instance.mass = reader.Read<System.Single>(ES3Type_float.Instance);
