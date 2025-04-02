@@ -1,10 +1,10 @@
 {
-    "name": "CodeCatGames.HiveMind.Core.Runtime",
-    "rootNamespace": "CodeCatGames.HiveMind.Core.Runtime",
-    "references": [
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+    "name": "CodeCatGames.HiveMind.Core.Editor",
+    "rootNamespace": "CodeCatGames.HiveMind.Core.Editor",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
     ],
-    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

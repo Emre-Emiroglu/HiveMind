@@ -1,5 +1,6 @@
 using System;
-using Zenject;
+using VContainer;
+using VContainer.Unity;
 
 namespace CodeCatGames.HiveMind.Core.Runtime.MVC.View
 {

@@ -1,6 +1,5 @@
 ﻿using CodeCatGames.HiveMind.Core.Runtime.MVC.View;
 using CodeCatGames.HiveMind.Samples.Runtime.MVC.Signals;
-using Zenject;
 
 namespace CodeCatGames.HiveMind.Samples.Runtime.MVC.Views
 {
